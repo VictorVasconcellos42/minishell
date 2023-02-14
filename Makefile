@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/02/09 17:41:12 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/02/14 03:59:13 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME	=	minishell
 
-SRC		=	src/main.c
+SRC		=	src/prompt.c
 
 OBJ		=	${SRC:.c=.o}
 
@@ -30,7 +30,7 @@ all: ${OBJ} $(NAME)
 	${CC} ${CFLAGS} -c $< -o $@
 
 $(NAME): ${OBJ}
-	${CC} ${CFLAGS} ${OBJ} -o ${NAME}
+	${CC} ${CFLAGS} -lreadline ${OBJ} -o ${NAME}
 
 clean: 
 	rm -rf ${OBJ}
