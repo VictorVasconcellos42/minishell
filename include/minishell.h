@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/14 04:18:23 by vde-vasc         ###   ########.fr       */
+/*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
+/*   Updated: 2023/02/14 04:15:53 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int	main(void)
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "libft/libft.h"
 
-{
-	while (1)
-		readline("minishell >> ");
-	return (0);
-}
+#endif
