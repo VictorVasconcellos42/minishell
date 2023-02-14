@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/09 15:09:20 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/14 04:08:02 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <readline/readline.h>
+#include <readline/history.h>
 #include <stdio.h>
+#include <string.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 
 {
-	(void)argv;
-	if (argc == 1)
-		printf("Hello World!\n");
+	while (1)
+		readline("minishell >> ");
 	return (0);
 }
