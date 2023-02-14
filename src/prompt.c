@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/14 04:18:23 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/14 14:22:44 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 int	main(void)
 
 {
+	char *input;
 	while (1)
-		readline("minishell >> ");
+	{
+		input = readline("minishell >> ");
+		add_history(input);
+		if (!strcmp(input, "exit"))
+			break ;
+		free(input);
+	}
+	free(input);
 	return (0);
 }
