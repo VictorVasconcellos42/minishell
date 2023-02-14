@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/14 09:08:29 by vde-vasc         ###   ########.fr       */
+/*   Created: 2022/05/30 19:42:01 by vde-vasc          #+#    #+#             */
+/*   Updated: 2022/05/30 20:09:11 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "libft.h"
+void	ft_putendl_fd(char *s, int fd)
 
-#endif
+{
+	int	i;
+
+	i = 0;
+	if (!(s))
+		return ;
+	while (s[i])
+		write(fd, &s[i++], 1);
+	ft_putchar_fd('\n', fd);
+}

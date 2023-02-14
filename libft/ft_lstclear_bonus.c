@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/14 09:08:29 by vde-vasc         ###   ########.fr       */
+/*   Created: 2023/02/11 00:17:32 by vde-vasc          #+#    #+#             */
+/*   Updated: 2023/02/11 01:09:44 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "libft.h"
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 
-#endif
+{
+	t_list	*temp;
+	t_list	*temp2;
+
+	if (!*lst)
+		return ;
+	temp = *lst;
+	while (temp)
+	{
+		temp2 = temp->next;
+		del(temp->content);
+		free(temp);
+		temp = temp2;
+	}
+	*lst = NULL;
+}

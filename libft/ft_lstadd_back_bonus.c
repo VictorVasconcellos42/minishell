@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/14 09:08:29 by vde-vasc         ###   ########.fr       */
+/*   Created: 2023/02/10 23:57:56 by vde-vasc          #+#    #+#             */
+/*   Updated: 2023/02/11 00:05:21 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "libft.h"
+void	ft_lstadd_back(t_list **lst, t_list *new)
 
-#endif
+{
+	if (*lst == NULL)
+		*lst = new;
+	else
+		ft_lstlast(*lst)->next = new;
+}

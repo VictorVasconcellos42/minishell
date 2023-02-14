@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/14 09:08:29 by vde-vasc         ###   ########.fr       */
+/*   Created: 2022/05/27 07:30:01 by vde-vasc          #+#    #+#             */
+/*   Updated: 2022/05/27 08:20:03 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "libft.h"
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
-#endif
+{
+	unsigned int	index;
+	char			*string;
+
+	if (!(s))
+		return (NULL);
+	string = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!(string))
+		return (NULL);
+	index = -1;
+	while (s[++index])
+		string[index] = f(index, s[index]);
+	return (string);
+}

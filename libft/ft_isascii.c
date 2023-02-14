@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/14 09:08:29 by vde-vasc         ###   ########.fr       */
+/*   Created: 2022/05/04 11:55:04 by vde-vasc          #+#    #+#             */
+/*   Updated: 2022/05/04 11:55:11 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+int	ft_isascii(int c)
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "libft.h"
+{
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
+}
 
-#endif
+/*#include <stdio.h>
+
+int	main(void)
+
+{
+	char	c;
+	int		a;
+
+	c = 127;
+	a = ft_isascii(c);
+	printf("%i", a);
+}*/
