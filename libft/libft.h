@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 18:23:30 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/16 01:04:18 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:00:34 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,12 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int     ft_putunbr(unsigned int number);
-int     argument_case(char c, va_list arguments);
-int     ft_puthexa(unsigned long num, char flags);
-int     ft_puthexa_case(unsigned long num, char flags);
-int     ft_putnbr(int num);
-int     ft_putstr(char *str);
-int     ft_putchar(char c);
-int     ft_printf(const char *text, ...);
+int		ft_putunbr(unsigned int number);
+int		argument_case(char c, va_list arguments);
+int		ft_puthexa(unsigned long num, char flags);
+int		ft_puthexa_case(unsigned long num, char flags);
+int		ft_putnbr(int num);
+int		ft_putstr(char *str);
+int		ft_putchar(char c);
+int		ft_printf(const char *text, ...);
 #endif
-

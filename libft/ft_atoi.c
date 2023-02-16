@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:15:41 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/16 00:49:51 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:59:44 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,3 @@ int	ft_atoi(const char *str)
 		num = num * 10 + (str[i++] - '0');
 	return (num * minus);
 }
-
