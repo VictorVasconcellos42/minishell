@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 18:25:11 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/02/16 00:58:05 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/02/16 01:16:24 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ $(NAME):	${OBJS}
 
 bonus: ${NAME} ${OBJS_BONUS}
 	${AR} ${LBFLAGS} $(NAME) ${OBJS_BONUS}
+	@touch bonus
 
 clean:
 	${RM} ${OBJS} ${OBJS_BONUS}
