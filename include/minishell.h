@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/16 11:39:42 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:59:55 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 
 typedef struct s_cmd
 {
-    char    *input;
-    char    **env;
-    int     env_size;
-}   t_cmd;
+    char	*input;
+    char	**env;
+    int		env_size;
+}	t_cmd;
 
 
 void    create_env(t_cmd *cmd, char **envp);
