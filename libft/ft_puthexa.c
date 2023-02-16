@@ -1,46 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_puthexa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 11:15:41 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/16 00:49:51 by vde-vasc         ###   ########.fr       */
+/*   Created: 2022/07/13 10:31:38 by vde-vasc          #+#    #+#             */
+/*   Updated: 2022/08/24 14:11:51 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_ispace(const char *str)
+int	ft_puthexa(unsigned long num, char flag)
 
 {
-	size_t	i;
+	static int	count;
+	char		*base;
+	char		*base2;
 
-	i = 0;
-	while ((str[i] == ' ') || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	return (i);
+	count = 0;
+	base = "0123456789abcdef";
+	base2 = "0123456789ABCDEF";
+	if (num >= 16)
+		ft_puthexa(num / 16, flag);
+	if (flag == 'X')
+		count += ft_putchar(base2[num % 16]);
+	else
+		count += ft_putchar(base[num % 16]);
+	return (count);
 }
 
-int	ft_atoi(const char *str)
+int	ft_puthexa_case(unsigned long num, char flag)
 
 {
-	size_t	i;
-	size_t	minus;
-	int		num;
-
-	num = 0;
-	minus = 1;
-	i = ft_ispace(str);
-	if (str[i] == '-' || str[i] == '+')
-	{	
-		if (str[i] == '-')
-			minus *= -1;
-		i++;
-	}
-	while (str[i] >= 48 && str[i] <= 57)
-		num = num * 10 + (str[i++] - '0');
-	return (num * minus);
+	return (ft_puthexa(num, flag));
 }
-
