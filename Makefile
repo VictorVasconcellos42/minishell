@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+         #
+#    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/02/14 03:59:13 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/02/16 11:40:23 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,13 @@
 
 NAME	=	minishell
 
-SRC		=	src/prompt.c
+SRC		=	src/prompt.c src/env.c
 
 OBJ		=	${SRC:.c=.o}
 
 CC		=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -g
 
 #	RULES	#
 

@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/16 11:39:53 by vde-vasc         ###   ########.fr       */
+/*   Created: 2023/02/14 16:30:08 by vde-vasc          #+#    #+#             */
+/*   Updated: 2023/02/16 11:41:17 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	is_builtin(char *input)
-
-{
-	return (!strncmp(input, "env", -1) || !strncmp(input, "echo", -1));
-}
-
-int	len(char **str)
+static int	env_size(char **str)
 
 {
 	int i = 0;
@@ -27,25 +21,18 @@ int	len(char **str)
 	return (i);
 }
 
-int	main(int argc, char **argv, char **envp)
+void    create_env(t_cmd *cmd, char **envp)
 
 {
-	(void)argc;
-	(void)argv;
-	t_cmd	cmd;
-	int		i;
-	i = 0;
-	while (1)
-	{
-		cmd.input = readline("$ ");
-		add_history(cmd.input);
-		if (!strcmp(cmd.input, "exit"))
-			break ;
-		if (is_builtin(cmd.input))
-			create_env(&cmd, envp);
-		free(cmd.input);
-	}
-	i = 0;
-	free(cmd.input);
-	return (0);
+    int i;
+
+    i = 0;
+    cmd->env_size = env_size(envp);
+    cmd->env = malloc(sizeof(char *) * (cmd->env_size + 1));
+    while (i < cmd->env_size - 1)
+    {
+        cmd->env[i] = envp[i];
+        printf("%s\n", cmd->env[i++]);
+    }
+    i = 0;
 }
