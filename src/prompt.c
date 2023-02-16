@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/14 18:57:39 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/16 02:01:12 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,30 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
-	char *input;
-	char **env;
+	t_cmd	cmd;
 	int		i;
-	int		size;
 	i = 0;
 	while (1)
 	{
-		input = readline("minishell >> ");
-		add_history(input);
-		if (!strcmp(input, "exit"))
+		cmd.input = readline("minishell >> ");
+		add_history(cmd.input);
+		if (!strcmp(cmd.input, "exit"))
 			break ;
-		if (!strcmp(input, "env"))
+		if (!strcmp(cmd.input, "env"))
 		{
-			size = len(envp);
-			env = malloc(sizeof(char *) * size + 1);
-			while (i < size - 1)
+			cmd.env_size = len(envp);
+			cmd.env = malloc(sizeof(char *) * cmd.env_size + 1);
+			while (i < cmd.env_size - 1)
 			{
-				env[i] = envp[i];
-				i++;
+				cmd.env[i] = envp[i];
 				printf("%s\n", envp[i]);
+				i++;
 			}
 			i = 0;
 		}
-		free(input);
+		free(cmd.input);
 	}
 	i = 0;
-	while (i < size - 1)
-		free(env[i++]);
+	free(cmd.input);
 	return (0);
 }

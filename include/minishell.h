@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/16 01:15:45 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/16 01:56:52 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,12 @@
 # include <readline/history.h>
 # include <string.h>
 # include "../libft/libft.h"
+
+typedef struct s_cmd
+{
+    char    *input;
+    char    **env;
+    int     env_size;
+}   t_cmd;
 
 #endif
