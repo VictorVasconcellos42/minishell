@@ -14,7 +14,7 @@
 
 NAME	=	minishell
 
-SRC		=	src/prompt.c src/env.c
+SRC		=	src/prompt.c src/env.c src/builtin.c
 
 OBJ		=	${SRC:.c=.o}
 
@@ -30,7 +30,7 @@ all: ${OBJ} $(NAME)
 	${CC} ${CFLAGS} -c $< -o $@
 
 $(NAME): ${OBJ}
-	${CC} ${CFLAGS} -lreadline ${OBJ} -o ${NAME}
+	${CC} ${CFLAGS} -lreadline ${OBJ} libft.a -lreadline -o ${NAME}
 
 clean: 
 	rm -rf ${OBJ}
