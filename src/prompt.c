@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/16 13:02:09 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/18 01:34:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	is_builtin(char *input)
 
 {
-	return (!strncmp(input, "env", -1) || !strncmp(input, "echo", -1));
+	return (!ft_strncmp(input, "env", -1) || !ft_strncmp(input, "echo", -1));
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -25,6 +25,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	create_env(&cmd, envp);
 	while (1)
 	{
 		cmd.input = readline("$ ");
@@ -32,7 +33,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!strcmp(cmd.input, "exit"))
 			break ;
 		if (is_builtin(cmd.input))
-			create_env(&cmd, envp);
+			builtin_env(&cmd);
 		free(cmd.input);
 	}
 	free(cmd.input);
