@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/02/18 01:32:41 by codespace        ###   ########.fr       */
+/*   Updated: 2023/02/28 15:32:05 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,13 @@ void	builtin_env(t_cmd *cmd)
     i = 0;
 	while (cmd->env[i])
 		printf("%s\n", cmd->env[i++]);
+}
+
+void	builtin_exit(t_cmd *cmd)
+
+{
+	printf("exit\n");
+	if (cmd->status == EXIT_FAILURE)
+		exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }
