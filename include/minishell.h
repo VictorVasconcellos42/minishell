@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/18 01:33:43 by codespace        ###   ########.fr       */
+/*   Updated: 2023/02/28 03:11:31 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <string.h>
+# include <errno.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <sys/ioctl.h>
 # include "../libft/libft.h"
 
 typedef struct s_cmd
@@ -24,10 +28,13 @@ typedef struct s_cmd
     char	*input;
     char	**env;
     int		env_size;
+    
+    char    **path;
 }	t_cmd;
 
 
 void    create_env(t_cmd *cmd, char **envp);
 void	builtin_env(t_cmd *cmd);
+void	execution(t_cmd *exec);
 
 #endif
