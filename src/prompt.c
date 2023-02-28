@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/18 01:34:00 by codespace        ###   ########.fr       */
+/*   Updated: 2023/02/28 07:14:34 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ int	main(int argc, char **argv, char **envp)
 	create_env(&cmd, envp);
 	while (1)
 	{
-		cmd.input = readline("$ ");
+		cmd.input = readline("\033[0;32mMinishell: \033[0m");
 		add_history(cmd.input);
 		if (!strcmp(cmd.input, "exit"))
 			break ;
 		if (is_builtin(cmd.input))
 			builtin_env(&cmd);
+		else
+			execution(&cmd);
 		free(cmd.input);
 	}
 	free(cmd.input);
