@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/02/16 11:40:23 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/02/28 00:53:56 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,20 +22,36 @@ CC		=	cc
 
 CFLAGS	=	-Wall -Wextra -Werror -g
 
+LIBFT	=	libft.a
+
+LIBFT_DIR	=	libft/
+
 #	RULES	#
 
 all: ${OBJ} $(NAME)
 
-.c.o: 
-	${CC} ${CFLAGS} -c $< -o $@
+$(LIBFT):
+	@make -C ${LIBFT_DIR}
+	@cp $(addprefix ${LIBFT_DIR}, ${LIBFT}) .
 
-$(NAME): ${OBJ}
-	${CC} ${CFLAGS} -lreadline ${OBJ} libft.a -lreadline -o ${NAME}
+.c.o: 
+	@${CC} ${CFLAGS} -c $< -o $@
+
+$(NAME): ${OBJ} ${LIBFT}
+	@${CC} ${CFLAGS} ${LIBFT} -lreadline ${OBJ} -lreadline -o ${NAME}
+	@echo "Minishell created! ✅"
 
 clean: 
-	rm -rf ${OBJ}
+	@rm -rf ${OBJ}
+	@make clean -C ${LIBFT_DIR}
+	@echo "Objects removed 🚫"
 
 fclean:	clean
-	rm -rf ${NAME}
+	@rm -rf ${NAME}
+	@rm -rf ${LIBFT}
+	@make fclean -C ${LIBFT_DIR}
+	@echo "Library removed 🚫"
 
 re:	fclean all
+
+.PHONY: all fclean re clean
