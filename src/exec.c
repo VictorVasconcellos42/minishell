@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 16:30:08 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/28 02:40:40 by vde-vasc         ###   ########.fr       */
+/*   Created: 2023/02/28 02:43:16 by vde-vasc          #+#    #+#             */
+/*   Updated: 2023/02/28 03:18:02 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	env_size(char **str)
+void	execution(t_cmd *exec)
 
 {
-	int	i;
+	int	pid;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	create_env(t_cmd *cmd, char **envp)
-
-{
-	int	i;
-
-	i = -1;
-	cmd->env_size = env_size(envp);
-	cmd->env = malloc(sizeof(char *) * (cmd->env_size + 1));
-	if (!cmd->env)
-		return ;
-	while (++i < cmd->env_size)
-		cmd->env[i] = ft_strdup(envp[i]);
+	pid = fork();
+	exec->path = ft_split(exec->input, ' ');
+	if (pid == 0)
+	{
+		execve(exec->path[0], exec->path, exec->env);
+		exit(0);
+	}
+	else
+		wait(0);
 }
