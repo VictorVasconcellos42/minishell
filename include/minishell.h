@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/28 03:11:31 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:31:37 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ typedef struct s_cmd
     int		env_size;
     
     char    **path;
+
+    int     status;
 }	t_cmd;
 
 
 void    create_env(t_cmd *cmd, char **envp);
 void	builtin_env(t_cmd *cmd);
+void	builtin_exit(t_cmd *cmd);
 void	execution(t_cmd *exec);
 
 #endif
