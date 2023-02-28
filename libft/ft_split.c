@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 19:47:40 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/01/10 21:00:25 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/28 03:13:50 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	how_many_words(char const *string, char c, size_t string_len)
 	return (count_words);
 }
 
-char	**ft_split(char const *string, char c)
+char	**ft_split(char *string, char c)
 
 {
 	size_t	string_len;
