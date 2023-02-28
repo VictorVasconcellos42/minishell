@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/02/28 00:53:56 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/02/28 03:14:41 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME	=	minishell
 
-SRC		=	src/prompt.c src/env.c src/builtin.c
+SRC		=	src/prompt.c src/env.c src/builtin.c src/exec.c
 
 OBJ		=	${SRC:.c=.o}
 
@@ -28,7 +28,7 @@ LIBFT_DIR	=	libft/
 
 #	RULES	#
 
-all: ${OBJ} $(NAME)
+all: ${LIBFT} ${OBJ} $(NAME)
 
 $(LIBFT):
 	@make -C ${LIBFT_DIR}
