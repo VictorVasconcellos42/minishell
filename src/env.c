@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:30:08 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/18 01:32:16 by codespace        ###   ########.fr       */
+/*   Updated: 2023/02/27 20:14:23 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	create_env(t_cmd *cmd, char **envp)
 	i = -1;
 	cmd->env_size = env_size(envp);
 	cmd->env = malloc(sizeof(char *) * (cmd->env_size + 1));
-	while (++i < cmd->env_size - 1)
+	while (++i < cmd->env_size)
 		cmd->env[i] = ft_strdup(envp[i]);
 }
