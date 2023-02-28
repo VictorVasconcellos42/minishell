@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/28 07:14:34 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:33:04 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ int	main(int argc, char **argv, char **envp)
 		free(cmd.input);
 	}
 	free(cmd.input);
+	cmd.status = 1;
+	builtin_exit(&cmd);
 	return (0);
 }
