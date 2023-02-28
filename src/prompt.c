@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/28 15:33:04 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/02/28 20:08:01 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	main(int argc, char **argv, char **envp)
 	create_env(&cmd, envp);
 	while (1)
 	{
-		cmd.input = readline("\033[0;32mMinishell: \033[0m");
-		add_history(cmd.input);
+		cmd.input = readline("Minishell: ");
+		if (!(cmd.input[0] == '\0'))
+			add_history(cmd.input);
 		if (!strcmp(cmd.input, "exit"))
 			break ;
 		if (is_builtin(cmd.input))
