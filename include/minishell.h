@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/28 16:22:34 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/01 20:12:25 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,17 @@
 # include <sys/ioctl.h>
 # include "../libft/libft.h"
 
+# define TRUE 1
+# define FALSE 0
+
 typedef struct s_cmd
 {
 	char	*input;
+
 	char	**env;
 	int		env_size;
+
+	char	**exec;
 
 	char	**path;
 
@@ -37,6 +43,7 @@ typedef struct s_cmd
 void	create_env(t_cmd *cmd, char **envp);
 void	builtin_env(t_cmd *cmd);
 void	builtin_exit(t_cmd *cmd);
+void	env_path(t_cmd *cmd);
 void	execution(t_cmd *exec);
 
 #endif
