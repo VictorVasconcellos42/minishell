@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/02 15:14:12 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:52:44 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	create_env(&cmd, envp);
 	signal(SIGINT, check_signal);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		cmd.input = readline("Minishell: ");
@@ -55,7 +56,6 @@ int	main(int argc, char **argv, char **envp)
 		free(cmd.input);
 	}
 	free(cmd.input);
-	cmd.status = 1;
 	builtin_exit(&cmd);
 	return (0);
 }
