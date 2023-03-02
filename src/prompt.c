@@ -6,11 +6,23 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/28 20:08:01 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:22:25 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	check_signal(int sig)
+
+{
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
 
 static int	is_builtin(char *input)
 
@@ -26,6 +38,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	create_env(&cmd, envp);
+	signal(SIGINT, check_signal);
 	while (1)
 	{
 		cmd.input = readline("Minishell: ");
