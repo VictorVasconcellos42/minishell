@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/02 13:20:37 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:27:31 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <sys/ioctl.h>
 # include "../libft/libft.h"
 # include <signal.h>
-# include "/Users/vde-vasc/.brew/Cellar/readline/8.2.1/include/readline/readline.h"
 
 # define TRUE 1
 # define FALSE 0
