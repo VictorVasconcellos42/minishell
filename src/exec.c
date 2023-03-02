@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 02:43:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/01 19:52:03 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/02 10:22:17 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ void	execution(t_cmd *cmd)
 	pid = fork();
 	cmd->exec = ft_split(cmd->input, ' ');
 	if (pid == 0)
-		check_command(cmd);
+	{
+		if (check_command(cmd) == FALSE)
+			printf("bash: %s: command not found\n", cmd->exec[0]);
+		exit(127);
+	}
 	else
 		wait(0);
 }
