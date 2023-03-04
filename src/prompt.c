@@ -6,28 +6,30 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/02 15:52:44 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:21:14 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	check_signal(int sig)
-
-{
-	if (sig == SIGINT)
-	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
-
 static int	is_builtin(char *input)
 
 {
-	return (!ft_strncmp(input, "env", -1) || !ft_strncmp(input, "echo", -1));
+	if (!ft_strncmp(input, "env", 3))
+		return (ENV);
+	else if (!ft_strncmp(input, "exit", 4))
+			return (EXIT);
+	return (FALSE);
+}
+
+static void	check_input(char *input)
+
+{
+	if (!(input))
+		handle_ctrl_backslash();
+	else if (input[0] != '\0')
+		add_history(input);
+	return ;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -38,20 +40,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	create_env(&cmd, envp);
-	signal(SIGINT, check_signal);
-	signal(SIGQUIT, SIG_IGN);
+	handle_signal();
 	while (1)
 	{
 		cmd.input = readline("Minishell: ");
-		if (cmd.input == NULL)
-			builtin_exit(&cmd);
-		if (!(cmd.input[0] == '\0'))
-			add_history(cmd.input);
-		if (!strcmp(cmd.input, "exit"))
-			break ;
-		if (is_builtin(cmd.input))
-			builtin_env(&cmd);
-		else
+		check_input(cmd.input);
+		if (who_builtin(&cmd, is_builtin(cmd.input)) == FALSE)
 			execution(&cmd);
 		free(cmd.input);
 	}
