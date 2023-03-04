@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/04 16:23:05 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:28:17 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	env_path(t_cmd *cmd);
 
 // BUILTIN //
 
-int	is_builtin(char *input);
+int		is_builtin(char *input);
 void	builtin_env(t_cmd *cmd);
 void	builtin_exit(t_cmd *cmd);
 int		who_builtin(t_cmd *cmd, int builtin);

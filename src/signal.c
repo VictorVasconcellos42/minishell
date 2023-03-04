@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:40:22 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/04 15:50:44 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:29:10 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_ctrl_backslash(void)
 
 {
 	ft_putstr("\x1b[1A");
-    ft_putstr_fd("\033[11C", 1);
+	ft_putstr_fd("\033[11C", 1);
 	ft_putstr_fd("exit", 1);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/03/04 16:22:55 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:28:38 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_builtin(char *input)
 	if (!ft_strncmp(input, "env", 3))
 		return (ENV);
 	else if (!ft_strncmp(input, "exit", 4))
-			return (EXIT);
+		return (EXIT);
 	return (FALSE);
 }
 

@@ -6,21 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/04 16:21:14 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:28:45 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-static int	is_builtin(char *input)
-
-{
-	if (!ft_strncmp(input, "env", 3))
-		return (ENV);
-	else if (!ft_strncmp(input, "exit", 4))
-			return (EXIT);
-	return (FALSE);
-}
 
 static void	check_input(char *input)
 
