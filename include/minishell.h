@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/02 13:27:31 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:28:17 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,36 @@ typedef struct s_cmd
 	int		status;
 }	t_cmd;
 
+typedef enum e_builtin
+{
+	ENV = 1,
+	ECHO,
+	EXIT,
+	PWD,
+	UNSET,
+	EXPORT,
+	CD
+}	t_builtin;
+
+// ENV //
+
 void	create_env(t_cmd *cmd, char **envp);
+void	env_path(t_cmd *cmd);
+
+// BUILTIN //
+
+int		is_builtin(char *input);
 void	builtin_env(t_cmd *cmd);
 void	builtin_exit(t_cmd *cmd);
-void	env_path(t_cmd *cmd);
+int		who_builtin(t_cmd *cmd, int builtin);
+
+// EXEC //
+
 void	execution(t_cmd *exec);
 
+// SIGNAL //
+
+void	handle_signal(void);
+void	handle_ctrl_c(int sig);
+void	handle_ctrl_backslash(void);
 #endif
