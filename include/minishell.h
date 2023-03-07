@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/04 16:28:17 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:38:24 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,9 @@ void	execution(t_cmd *exec);
 
 void	handle_signal(void);
 void	handle_ctrl_c(int sig);
-void	handle_ctrl_backslash(void);
+void	handle_ctrl_d(void);
+
+// LEAK //
+
+void    control_free(t_cmd *cmd);
 #endif

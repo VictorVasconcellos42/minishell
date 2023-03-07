@@ -6,17 +6,20 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/04 16:28:45 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:38:29 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	check_input(char *input)
+static void	check_input(char *input, t_cmd *cmd)
 
 {
 	if (!(input))
-		handle_ctrl_backslash();
+	{
+		control_free(cmd);
+		handle_ctrl_d();
+	}
 	else if (input[0] != '\0')
 		add_history(input);
 	return ;
@@ -34,12 +37,11 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		cmd.input = readline("Minishell: ");
-		check_input(cmd.input);
+		check_input(cmd.input, &cmd);
 		if (who_builtin(&cmd, is_builtin(cmd.input)) == FALSE)
 			execution(&cmd);
 		free(cmd.input);
 	}
-	free(cmd.input);
 	builtin_exit(&cmd);
 	return (0);
 }

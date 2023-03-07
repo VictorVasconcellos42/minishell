@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 02:43:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/02 10:22:17 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:03:11 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	check_command(t_cmd *cmd)
 		}
 		free(full_path);
 		full_path = ft_strjoin(cmd->path[i], "/");
-		full_path = ft_strjoin(full_path, cmd->exec[0]);
+		full_path = ft_strjoin_gnl(full_path, cmd->exec[0]);
 		i++;
 	}
+	free(full_path);
 	return (FALSE);
 }
 
@@ -42,8 +43,8 @@ void	execution(t_cmd *cmd)
 {
 	int		pid;
 
-	pid = fork();
 	cmd->exec = ft_split(cmd->input, ' ');
+	pid = fork();
 	if (pid == 0)
 	{
 		if (check_command(cmd) == FALSE)
