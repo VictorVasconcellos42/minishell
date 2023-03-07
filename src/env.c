@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:30:08 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/01 18:40:20 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:44:48 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	env_path(t_cmd *cmd)
 		{
 			tmp = ft_strdup(cmd->env[i]);
 			cmd->path = ft_split(tmp + 5, ':');
+			free(tmp);
 			break ;
 		}
 		i++;
