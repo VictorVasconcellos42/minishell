@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/03/04 16:28:38 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:34:33 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	builtin_env(t_cmd *cmd)
 void	builtin_exit(t_cmd *cmd)
 
 {
-	cmd->status = 1;
+	control_free(cmd);
 	printf("exit\n");
-	if (cmd->status == EXIT_FAILURE)
-		exit(EXIT_FAILURE);
+	if (!(cmd->status == 0))
+		exit(cmd->status);
 	exit(EXIT_SUCCESS);
 }
 
