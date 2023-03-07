@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/03/07 09:38:48 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/03/07 19:22:35 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,9 @@ fclean:	clean
 	@make fclean -C ${LIBFT_DIR}
 	@echo "${RED}Library removed${END} 🚫"
 
+develop: $(LIBFT)
+	cc -Wall -Wextra -Werror -g develop/shell.c src/builtin.c src/env.c src/exec.c src/leak.c src/signal.c -L ~/.brew/opt/readline/lib libft.a -I ~/.brew/opt/readline/include -lreadline -o tester
+
 re:	fclean all
 
-.PHONY: all fclean re clean
+.PHONY: all fclean re clean develop
