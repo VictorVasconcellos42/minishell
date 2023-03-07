@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/07 09:38:24 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:21:39 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define BLUE "\033[0;34m"
 # define END "\033[0m"
 
+typedef struct s_token t_token;
+
 typedef struct s_cmd
 {
 	char	*input;
@@ -44,7 +46,14 @@ typedef struct s_cmd
 	char	**path;
 
 	int		status;
+	t_token	*token;
 }	t_cmd;
+
+typedef struct s_token
+{
+	char	*token_value;
+	int		type;
+} t_token;
 
 typedef enum e_builtin
 {
@@ -56,6 +65,16 @@ typedef enum e_builtin
 	EXPORT,
 	CD
 }	t_builtin;
+
+typedef enum e_tokens
+{
+	COMMAND = 100,
+	PIPE,
+	R_INPUT,
+	APP_INPUT,
+	HERE_DOC,
+	R_OUTPUT
+}	t_tokens;
 
 // ENV //
 
@@ -82,4 +101,5 @@ void	handle_ctrl_d(void);
 // LEAK //
 
 void    control_free(t_cmd *cmd);
+void    free_matriz(char **input);
 #endif
