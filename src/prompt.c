@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/08 23:20:14 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/09 05:58:19 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		check_input(cmd.input, &cmd);
 		if (who_builtin(&cmd, is_builtin(cmd.input)) == FALSE)
 		{
-			if (has_pipe(cmd.input) == TRUE)
+			if (has_pipe(cmd.input, &cmd) == TRUE)
 				pipes(&cmd);
 			else
 				execution(&cmd);
