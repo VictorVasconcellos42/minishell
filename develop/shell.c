@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/09 04:36:18 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/09 04:57:42 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	type_var(char *str)
 	else if (!ft_strncmp("|", str, -1))
 		return (PIPE);
 	else
-		return (WORDg);
+		return (WORD);
 }
 
 void	lexer(t_cmd *cmd, char **input)
