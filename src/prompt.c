@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/07 09:38:29 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/08 23:20:14 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ int	main(int argc, char **argv, char **envp)
 		cmd.input = readline("Minishell: ");
 		check_input(cmd.input, &cmd);
 		if (who_builtin(&cmd, is_builtin(cmd.input)) == FALSE)
-			execution(&cmd);
+		{
+			if (has_pipe(cmd.input) == TRUE)
+				pipes(&cmd);
+			else
+				execution(&cmd);
+		}
 		free(cmd.input);
 	}
 	builtin_exit(&cmd);

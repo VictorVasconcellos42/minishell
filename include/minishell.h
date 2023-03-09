@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/07 09:38:24 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/08 23:24:51 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
+# include <sys/types.h>
 # include "../libft/libft.h"
 # include <signal.h>
 
@@ -31,6 +32,8 @@
 # define YELLOW "\033[0;33m"
 # define BLUE "\033[0;34m"
 # define END "\033[0m"
+# define END_R	0
+# define END_W	1
 
 typedef struct s_cmd
 {
@@ -40,6 +43,7 @@ typedef struct s_cmd
 	int		env_size;
 
 	char	**exec;
+	char	**pipex;
 
 	char	**path;
 
@@ -72,6 +76,7 @@ int		who_builtin(t_cmd *cmd, int builtin);
 // EXEC //
 
 void	execution(t_cmd *exec);
+int	check_command(t_cmd *cmd);
 
 // SIGNAL //
 
@@ -82,4 +87,9 @@ void	handle_ctrl_d(void);
 // LEAK //
 
 void    control_free(t_cmd *cmd);
+
+// PIPEX //
+
+int	has_pipe(char *string);
+int	pipes(t_cmd *cmd);
 #endif

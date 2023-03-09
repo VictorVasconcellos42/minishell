@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/03/07 09:38:48 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/03/08 23:23:48 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME	=	minishell
 
-SRC		=	src/prompt.c src/env.c src/builtin.c src/exec.c src/signal.c src/leak.c
+SRC		=	src/prompt.c src/env.c src/builtin.c src/exec.c src/signal.c src/leak.c src/pipes.c
 
 OBJ		=	${SRC:.c=.o}
 
