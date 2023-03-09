@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/09 04:00:07 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/09 04:36:07 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef enum e_builtin
 
 typedef enum e_tokens
 {
-	COMMAND = 100,
+	WORD = 100,
 	PIPE,
 	R_INPUT,
 	APP_INPUT,
