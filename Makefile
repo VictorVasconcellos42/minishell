@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/03/09 04:00:33 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/03/09 04:29:05 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME	=	minishell
 
-SRC		=	src/prompt.c src/env.c src/builtin.c src/exec.c src/signal.c src/leak.c src/pipes.c
+SRC		=	src/env.c src/builtin.c src/exec.c src/signal.c src/leak.c src/pipes.c
 
 OBJ		=	${SRC:.c=.o}
 
@@ -46,7 +46,7 @@ $(LIBFT):
 	@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -c $< -o $@
 
 $(NAME): ${OBJ} ${LIBFT}
-	@${CC} ${CFLAGS} ${LIBFT} ${OBJ} -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include -lreadline -o ${NAME}
+	@${CC} ${CFLAGS} ${LIBFT} src/prompt.c ${OBJ} -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include -lreadline -o ${NAME}
 	@echo "${GREEN}Minishell created!${END} ✅"
 
 clean: 
@@ -61,7 +61,7 @@ fclean:	clean
 	@echo "${RED}Library removed${END} 🚫"
 
 develop: $(LIBFT)
-	cc -Wall -Wextra -Werror -g develop/shell.c src/builtin.c src/env.c src/exec.c src/leak.c src/signal.c -L ~/.brew/opt/readline/lib libft.a -I ~/.brew/opt/readline/include -lreadline -o tester
+	cc -Wall -Wextra -Werror -g develop/shell.c ${SRC} -L ~/.brew/opt/readline/lib libft.a -I ~/.brew/opt/readline/include -lreadline -o tester
 
 re:	fclean all
 
