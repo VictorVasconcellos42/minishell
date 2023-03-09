@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/08 23:24:51 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/09 04:00:07 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define END_R	0
 # define END_W	1
 
+typedef struct s_token t_token;
+
 typedef struct s_cmd
 {
 	char	*input;
@@ -48,7 +50,14 @@ typedef struct s_cmd
 	char	**path;
 
 	int		status;
+	t_token	*token;
 }	t_cmd;
+
+typedef struct s_token
+{
+	char	*token_value;
+	int		type;
+} t_token;
 
 typedef enum e_builtin
 {
@@ -60,6 +69,16 @@ typedef enum e_builtin
 	EXPORT,
 	CD
 }	t_builtin;
+
+typedef enum e_tokens
+{
+	COMMAND = 100,
+	PIPE,
+	R_INPUT,
+	APP_INPUT,
+	HERE_DOC,
+	R_OUTPUT
+}	t_tokens;
 
 // ENV //
 
@@ -90,6 +109,7 @@ void    control_free(t_cmd *cmd);
 
 // PIPEX //
 
-int	has_pipe(char *string);
-int	pipes(t_cmd *cmd);
+int		has_pipe(char *string);
+int		pipes(t_cmd *cmd);
+void    free_matriz(char **input);
 #endif
