@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/09 04:36:07 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/09 05:57:35 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_cmd
 	char	**path;
 
 	int		status;
+	int		c_pipes;
 	t_token	*token;
 }	t_cmd;
 
@@ -109,7 +110,10 @@ void    control_free(t_cmd *cmd);
 
 // PIPEX //
 
-int		has_pipe(char *string);
-int		pipes(t_cmd *cmd);
+int		has_pipe(char *string, t_cmd *cmd);
+void	pipes(t_cmd *cmd);
 void    free_matriz(char **input);
+void 	last_pipe(t_cmd *cmd, int i, int *fd);
+void 	first_pipe(t_cmd *cmd, int *fd);
+void	middle_pipe(t_cmd *cmd, int i, int **fd);
 #endif
