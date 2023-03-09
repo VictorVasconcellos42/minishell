@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/07 19:41:01 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/09 04:17:27 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,12 @@ int	main(int argc, char **argv, char **envp)
 		cmd.token = malloc(sizeof(t_token) + (matriz_len(input) + 1));
 		lexer(&cmd, input);
 		if (who_builtin(&cmd, is_builtin(cmd.input)) == FALSE)
-			execution(&cmd);
+		{
+			if (has_pipe(cmd.input) == TRUE)
+				pipes(&cmd);
+			else
+				execution(&cmd);
+		}
 		free(cmd.input);
 	}
 	builtin_exit(&cmd);
