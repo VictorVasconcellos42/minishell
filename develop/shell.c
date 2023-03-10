@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/09 04:57:42 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:30:35 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int argc, char **argv, char **envp)
 		lexer(&cmd, input);
 		if (who_builtin(&cmd, is_builtin(cmd.input)) == FALSE)
 		{
-			if (has_pipe(cmd.input) == TRUE)
+			if (has_pipe(cmd.input, &cmd) == TRUE)
 				pipes(&cmd);
 			else
 				execution(&cmd);
