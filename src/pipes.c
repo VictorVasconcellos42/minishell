@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:26:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/09 06:19:00 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/10 07:01:40 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	pipes(t_cmd *cmd)
 	pid[i] = fork();
 	if (pid[i] == 0)
 		first_pipe(cmd, fd[i]);
-	wait(0);
 	close(fd[i][1]);
 	while (i < cmd->c_pipes - 1)
 	{
@@ -70,13 +69,14 @@ void	pipes(t_cmd *cmd)
 		    middle_pipe(cmd, i, fd);
 		close(fd[i - 1][0]);
 		close(fd[i][1]);
-		wait(0);
 	}
 	pid[i + 1] = fork();
 	if (pid[i + 1] == 0)
 		last_pipe(cmd, i + 1, fd[i]);
 	close(fd[i][0]);
-	wait (0);
+	i = 0;
+	while (pid[i])
+		waitpid(pid[i++], NULL, 0);
 }
 
 void first_pipe(t_cmd *cmd, int *fd)

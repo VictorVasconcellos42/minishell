@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/09 05:57:35 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:49:07 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,5 @@ void    free_matriz(char **input);
 void 	last_pipe(t_cmd *cmd, int i, int *fd);
 void 	first_pipe(t_cmd *cmd, int *fd);
 void	middle_pipe(t_cmd *cmd, int i, int **fd);
+void    init_minishell(t_cmd *cmd);
 #endif
