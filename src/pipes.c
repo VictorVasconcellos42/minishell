@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:26:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/10 07:01:40 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:33:10 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,18 @@ int	has_pipe(char *string, t_cmd *cmd)
 	return (FALSE);
 }
 
-/* int    **init_fd(int **fd, t_cmd *cmd)
+int    **init_fd(t_cmd *cmd)
 
 {
 	int i;
+	int **fd;
 
 	i = 0;
     fd = malloc(sizeof(int *) * cmd->c_pipes);
 	while (i < cmd->c_pipes)
 		fd[i++] = malloc(sizeof(int) * 2);
 	return (fd);
-} */
+}
 
 void	pipes(t_cmd *cmd)
 
@@ -49,11 +50,8 @@ void	pipes(t_cmd *cmd)
 	int	*pid;
 
     i = 0;
-	fd = malloc(sizeof(int *) * cmd->c_pipes);
-	while (i < cmd->c_pipes)
-		fd[i++] = malloc(sizeof(int) * 2);
+	fd = init_fd(cmd);
 	pid = (int *)malloc(sizeof(int) * cmd->c_pipes + 1);
-	i = 0;
 	cmd->pipex = ft_split(cmd->input, '|');
 	pipe(fd[i]);
 	pid[i] = fork();
