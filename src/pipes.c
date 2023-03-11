@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:26:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/10 13:33:10 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/11 11:27:01 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,29 @@ int    **init_fd(t_cmd *cmd)
 	int **fd;
 
 	i = 0;
+	cmd->pipex = ft_split(cmd->input, '|');
     fd = malloc(sizeof(int *) * cmd->c_pipes);
 	while (i < cmd->c_pipes)
 		fd[i++] = malloc(sizeof(int) * 2);
 	return (fd);
 }
 
-void	pipes(t_cmd *cmd)
+void	pipes(t_cmd *cmd, int i, int j)
 
 {
-	int i;
 	int	**fd;
 	int	*pid;
 
-    i = 0;
 	fd = init_fd(cmd);
 	pid = (int *)malloc(sizeof(int) * cmd->c_pipes + 1);
-	cmd->pipex = ft_split(cmd->input, '|');
 	pipe(fd[i]);
 	pid[i] = fork();
 	if (pid[i] == 0)
 		first_pipe(cmd, fd[i]);
-	close(fd[i][1]);
+	close(fd[i][WRITE_END]);
 	while (i < cmd->c_pipes - 1)
 	{
-		i++;
-		pipe(fd[i]);
+		pipe(fd[++i]);
 		pid[i] = fork();
 		if (pid[i] == 0)
 		    middle_pipe(cmd, i, fd);
@@ -71,39 +68,44 @@ void	pipes(t_cmd *cmd)
 	pid[i + 1] = fork();
 	if (pid[i + 1] == 0)
 		last_pipe(cmd, i + 1, fd[i]);
-	close(fd[i][0]);
-	i = 0;
-	while (pid[i])
-		waitpid(pid[i++], NULL, 0);
+	close(fd[i][READ_END]);
+	while (pid[j])
+		waitpid(pid[j++], NULL, 0);
 }
 
 void first_pipe(t_cmd *cmd, int *fd)
 
 {
-	close(fd[0]);
-	dup2(fd[1], STDOUT_FILENO);
-	close(fd[1]);
+	close(fd[READ_END]);
+	dup2(fd[WRITE_END], STDOUT_FILENO);
+	close(fd[WRITE_END]);
 	cmd->exec = ft_split(cmd->pipex[0], ' ');
-	check_command(cmd);
+	if (check_command(cmd) == FALSE)
+		error_command(cmd->exec[0]);
+	exit(127);
 }
 
 void middle_pipe(t_cmd *cmd, int i, int **fd)
 
 {
-	close(fd[i][0]);
-	dup2(fd[i - 1][0], STDIN_FILENO);
-	close(fd[i - 1][0]);
-	dup2(fd[i][1], STDOUT_FILENO);
-	close(fd[i][1]);
+	close(fd[i][READ_END]);
+	dup2(fd[i - 1][READ_END], STDIN_FILENO);
+	close(fd[i - 1][READ_END]);
+	dup2(fd[i][WRITE_END], STDOUT_FILENO);
+	close(fd[i][WRITE_END]);
 	cmd->exec = ft_split(cmd->pipex[i], ' ');
-	check_command(cmd);
+	if (check_command(cmd) == FALSE)
+		error_command(cmd->exec[0]);
+	exit(127);
 }
 
 void last_pipe(t_cmd *cmd, int i, int *fd)
 
 {
-	dup2(fd[0], STDIN_FILENO);
-	close(fd[0]);
+	dup2(fd[READ_END], STDIN_FILENO);
+	close(fd[READ_END]);
 	cmd->exec = ft_split(cmd->pipex[i], ' ');
-	check_command(cmd);
+	if (check_command(cmd) == FALSE)
+		error_command(cmd->exec[0]);
+	exit(127);
 }
