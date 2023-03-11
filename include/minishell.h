@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/09 18:49:07 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/11 11:22:05 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define YELLOW "\033[0;33m"
 # define BLUE "\033[0;34m"
 # define END "\033[0m"
-# define END_R	0
-# define END_W	1
+# define READ_END	0
+# define WRITE_END	1
 
 typedef struct s_token t_token;
 
@@ -60,6 +60,8 @@ typedef struct s_token
 	int		type;
 } t_token;
 
+// BUILTINS ENUM //
+
 typedef enum e_builtin
 {
 	ENV = 1,
@@ -70,6 +72,8 @@ typedef enum e_builtin
 	EXPORT,
 	CD
 }	t_builtin;
+
+// TOKENS ENUM //
 
 typedef enum e_tokens
 {
@@ -111,10 +115,14 @@ void    control_free(t_cmd *cmd);
 // PIPEX //
 
 int		has_pipe(char *string, t_cmd *cmd);
-void	pipes(t_cmd *cmd);
+void	pipes(t_cmd *cmd, int i, int j);
 void    free_matriz(char **input);
 void 	last_pipe(t_cmd *cmd, int i, int *fd);
 void 	first_pipe(t_cmd *cmd, int *fd);
 void	middle_pipe(t_cmd *cmd, int i, int **fd);
 void    init_minishell(t_cmd *cmd);
+
+// UTILS //
+
+void	error_command(char *command);
 #endif
