@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/10 13:30:35 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:55:42 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	lexer(t_cmd *cmd, char **input)
 
 {
 	int		j = 0;
+	cmd->token = malloc(sizeof(t_token) + (matriz_len(input) + 1));
 	while (input[j])
 	{
 		cmd->token[j].token_value = ft_strdup(input[j]);
@@ -79,7 +80,6 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd.input = readline("Minishell: ");
 		input = ft_split(cmd.input, ' ');
-		cmd.token = malloc(sizeof(t_token) + (matriz_len(input) + 1));
 		lexer(&cmd, input);
 		if (who_builtin(&cmd, is_builtin(cmd.input)) == FALSE)
 		{
