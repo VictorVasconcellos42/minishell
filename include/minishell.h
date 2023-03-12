@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/11 11:22:05 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:45:09 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_cmd
 	char	**env;
 	int		env_size;
 
+	char	**cd;
 	char	**exec;
 	char	**pipex;
 
@@ -96,6 +97,8 @@ int		is_builtin(char *input);
 void	builtin_env(t_cmd *cmd);
 void	builtin_exit(t_cmd *cmd);
 int		who_builtin(t_cmd *cmd, int builtin);
+int		cd(char **cmd_table, t_cmd *cmd);
+
 
 // EXEC //
 
@@ -125,4 +128,5 @@ void    init_minishell(t_cmd *cmd);
 // UTILS //
 
 void	error_command(char *command);
+int		matriz_size(char **str);
 #endif
