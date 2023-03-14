@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/13 14:05:28 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:18:18 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_cmd
 	char	**cd;
 	char	**exec;
 	char	**pipex;
+	char	*export;
 
 	char	**path;
 
@@ -99,6 +100,7 @@ void	builtin_exit(t_cmd *cmd);
 int		who_builtin(t_cmd *cmd, int builtin);
 int		cd(char **cmd_table, t_cmd *cmd);
 void	pwd(t_cmd *cmd);
+void	export(t_cmd *cmd, char *new_var);
 
 
 // EXEC //
