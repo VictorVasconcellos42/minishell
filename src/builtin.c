@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/03/13 14:13:49 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/13 23:53:22 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	is_builtin(char *input)
 	    return (CD);
 	else if(!ft_strncmp(input, "pwd", -1))
 		return (PWD);
+	else if (!ft_strncmp(input, "export", 6))
+	    return (EXPORT);
 	return (FALSE);
 }
 
@@ -59,5 +61,7 @@ int	who_builtin(t_cmd *cmd, int builtin)
 	    cd(cmd->cd, cmd);
 	else if (builtin == PWD)
 		pwd(cmd);
+	else if (builtin == EXPORT)
+		export(cmd, cmd->input);
 	return (TRUE);
 }
