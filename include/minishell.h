@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/13 18:18:18 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/15 08:21:05 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_cmd
 	char	*input;
 
 	char	**env;
+	int		sys_env;
 	int		env_size;
 
 	char	**cd;
