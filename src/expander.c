@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 07:24:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/15 06:46:13 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:02:35 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int is_expandable(char *token)
 		return (0);
 	if (!next_char)
 		return (0);
-	if (!ft_isalpha(next_char) && next_char != '_')
+	if (!ft_isalpha(next_char) && next_char != '_' && next_char != '?')
 		return (0);
 	// TODO: Check if symbol is between single quotes
 	return (1);
@@ -82,19 +82,27 @@ char *remove_quotes_pair(char *token)
 	return (free(tmp), freedom(split_table), clean_token);
 }
 
-char *expand_token(char *token)
+char *expand_token(char *token, **envp)
 {
 	int end_pos;
 	char *identifier;
 	char *var_pointer;
+	char *expanded_token;
 
 	end_pos = 0;
 	var_pointer = ft_strchr(token, '$') + 1;
-	while (ft_isalnum(var_pointer[end_pos]) || var_pointer[end_pos] == '_')
+	if (*var_pointer == '?')
 		end_pos++;
+	else
+	{
+		while (ft_isalnum(var_pointer[end_pos]) || var_pointer[end_pos] == '_')
+			end_pos++;
+	}
 	identifier = ft_substr(var_pointer, 0, end_pos);
+	search_var(identifier, envp);
 	if (!identifier)
 		return (NULL);
+		
 	return (identifier);
 }
 
@@ -103,14 +111,14 @@ char *search_var(char *id, char **envp)
 	int i;
 	char *expanded;
 	char *search_id;
+	extern int g_status_code;
 
 	i = 0;
+	if (*id == '?')
+		return (ft_itoa(g_status_code));
 	search_id = ft_strjoin(id, "=");
 	while (envp[i])
 	{
-		ft_printf("%s\n", id);
-		ft_printf("%s\n", envp[i]);
-
 		if (!ft_strncmp(search_id, envp[i], ft_strlen(id)))
 		{
 			expanded = ft_substr(envp[i], ft_strlen(id) + 1, ft_strlen(envp[i]));
@@ -129,7 +137,6 @@ void expand_tokens(char **tokens)
 	int i;
 	char *swap;
 	i = 0;
-	// TODO: Remove quotes
 	while (tokens[i])
 	{
 		if (!is_expandable(tokens[i]))
@@ -146,5 +153,6 @@ void expand_tokens(char **tokens)
 int main(int argc, char **argv, char **envp)
 {
 	// ft_printf("%s\n", search_var(expand_token(argv[1]), envp));
-	ft_printf("%s\n", remove_quotes_pair(argv[1]));
+	// ft_printf("%s\n", remove_quotes_pair(argv[1]));
+	ft_printf("%s", get_indentifier(argv[1]));
 }

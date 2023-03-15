@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/15 08:21:05 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/15 19:38:35 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define END "\033[0m"
 # define READ_END	0
 # define WRITE_END	1
+
+int	g_status_code;
 
 typedef struct s_token t_token;
 
