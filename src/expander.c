@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 07:24:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/14 08:55:50 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/15 06:46:13 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int check_quotes(char *token)
 	char quote;
 
 	i = 0;
-	while (token[i] || token[i] != '\'' || token[i] == '"')
+	while (token[i] && (token[i] != '\'' || token[i] != '"'))
 		i++;
 	if (!token[i])
 		return (0);
 	quote = token[i];
-	while (token[i] || token[i] != quote)
+	while (token[i] && token[i] != quote)
 		i++;
 	if (!token[i])
 		return (0);
