@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:30:08 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/13 17:03:54 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/15 08:24:40 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	create_env(t_cmd *cmd, char **envp)
 	int	i;
 
 	i = -1;
+
 	cmd->env_size = matriz_size(envp);
 	cmd->env = malloc(sizeof(char *) * (cmd->env_size + 2));
 	if (!cmd->env)
@@ -58,4 +59,8 @@ void	create_env(t_cmd *cmd, char **envp)
 	cmd->env[i] = NULL;
 	cmd->env[i + 1] = NULL;
 	env_path(cmd);
+	if (cmd->sys_env == 0)
+		cmd->sys_env = 1;
+	else
+		free_matriz(envp);
 }
