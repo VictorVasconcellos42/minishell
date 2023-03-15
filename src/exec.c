@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 02:43:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/07 10:03:11 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/15 09:51:58 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	check_command(t_cmd *cmd)
 	int		i;
 	char	*full_path;
 
-	full_path = ft_strdup(cmd->exec[0]);
+	if (cmd->exec[0][0] == '/' || cmd->exec[0][0] == '.')
+		full_path = ft_strdup(cmd->exec[0]);
 	i = 0;
 	while (cmd->path[i])
 	{
@@ -29,7 +30,6 @@ int	check_command(t_cmd *cmd)
 			execve(cmd->exec[0], cmd->exec, cmd->env);
 			return (TRUE);
 		}
-		free(full_path);
 		full_path = ft_strjoin(cmd->path[i], "/");
 		full_path = ft_strjoin_gnl(full_path, cmd->exec[0]);
 		i++;
