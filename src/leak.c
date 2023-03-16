@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 09:25:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/10 07:38:05 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:29:54 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void    free_matriz(char **input)
     i = -1;
     while (input[++i])
         free(input[i]);
+    free(input);
 }
 
 int matriz_have_malloc(char **str)
