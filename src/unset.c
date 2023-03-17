@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:21:11 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/16 20:25:23 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/17 14:58:43 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,53 +34,35 @@ int	ft_isspace(char *str)
 	return (i);
 }
 
-char	**unset(char *str, char **envp)
+void	unset(t_cmd *cmd, char *str)
 
 {
-	int i;
-	int new_count;
-	int	count;
-	int	len_s;
+	int		i;
+	int		new_count;
+	int		count;
+	int		len_s;
 	char	**new_envp;
-	
+
 	i = ft_isspace(str);
-	new_envp = malloc((matriz_size(envp)) * sizeof(*new_envp)); 
+	new_envp = malloc((matriz_size(cmd->env)) * sizeof(*new_envp));
 	count = 0;
 	new_count = 0;
-	len_s =	ft_name(str + i);
-	while (envp[count])
+	len_s = ft_name(str + i);
+	while (cmd->env[count])
 	{
-		if (!ft_strncmp(envp[count], str + i, len_s))
+		if (!ft_strncmp(cmd->env[count], str + i, len_s))
 		{
 			count++;
 			continue ;
 		}
-		new_envp[new_count++] = ft_strdup(envp[count++]);
+		new_envp[new_count++] = ft_strdup(cmd->env[count++]);
 	}
 	new_envp[new_count] = NULL;
-	free_matriz(envp);
-	return (new_envp);
+	free_matriz(cmd->env);
+	cmd->env = new_envp;
 }
 
-char	**_env(char **envp)
-
-{
-	int	i;
-	int size;
-	char **n_env;
-	i = -1;
-
-	size = matriz_size(envp);
-	n_env = malloc(sizeof(char *) * (size + 2));
-	while (++i < size)
-		n_env[i] = ft_strdup(envp[i]);
-	n_env[i] = NULL;
-	n_env[i + 1] = NULL;
-	return (n_env);
-}
-
-
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 
 {
 	char **envt;
@@ -105,4 +87,4 @@ int	main(int argc, char **argv, char **envp)
 	for (int j = 0; j < matriz_size(envt); j++)
 			printf("%s\n", envt[j]);
 	free_matriz(envt);
-}
+} */
