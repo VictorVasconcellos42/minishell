@@ -56,28 +56,6 @@ int is_expandable(char *token)
 	return (1);
 }
 
-int check_quotes(char *token)
-{
-	char	quote;
-
-	quote = 0;
-	while (*token)
-	{
-		if (!quote && (*token == '\'' || *token == '"'))
-		{
-			if (!is_quote_closed(*token, token))
-				return (0);
-			quote = *token++
-		}
-		else if (quote && (*token == quote))
-		{
-			quote = 0;
-			token++;
-		}
-		tmp[i++] = *token++;
-	}
-}
-
 char	is_quote_closed(char quote, char *str)
 {
 	while (*str++)
@@ -87,6 +65,36 @@ char	is_quote_closed(char quote, char *str)
 	}
 	return (0);
 }
+/*
+Work in progress
+
+int check_quotes(char *token)
+{
+	char	quote;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = 0;
+	quote = 0;
+	while (*token)
+	{
+		if (!quote && (*token == '\'' || *token == '"'))
+		{
+			if (!is_quote_closed(*token, token))
+				return (0);
+			quote = *token++;
+		}
+		else if (quote && (*token == quote))
+		{
+			quote = 0;
+			token++;
+		}
+		tmp[i++] = *token++;
+	}
+}
+*/
+
 
 char *remove_quotes_pair(char *token)
 {
@@ -121,6 +129,9 @@ char *remove_quotes_pair(char *token)
 	return (free(tmp), string);
 }
 
+
+/*
+Work in progress
 char *expand_token(char *token, char **envp)
 {
 	int end_pos;
@@ -144,7 +155,6 @@ char *expand_token(char *token, char **envp)
 		
 	return (identifier);
 }
-
 char *expand_token(char *token, char **envp)
 {
 	int	i;
@@ -166,6 +176,7 @@ char *expand_token(char *token, char **envp)
 		tmp[i++] = *token++;
 	}
 }
+*/
 
 
 void expand_tokens(char **tokens)
