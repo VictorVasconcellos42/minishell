@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 19:47:40 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/02/28 03:13:50 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:03:26 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,29 @@ static void	*freedom(char	**array)
 	return (NULL);
 }
 
-static char	**split_string(char const *string, char c, char **array, int max)
+static int	separator(char *string, char c)
+
+{
+	int	i;
+
+	i = 0;
+	while (string[i] == c)
+		i++;
+	return (i);
+}
+
+static char	**split_string(char *string, char c, int words, int max)
 
 {
 	int		i;
 	int		len;
 	int		point;
+	char	**array;
 
+	array = ft_calloc(words, sizeof(char *));
 	point = 0;
 	len = 0;
-	i = 0;
-	while (string[i] == c)
-		i++;
+	i = separator(string, c);
 	while (i <= max)
 	{
 		if ((string[i] == c && len != 0) || \
@@ -88,16 +99,12 @@ char	**ft_split(char *string, char c)
 {
 	size_t	string_len;
 	int		count_words;
-	char	**array_words;
 	char	**array;
 
 	if (!(string))
 		return (NULL);
 	string_len = ft_strlen(string);
 	count_words = how_many_words(string, c, string_len);
-	array_words = ft_calloc((count_words + 1), sizeof(char *));
-	if (!(array_words))
-		return (NULL);
-	array = split_string(string, c, array_words, string_len);
+	array = split_string(string, c, count_words + 1, string_len);
 	return (array);
 }

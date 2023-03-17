@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/15 19:38:35 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:01:31 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@
 # define READ_END	0
 # define WRITE_END	1
 
-int	g_status_code;
-
-typedef struct s_token t_token;
+typedef struct s_token	t_token;
 
 typedef struct s_cmd
 {
@@ -63,7 +61,7 @@ typedef struct s_token
 {
 	char	*token_value;
 	int		type;
-} t_token;
+}	t_token;
 
 // BUILTINS ENUM //
 
@@ -93,7 +91,7 @@ typedef enum e_tokens
 // ENV //
 
 void	create_env(t_cmd *cmd, char **envp);
-void	env_path(t_cmd *cmd);
+char	**get_path(t_cmd *cmd);
 
 // BUILTIN //
 
@@ -104,12 +102,12 @@ int		who_builtin(t_cmd *cmd, int builtin);
 int		cd(char **cmd_table, t_cmd *cmd);
 void	pwd(t_cmd *cmd);
 void	export(t_cmd *cmd, char *new_var);
-
+void	unset(t_cmd *cmd, char *str);
 
 // EXEC //
 
+int		check_command(t_cmd *cmd);
 void	execution(t_cmd *exec);
-int	check_command(t_cmd *cmd);
 
 // SIGNAL //
 
@@ -119,20 +117,31 @@ void	handle_ctrl_d(void);
 
 // LEAK //
 
-void    control_free(t_cmd *cmd);
+void	control_free(t_cmd *cmd);
+void	free_fd(int **input, int size);
 
 // PIPEX //
 
 int		has_pipe(char *string, t_cmd *cmd);
 void	pipes(t_cmd *cmd, int i, int j);
-void    free_matriz(char **input);
-void 	last_pipe(t_cmd *cmd, int i, int *fd);
-void 	first_pipe(t_cmd *cmd, int *fd);
+void	free_matriz(char **input);
+void	last_pipe(t_cmd *cmd, int i, int *fd);
+void	first_pipe(t_cmd *cmd, int *fd);
 void	middle_pipe(t_cmd *cmd, int i, int **fd);
-void    init_minishell(t_cmd *cmd);
 
 // UTILS //
 
 void	error_command(char *command);
 int		matriz_size(char **str);
+int		ft_isspace(char *str);
+
+//	START	//
+
+void	start_shell(t_cmd *cmd, char **envp);
+void	init_minishell(t_cmd *cmd);
+int		**init_fd(t_cmd *cmd);
+
+//	EXPANDER	//
+
+char	*search_var(char *id, char **envp);
 #endif

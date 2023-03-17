@@ -6,47 +6,59 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 09:25:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/10 07:38:05 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:10:39 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void    free_matriz(char **input)
+void	free_fd(int **input, int size)
 
 {
-    int i;
+	int	i;
 
-    i = -1;
-    while (input[++i])
-        free(input[i]);
+	i = 0;
+	while (i < size)
+		free(input[i++]);
+	free(input);
 }
 
-int matriz_have_malloc(char **str)
+void	free_matriz(char **input)
 
 {
-    if (!str)
-        return (FALSE);
-    return (TRUE);
+	int	i;
+
+	i = -1;
+	while (input[++i])
+		free(input[i]);
+	free(input);
 }
 
-int have_malloc(char *str)
+int	matriz_have_malloc(char **str)
 
 {
-    if (!str)
-        return (FALSE);
-    return (TRUE);
+	if (!str)
+		return (FALSE);
+	return (TRUE);
 }
 
-void    control_free(t_cmd *cmd)
+int	have_malloc(char *str)
 
 {
-    if (have_malloc(cmd->input) == TRUE)
-        free(cmd->input);
-    if (matriz_have_malloc(cmd->env) == TRUE)
-        free_matriz(cmd->env);
-    if (matriz_have_malloc(cmd->exec) == TRUE)
-        free_matriz(cmd->exec);
-    if (matriz_have_malloc(cmd->path) == TRUE)
-        free_matriz(cmd->path);
+	if (!str)
+		return (FALSE);
+	return (TRUE);
+}
+
+void	control_free(t_cmd *cmd)
+
+{
+	if (have_malloc(cmd->input) == TRUE)
+		free(cmd->input);
+	if (matriz_have_malloc(cmd->env) == TRUE)
+		free_matriz(cmd->env);
+	if (matriz_have_malloc(cmd->exec) == TRUE)
+		free_matriz(cmd->exec);
+	if (matriz_have_malloc(cmd->path) == TRUE)
+		free_matriz(cmd->path);
 }

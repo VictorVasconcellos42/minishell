@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/03/13 23:53:22 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:12:28 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ int	is_builtin(char *input)
 	else if (!ft_strncmp(input, "exit", 4))
 		return (EXIT);
 	else if (!ft_strncmp(input, "cd", 2))
-	    return (CD);
-	else if(!ft_strncmp(input, "pwd", -1))
+		return (CD);
+	else if (!ft_strncmp(input, "pwd", -1))
 		return (PWD);
 	else if (!ft_strncmp(input, "export", 6))
-	    return (EXPORT);
+		return (EXPORT);
+	else if (!ft_strncmp(input, "unset", 5))
+		return (UNSET);
 	return (FALSE);
 }
 
@@ -58,10 +60,12 @@ int	who_builtin(t_cmd *cmd, int builtin)
 	else if (builtin == EXIT)
 		builtin_exit(cmd);
 	else if (builtin == CD)
-	    cd(cmd->cd, cmd);
+		cd(cmd->cd, cmd);
 	else if (builtin == PWD)
 		pwd(cmd);
 	else if (builtin == EXPORT)
-		export(cmd, cmd->input);
+		export(cmd, cmd->input + 6);
+	else if (builtin == UNSET)
+		unset(cmd, cmd->input + 5);
 	return (TRUE);
 }
