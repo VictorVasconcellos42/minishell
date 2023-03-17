@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 16:01:31 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/15 19:38:35 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define WRITE_END	1
 
 typedef struct s_token	t_token;
+
+int	g_status_code;
 
 typedef struct s_cmd
 {
@@ -106,8 +108,8 @@ void	unset(t_cmd *cmd, char *str);
 
 // EXEC //
 
-void	execution(t_cmd *exec);
 int		check_command(t_cmd *cmd);
+void	execution(t_cmd *exec);
 
 // SIGNAL //
 
