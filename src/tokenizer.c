@@ -89,6 +89,7 @@ char	**tokenize(char const *string)
 	return (token_list);
 }
 
+/*
 int main(int argc, char *argv[])
 {
 	int i = 0;
@@ -98,3 +99,4 @@ int main(int argc, char *argv[])
 	while (table[i])
 		ft_printf("%s\n", table[i++]);
 }
+*/
