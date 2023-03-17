@@ -6,30 +6,36 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:30:08 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/15 08:24:40 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/17 05:08:50 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	env_path(t_cmd *cmd)
+char	**get_path(t_cmd *cmd)
 
 {
 	int		i;
 	char	*tmp;
+	char	**path;
 
-	i = 0;
-	while (cmd->env[i])
+	i = -1;
+	path = NULL;
+	while (cmd->env[++i])
 	{
-		if (!ft_strncmp(cmd->env[i], "PATH", 4))
+		if (!ft_strncmp(cmd->env[i], "PATH=", 5))
 		{
 			tmp = ft_strdup(cmd->env[i]);
-			cmd->path = ft_split(tmp + 5, ':');
+			if (!tmp)
+				return (NULL);
+			path = ft_split(tmp + 5, ':');
+			if (!path)
+				return (free(tmp), NULL);
 			free(tmp);
 			break ;
 		}
-		i++;
 	}
+	return (path);
 }
 
 int	matriz_size(char **str)
@@ -47,20 +53,17 @@ void	create_env(t_cmd *cmd, char **envp)
 
 {
 	int	i;
+	int	size;
 
-	i = -1;
-
-	cmd->env_size = matriz_size(envp);
-	cmd->env = malloc(sizeof(char *) * (cmd->env_size + 2));
+	i = 0;
+	size = matriz_size(envp);
+	cmd->env = malloc(sizeof(char *) * (size + 1));
 	if (!cmd->env)
 		return ;
-	while (++i < cmd->env_size)
+	while (i < size)
+	{
 		cmd->env[i] = ft_strdup(envp[i]);
+		i++;
+	}
 	cmd->env[i] = NULL;
-	cmd->env[i + 1] = NULL;
-	env_path(cmd);
-	if (cmd->sys_env == 0)
-		cmd->sys_env = 1;
-	else
-		free_matriz(envp);
 }
