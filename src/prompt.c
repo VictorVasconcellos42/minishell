@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 16:03:44 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:16:40 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 
 {
 	t_cmd	cmd;
-	int		build;
+//	int		build;
 
 	(void)argc;
 	(void)argv;
@@ -39,7 +39,9 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd.input = readline("Minishell: ");
 		check_input(cmd.input, &cmd);
-		cmd.cd = ft_split(cmd.input, ' ');
+		cmd.token = lexer(&cmd);
+		cmd.exec = sentence(&cmd);
+/* 		cmd.cd = ft_split(cmd.input, ' ');
 		build = is_builtin(cmd.input);
 		if (who_builtin(&cmd, build) == FALSE)
 		{
@@ -47,7 +49,7 @@ int	main(int argc, char **argv, char **envp)
 				pipes(&cmd, 0, 0);
 			else
 				execution(&cmd);
-		}
+		} */
 		free(cmd.input);
 		free_matriz(cmd.cd);
 	}

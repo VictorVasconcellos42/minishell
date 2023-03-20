@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 04:26:46 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/15 19:57:31 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:05:09 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,3 @@ char	**tokenize(char const *string)
 	token_list[token_index] = NULL;
 	return (token_list);
 }
-
-/*
-int main(int argc, char *argv[])
-{
-	int i = 0;
-	char **table = tokenize(argv[1]);
-
-	ft_printf("Tokens: %d\n", count_tokens(argv[1]));
-	while (table[i])
-		ft_printf("%s\n", table[i++]);
-}
-*/
