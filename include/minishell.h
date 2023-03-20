@@ -157,5 +157,5 @@ char	*search_var(char *id, char **envp);
 
 char	**tokenize(char const *string);
 t_token	*lexer(t_cmd *cmd);
-char	**sentence(t_cmd *cmd);
+char	**create_sentence(t_cmd *cmd);
 #endif
