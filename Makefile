@@ -44,11 +44,13 @@ $(LIBFT):
 	@make -C ${LIBFT_DIR}
 	@cp $(addprefix ${LIBFT_DIR}, ${LIBFT}) .
 
-.c.o: 
+.c.o:
 	@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -c $< -o $@
+#	@${CC} ${CFLAGS} -I/opt/homebrew/opt/readline/include -c $< -o $@
 
 $(NAME): ${OBJ} ${LIBFT}
 	@${CC} ${CFLAGS} ${LIBFT} src/prompt.c ${OBJ} -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include -lreadline -o ${NAME}
+#	@${CC} ${CFLAGS} ${LIBFT} src/prompt.c -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline ${OBJ} -o ${NAME}
 	@echo "${GREEN}Minishell created!${END} ✅"
 
 clean: 
