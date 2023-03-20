@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/11 09:55:42 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:34:41 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	lexer(t_cmd *cmd, char **input)
 	cmd->token = malloc(sizeof(t_token) + (matriz_len(input) + 1));
 	while (input[j])
 	{
-		cmd->token[j].token_value = ft_strdup(input[j]);
+		cmd->token[j].value = ft_strdup(input[j]);
 		cmd->token[j].type = type_var(input[j]);
-		printf("TOKEN [%i]: [%s]\tVALUE: [%d]\n", j + 1, cmd->token[j].token_value, cmd->token[j].type);
+		printf("TOKEN [%i]: [%s]\tVALUE: [%d]\n", j + 1, cmd->token[j].value, cmd->token[j].type);
 		j++;
 	}
 }

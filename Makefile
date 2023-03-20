@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/03/17 15:01:43 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/03/20 15:17:02 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@
 NAME	=	minishell
 
 SRC		=	src/env.c src/builtin.c src/exec.c src/signal.c src/leak.c src/pipes.c src/init.c \
-			src/utils.c src/cd.c src/pwd.c src/export.c src/expander.c src/tokenizer.c src/unset.c
+			src/utils.c src/cd.c src/pwd.c src/export.c src/expander.c src/tokenizer.c src/unset.c \
+			src/lexer.c src/sentence.c
 
 OBJ		=	${SRC:.c=.o}
 
