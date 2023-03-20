@@ -33,6 +33,7 @@ int	cd(char **cmd_table, t_cmd *cmd)
 	char	*home;
 
 	i = -1;
+	i++;
 	old = search_var("OLDPWD", cmd->env);
 	home = search_var("HOME", cmd->env);
 	export_concat(cmd, "OLDPWD", getcwd(NULL, 0));

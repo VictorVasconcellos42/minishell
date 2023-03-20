@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	cmd;
 //	int		build;
-
+	char	**socorro;
 	(void)argc;
 	(void)argv;
 	start_shell(&cmd, envp);
@@ -40,7 +40,8 @@ int	main(int argc, char **argv, char **envp)
 		cmd.input = readline("Minishell: ");
 		check_input(cmd.input, &cmd);
 		cmd.token = lexer(&cmd);
-		cmd.exec = sentence(&cmd);
+		socorro = create_sentence(&cmd);
+		socorro++;
 /* 		cmd.cd = ft_split(cmd.input, ' ');
 		build = is_builtin(cmd.input);
 		if (who_builtin(&cmd, build) == FALSE)
@@ -51,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 				execution(&cmd);
 		} */
 		free(cmd.input);
-		free_matriz(cmd.cd);
+		//free_matriz(cmd.cd);
 	}
 	builtin_exit(&cmd);
 	return (0);
