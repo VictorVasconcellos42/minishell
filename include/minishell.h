@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/15 19:38:35 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:16:11 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,35 @@ typedef struct s_token	t_token;
 
 int	g_status_code;
 
+
 typedef struct s_cmd
 {
-	char	*input;
+	char		*input;
 
-	char	**env;
-	int		sys_env;
-	int		env_size;
+	char		**env;
+	int			sys_env;
+	int			env_size;
 
-	char	**cd;
-	char	**exec;
-	char	**pipex;
-	char	*export;
+	char		**cd;
+	char		**exec;
+	char		**pipex;
+	char		*export;
 
-	char	**path;
+	char		**path;
 
-	int		status;
-	int		c_pipes;
-	t_token	*token;
+	int			status;
+	int			c_pipes;
+	t_token		*token;
 }	t_cmd;
+
+/* typedef struct s_sentence
+{
+	char	**sentence;
+}	t_sentence; */
 
 typedef struct s_token
 {
-	char	*token_value;
+	char	*value;
 	int		type;
 }	t_token;
 
@@ -146,4 +152,10 @@ int		**init_fd(t_cmd *cmd);
 //	EXPANDER	//
 
 char	*search_var(char *id, char **envp);
+
+//	TOKEN	//
+
+char	**tokenize(char const *string);
+t_token	*lexer(t_cmd *cmd);
+char	**sentence(t_cmd *cmd);
 #endif
