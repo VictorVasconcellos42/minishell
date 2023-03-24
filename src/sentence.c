@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sentence.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lguedes <lguedes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:26:52 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/20 16:27:52 by lguedes          ###   ########.fr       */
+/*   Updated: 2023/03/23 08:38:07 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,7 @@ char	**split_sentence(t_cmd *cmd, int s_len, int len)
 		i++;
 	while (i <= len)
 	{
-		if (*str == '|' || (ft_strncmp(">", str, 1) && str[i + 1] == ' ') || (*str == '\0' && count != 0))
-		{
-			matriz[pos++] = ft_substr(cmd->input, i - count, count);
-			count = 0;
-		}
-		else if (ft_strnstr(">>", str, 2) || ft_strnstr("<<", str, 2))
-		{
-			matriz[pos++] = ft_substr(cmd->input, i - count, count);
-			count = 0;
-		}
-		else if (ft_strncmp("<", str, 1) && str[i + 1] == ' ')
+		if ((str[i] == '|' && count != 0) || (str[i] == '\0' && count != 0))
 		{
 			matriz[pos++] = ft_substr(cmd->input, i - count, count);
 			count = 0;
@@ -48,8 +38,8 @@ char	**split_sentence(t_cmd *cmd, int s_len, int len)
 		else
 			count++;
 		i++;
-		str++;
 	}
+	matriz[pos] = NULL;
 	return (matriz);
 }
 
@@ -96,6 +86,6 @@ char	**create_sentence(t_cmd *cmd)
 	sentence = split_sentence(cmd, s_len, str_len);
 	int i = -1;
 	while (sentence[++i] != NULL)
-		printf("Sentence: [%s]\n", sentence[i]);
+		printf("COUNT: [%d] | Sentence: [%s]\n", s_len, sentence[i]);
 	return (sentence);
 }

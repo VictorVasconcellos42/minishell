@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/20 15:16:40 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:52:55 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	main(int argc, char **argv, char **envp)
 		check_input(cmd.input, &cmd);
 		cmd.token = lexer(&cmd);
 		socorro = create_sentence(&cmd);
-		socorro++;
 /* 		cmd.cd = ft_split(cmd.input, ' ');
 		build = is_builtin(cmd.input);
 		if (who_builtin(&cmd, build) == FALSE)
