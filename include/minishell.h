@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/20 15:16:11 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:06:53 by marolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_cmd
 	int			env_size;
 
 	char		**cd;
+	char		**echo;
 	char		**exec;
 	char		**pipex;
 	char		*export;
@@ -111,6 +112,7 @@ int		cd(char **cmd_table, t_cmd *cmd);
 void	pwd(t_cmd *cmd);
 void	export(t_cmd *cmd, char *new_var);
 void	unset(t_cmd *cmd, char *str);
+void	my_echo(t_cmd *cmd);
 
 // EXEC //
 

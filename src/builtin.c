@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/03/17 16:12:28 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:08:25 by marolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	is_builtin(char *input)
 		return (CD);
 	else if (!ft_strncmp(input, "pwd", -1))
 		return (PWD);
+	else if (!ft_strncmp(input, "echo", 4))
+		return (ECHO);
 	else if (!ft_strncmp(input, "export", 6))
 		return (EXPORT);
 	else if (!ft_strncmp(input, "unset", 5))
@@ -51,7 +53,6 @@ void	builtin_exit(t_cmd *cmd)
 }
 
 int	who_builtin(t_cmd *cmd, int builtin)
-
 {
 	if (builtin == 0)
 		return (FALSE);
@@ -63,6 +64,8 @@ int	who_builtin(t_cmd *cmd, int builtin)
 		cd(cmd->cd, cmd);
 	else if (builtin == PWD)
 		pwd(cmd);
+	else if (builtin == ECHO)
+		my_echo(cmd);
 	else if (builtin == EXPORT)
 		export(cmd, cmd->input + 6);
 	else if (builtin == UNSET)

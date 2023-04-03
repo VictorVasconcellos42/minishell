@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/21 13:52:55 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:00:29 by marolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	main(int argc, char **argv, char **envp)
 
 {
 	t_cmd	cmd;
-//	int		build;
-	char	**socorro;
+	int		build;
+	//char	**socorro;
 	(void)argc;
 	(void)argv;
 	start_shell(&cmd, envp);
@@ -40,8 +40,9 @@ int	main(int argc, char **argv, char **envp)
 		cmd.input = readline("Minishell: ");
 		check_input(cmd.input, &cmd);
 		cmd.token = lexer(&cmd);
-		socorro = create_sentence(&cmd);
-/* 		cmd.cd = ft_split(cmd.input, ' ');
+		//socorro = create_sentence(&cmd);
+		cmd.cd = ft_split(cmd.input, ' ');
+		cmd.echo = ft_split(cmd.input, ' ');
 		build = is_builtin(cmd.input);
 		if (who_builtin(&cmd, build) == FALSE)
 		{
@@ -49,9 +50,9 @@ int	main(int argc, char **argv, char **envp)
 				pipes(&cmd, 0, 0);
 			else
 				execution(&cmd);
-		} */
+		}
 		free(cmd.input);
-		//free_matriz(cmd.cd);
+		free_matriz(cmd.cd);
 	}
 	builtin_exit(&cmd);
 	return (0);
