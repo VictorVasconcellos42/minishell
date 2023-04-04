@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/30 17:00:29 by marolive         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:43:30 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,21 @@ int	main(int argc, char **argv, char **envp)
 		cmd.input = readline("Minishell: ");
 		check_input(cmd.input, &cmd);
 		cmd.token = lexer(&cmd);
-		//socorro = create_sentence(&cmd);
-		cmd.cd = ft_split(cmd.input, ' ');
-		cmd.echo = ft_split(cmd.input, ' ');
-		build = is_builtin(cmd.input);
-		if (who_builtin(&cmd, build) == FALSE)
-		{
-			if (has_pipe(cmd.input, &cmd) == TRUE)
-				pipes(&cmd, 0, 0);
-			else
-				execution(&cmd);
+		if (parser(cmd.token))
+		{	
+			cmd.cd = ft_split(cmd.input, ' ');
+			cmd.echo = ft_split(cmd.input, ' ');
+			build = is_builtin(cmd.input);
+			if (who_builtin(&cmd, build) == FALSE)
+			{
+				if (has_pipe(cmd.input, &cmd) == TRUE)
+					pipes(&cmd, 0, 0);
+				else
+					execution(&cmd);
+			}
+			free_matriz(cmd.cd);
 		}
 		free(cmd.input);
-		free_matriz(cmd.cd);
 	}
 	builtin_exit(&cmd);
 	return (0);
