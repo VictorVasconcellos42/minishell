@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/29 18:06:53 by marolive         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:08:05 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_token
 {
 	char	*value;
 	int		type;
+	int		count;
 }	t_token;
 
 // BUILTINS ENUM //
@@ -118,6 +119,8 @@ void	my_echo(t_cmd *cmd);
 
 int		check_command(t_cmd *cmd);
 void	execution(t_cmd *exec);
+int		check_case(char *str);
+void	executor(t_cmd *cmd);
 
 // SIGNAL //
 
@@ -160,4 +163,15 @@ char	*search_var(char *id, char **envp);
 char	**tokenize(char const *string);
 t_token	*lexer(t_cmd *cmd);
 char	**create_sentence(t_cmd *cmd);
+
+//	PARSER	//
+
+int		parser(t_token *token);
+int		check(t_token *token);
+void	easy_command(t_token *token);
+void	pipeline(t_token *token);
+int		redirects(t_token *token);
+int		parser_error(char *text);
+int		word(t_token *token);
+int		file(t_token *token);
 #endif

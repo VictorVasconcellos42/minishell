@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marolive <marolive@student.42.fr>          +#+  +:+       +#+         #
+#    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/03/29 13:01:16 by marolive         ###   ########.fr        #
+#    Updated: 2023/04/04 10:48:38 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME	=	minishell
 
 SRC		=	src/env.c src/builtin.c src/exec.c src/signal.c src/leak.c src/pipes.c src/init.c \
 			src/utils.c src/cd.c src/pwd.c src/export.c src/expander.c src/tokenizer.c src/unset.c \
-			src/lexer.c src/sentence.c src/prompt.c src/echo.c
+			src/lexer.c src/sentence.c src/echo.c develop/parser.c src/prompt.c
 
 OBJ		=	${SRC:.c=.o}
 
@@ -65,7 +65,7 @@ fclean:	clean
 	@echo "${RED}Library removed${END} 🚫"
 
 develop: $(LIBFT)
-	cc -Wall -Wextra -Werror -g develop/shell.c ${SRC} -L ~/.brew/opt/readline/lib libft.a -I ~/.brew/opt/readline/include -lreadline -o tester
+	cc -Wall -Wextra -Werror -g develop/*.c ${SRC} -L ~/.brew/opt/readline/lib libft.a -I ~/.brew/opt/readline/include -lreadline -o tester
 
 re:	fclean all
 
