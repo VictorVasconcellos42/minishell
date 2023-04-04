@@ -6,7 +6,7 @@
 /*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:48:44 by marolive          #+#    #+#             */
-/*   Updated: 2023/04/03 19:30:56 by marolive         ###   ########.fr       */
+/*   Updated: 2023/04/03 20:12:59 by marolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void my_echo(t_cmd *cmd)
                 i++;
                 if (cmd->echo[i] == NULL)
                 {
-                    if(flag == 1)
+                    if (flag == 1 && i == 2)
                         printf("\n");
                     return ;
                 }
