@@ -30,7 +30,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	cmd;
 	int		build;
-	//char	**socorro;
 	(void)argc;
 	(void)argv;
 	start_shell(&cmd, envp);
