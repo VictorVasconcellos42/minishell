@@ -45,12 +45,14 @@ $(LIBFT):
 	@cp $(addprefix ${LIBFT_DIR}, ${LIBFT}) .
 
 .c.o:
-	@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -c $< -o $@
-#	@${CC} ${CFLAGS} -I/opt/homebrew/opt/readline/include -c $< -o $@
+#	@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -c $< -o $@ #Mac 42
+	@${CC} ${CFLAGS} -lreadline -c $< -o $@ #Linux
+#	@${CC} ${CFLAGS} -I/opt/homebrew/opt/readline/include -c $< -o $@ #Mac M1
 
 $(NAME): ${OBJ} ${LIBFT}
-	@${CC} ${CFLAGS} ${LIBFT} ${OBJ} -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include -lreadline -o ${NAME}
-#	@${CC} ${CFLAGS} ${LIBFT} src/prompt.c -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline ${OBJ} -o ${NAME}
+#	@${CC} ${CFLAGS} ${LIBFT} ${OBJ} -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include -lreadline -o ${NAME} #Mac 42
+#	@${CC} ${CFLAGS} ${LIBFT} src/prompt.c -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline ${OBJ} -o ${NAME} #Mac M1
+	@${CC} ${CFLAGS} ${OBJ} ${LIBFT} -lreadline -o ${NAME} #Linux
 	@echo "${GREEN}Minishell created!${END} ✅"
 
 clean: 
