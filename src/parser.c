@@ -6,23 +6,32 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 08:28:45 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/04 15:46:43 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/05 07:40:53 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	file(t_token *token)
+int	is_pipes(int type)
 
 {
-	if (token[token->count].type == WORD)
-		token->count++;
-	else
-		return (parser_error("word"));
-	return (TRUE);
+	if (type == PIPE)
+		return (TRUE);
+	return (FALSE);
 }
 
-int	word(t_token *token)
+int	is_redirect(int type)
+
+{
+	if (type == HERE_DOC \
+	|| type == APP_INPUT \
+	|| type == R_INPUT \
+	|| type == R_OUTPUT)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	file(t_token *token)
 
 {
 	if (token[token->count].type == WORD)
@@ -43,16 +52,13 @@ int	parser_error(char *text)
 int	redirects(t_token *token)
 
 {
-	if (token[token->count].type == R_INPUT || \
-		token[token->count].type == R_OUTPUT || \
-		token[token->count].type == APP_INPUT || \
-		token[token->count].type == HERE_DOC)
+	if (is_redirect(token[token->count].type))
 	{
 		token->count++;
 		if (token[token->count].type == WORD)
 			file(token);
 		else
-			return (parser_error("file"));
+			return (parser_error("newline"));
 	}
 	else
 		return (parser_error("'<' or '>'"));
@@ -63,11 +69,21 @@ void	pipeline(t_token *token)
 
 {
 	check(token);
-	if (token[token->count].type == PIPE)
+	if (is_pipes(token[token->count].type))
 	{
 		token->count++;
 		pipeline(token);
 	}
+}
+
+int	word(t_token *token)
+
+{
+	if (token[token->count].type == WORD)
+		token->count++;
+	else
+		return (FALSE);
+	return (TRUE);
 }
 
 void	easy_command(t_token *token)
@@ -82,21 +98,15 @@ int	check(t_token *token)
 
 {
 	if (token[token->count].type == WORD)
-	{		
+	{
 		easy_command(token);
-		if (token[token->count].type == R_INPUT || \
-			token[token->count].type == R_OUTPUT || \
-			token[token->count].type == APP_INPUT || \
-			token[token->count].type == HERE_DOC)
+		if (is_redirect(token[token->count].type))
 			return (redirects(token));
 	}
-	else if (token[token->count].type == PIPE)
+	else if (is_redirect(token[token->count].type))
+		return (redirects(token));
+	else if (is_pipes(token[token->count].type))
 		return (parser_error("|"));
-	else if (token[token->count].type == R_INPUT || \
-			token[token->count].type == R_OUTPUT || \
-			token[token->count].type == APP_INPUT || \
-			token[token->count].type == HERE_DOC)
-		return (parser_error("newline"));
 	else
 		pipeline(token);
 	return (TRUE);
