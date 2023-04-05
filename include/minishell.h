@@ -37,9 +37,6 @@
 
 typedef struct s_token	t_token;
 
-int	g_status_code;
-
-
 typedef struct s_cmd
 {
 	char		*input;

@@ -18,11 +18,10 @@ char *search_var(char *id, char **envp)
 	int i;
 	char *expanded;
 	char *search_id;
-	extern int g_status_code;
 
 	i = 0;
 	if (*id == '?')
-		return (ft_itoa(g_status_code));
+		return (ft_itoa(0));
 	search_id = ft_strjoin(id, "=");
 	while (envp[i])
 	{
