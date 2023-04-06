@@ -6,14 +6,13 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 07:24:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 04:51:15 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/04/06 13:31:24 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// TODO: Check leaks
-char *search_var(char *id, char **envp)
+char	*search_var(char *id, char **envp)
 {
 	int i;
 	char *expanded;
@@ -38,7 +37,7 @@ char *search_var(char *id, char **envp)
 	return (NULL);
 }
 
-int is_expandable(char *token)
+int	is_expandable(char *token)
 {
 	char *symbol_pointer;
 	char next_char;
@@ -51,23 +50,10 @@ int is_expandable(char *token)
 		return (0);
 	if (!ft_isalpha(next_char) && next_char != '_' && next_char != '?')
 		return (0);
-	// TODO: Check if symbol is between single quotes
 	return (1);
 }
 
-char	is_quote_closed(char quote, char *str)
-{
-	while (*str++)
-	{
-		if (*str == quote)
-			return (1);
-	}
-	return (0);
-}
-/*
-Work in progress
-
-int check_quotes(char *token)
+int	check_quotes(char *token)
 {
 	char	quote;
 	char	*tmp;
@@ -89,7 +75,6 @@ int check_quotes(char *token)
 			quote = 0;
 			token++;
 		}
-		tmp[i++] = *token++;
 	}
 }
 */
@@ -128,38 +113,53 @@ char *remove_quotes_pair(char *token)
 	return (free(tmp), string);
 }
 
+// char *expand_token(char *token, char **envp)
+// {
+// 	int end_pos;
+// 	char *identifier;
+// 	char *var_pointer;
+// 	char *expanded_token;
 
-/*
-Work in progress
-char *expand_token(char *token, char **envp)
-{
-	int end_pos;
-	char *identifier;
-	char *var_pointer;
-	char *expanded_token;
-
-	end_pos = 0;
-	var_pointer = ft_strchr(token, '$') + 1;
-	if (*var_pointer == '?')
-		end_pos++;
-	else
-	{
-		while (ft_isalnum(var_pointer[end_pos]) || var_pointer[end_pos] == '_')
-			end_pos++;
-	}
-	identifier = ft_substr(var_pointer, 0, end_pos);
-	search_var(identifier, envp);
-	if (!identifier)
-		return (NULL);
+// 	end_pos = 0;
+// 	var_pointer = ft_strchr(token, '$') + 1;
+// 	if (*var_pointer == '?')
+// 		end_pos++;
+// 	else
+// 	{
+// 		while (ft_isalnum(var_pointer[end_pos]) || var_pointer[end_pos] == '_')
+// 			end_pos++;
+// 	}
+// 	identifier = ft_substr(var_pointer, 0, end_pos);
+// 	search_var(identifier, envp);
+// 	if (!identifier)
+// 		return (NULL);
 		
-	return (identifier);
-}
-char *expand_token(char *token, char **envp)
+// 	return (identifier);
+// }
+
+int	id_len(char *str)
 {
 	int	i;
 
 	i = 0;
+	if (is_expandable(str))
+	{
+		while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+			i++;
+	}
+	return (i);
+}
 
+char *expand_token(char *token, char **envp)
+{
+	int		i;
+	char	quote;
+	char	*tmp;
+	char	*result;
+
+	i = 0;
+	quote = 0;
+	tmp = malloc((ft_strlen(token) + 1) * sizeof(*tmp));
 	while (*token)
 	{
 		if (!quote && (*token == '\'' || *token == '"'))
@@ -172,10 +172,14 @@ char *expand_token(char *token, char **envp)
 			quote = 0;
 			token++;
 		}
+		if (*token == '$' && quote != '\'')
+		{
+			search_var(token);
+		}
 		tmp[i++] = *token++;
 	}
 }
-*/
+
 
 
 void expand_tokens(char **tokens)
