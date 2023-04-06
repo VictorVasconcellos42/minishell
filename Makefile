@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/04/04 17:10:10 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/04/05 17:28:56 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,14 +45,14 @@ $(LIBFT):
 	@cp $(addprefix ${LIBFT_DIR}, ${LIBFT}) .
 
 .c.o:
-#	@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -c $< -o $@ #Mac 42
-	@${CC} ${CFLAGS} -lreadline -c $< -o $@ #Linux
+	@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -c $< -o $@ #Mac 42
+#	@${CC} ${CFLAGS} -lreadline -c $< -o $@ #Linux
 #	@${CC} ${CFLAGS} -I/opt/homebrew/opt/readline/include -c $< -o $@ #Mac M1
 
 $(NAME): ${OBJ} ${LIBFT}
-#	@${CC} ${CFLAGS} ${LIBFT} ${OBJ} -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include -lreadline -o ${NAME} #Mac 42
+	@${CC} ${CFLAGS} ${LIBFT} ${OBJ} -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include -lreadline -o ${NAME} #Mac 42
 #	@${CC} ${CFLAGS} ${LIBFT} src/prompt.c -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline ${OBJ} -o ${NAME} #Mac M1
-	@${CC} ${CFLAGS} ${OBJ} ${LIBFT} -lreadline -o ${NAME} #Linux
+#	@${CC} ${CFLAGS} ${OBJ} ${LIBFT} -lreadline -o ${NAME} #Linux
 	@echo "${GREEN}Minishell created!${END} ✅"
 
 clean: 
