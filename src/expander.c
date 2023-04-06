@@ -12,8 +12,7 @@
 
 #include "../include/minishell.h"
 
-// TODO: Check leaks
-char *search_var(char *id, char **envp)
+char	*search_var(char *id, char **envp)
 {
 	int i;
 	char *expanded;
@@ -39,7 +38,7 @@ char *search_var(char *id, char **envp)
 	return (NULL);
 }
 
-int is_expandable(char *token)
+int	is_expandable(char *token)
 {
 	char *symbol_pointer;
 	char next_char;
@@ -52,11 +51,10 @@ int is_expandable(char *token)
 		return (0);
 	if (!ft_isalpha(next_char) && next_char != '_' && next_char != '?')
 		return (0);
-	// TODO: Check if symbol is between single quotes
 	return (1);
 }
 
-int check_quotes(char *token)
+int	check_quotes(char *token)
 {
 	char	quote;
 
@@ -67,14 +65,13 @@ int check_quotes(char *token)
 		{
 			if (!is_quote_closed(*token, token))
 				return (0);
-			quote = *token++
+			quote = *token++;
 		}
 		else if (quote && (*token == quote))
 		{
 			quote = 0;
 			token++;
 		}
-		tmp[i++] = *token++;
 	}
 }
 
@@ -121,36 +118,53 @@ char *remove_quotes_pair(char *token)
 	return (free(tmp), string);
 }
 
-char *expand_token(char *token, char **envp)
-{
-	int end_pos;
-	char *identifier;
-	char *var_pointer;
-	char *expanded_token;
+// char *expand_token(char *token, char **envp)
+// {
+// 	int end_pos;
+// 	char *identifier;
+// 	char *var_pointer;
+// 	char *expanded_token;
 
-	end_pos = 0;
-	var_pointer = ft_strchr(token, '$') + 1;
-	if (*var_pointer == '?')
-		end_pos++;
-	else
-	{
-		while (ft_isalnum(var_pointer[end_pos]) || var_pointer[end_pos] == '_')
-			end_pos++;
-	}
-	identifier = ft_substr(var_pointer, 0, end_pos);
-	search_var(identifier, envp);
-	if (!identifier)
-		return (NULL);
+// 	end_pos = 0;
+// 	var_pointer = ft_strchr(token, '$') + 1;
+// 	if (*var_pointer == '?')
+// 		end_pos++;
+// 	else
+// 	{
+// 		while (ft_isalnum(var_pointer[end_pos]) || var_pointer[end_pos] == '_')
+// 			end_pos++;
+// 	}
+// 	identifier = ft_substr(var_pointer, 0, end_pos);
+// 	search_var(identifier, envp);
+// 	if (!identifier)
+// 		return (NULL);
 		
-	return (identifier);
-}
+// 	return (identifier);
+// }
 
-char *expand_token(char *token, char **envp)
+int	id_len(char *str)
 {
 	int	i;
 
 	i = 0;
+	if (is_expandable(str))
+	{
+		while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+			i++;
+	}
+	return (i);
+}
 
+char *expand_token(char *token, char **envp)
+{
+	int		i;
+	char	quote;
+	char	*tmp;
+	char	*result;
+
+	i = 0;
+	quote = 0;
+	tmp = malloc((ft_strlen(token) + 1) * sizeof(*tmp));
 	while (*token)
 	{
 		if (!quote && (*token == '\'' || *token == '"'))
@@ -162,6 +176,10 @@ char *expand_token(char *token, char **envp)
 		{
 			quote = 0;
 			token++;
+		}
+		if (*token == '$' && quote != '\'')
+		{
+			search_var(token);
 		}
 		tmp[i++] = *token++;
 	}
