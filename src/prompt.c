@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/06 19:45:23 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:14:19 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,16 @@ int	main(int argc, char **argv, char **envp)
 		cmd.token = lexer(&cmd);
 		if (parser(cmd.token))
 		{
-			if (test == 0)
+			if (test == 1)
 			{
 				cmd.sentence = sentence_generator(cmd.token, &cmd);
-				int j = 0;
+				control_redirect(cmd.sentence);
+				int i = 0;
+				while (cmd.sentence[i].args)
+				{
+					execute_sentence(cmd.sentence[i++], &cmd);
+				}
+/* 				int j = 0;
 				int i = -1;
 				while (cmd.sentence[j].args)
 				{
@@ -57,7 +63,7 @@ int	main(int argc, char **argv, char **envp)
 					if (cmd.sentence[j].args != NULL)
 						printf("==================\n");
 					j++;
-				}
+				} */
 			}
 			else
 			{
