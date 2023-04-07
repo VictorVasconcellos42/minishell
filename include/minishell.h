@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/04 15:08:05 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:30:38 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 # define READ_END	0
 # define WRITE_END	1
 
-typedef struct s_token	t_token;
+typedef struct s_token		t_token;
+typedef struct s_sentence	t_sentence;
 
 typedef struct s_cmd
 {
@@ -56,12 +57,15 @@ typedef struct s_cmd
 	int			status;
 	int			c_pipes;
 	t_token		*token;
+	t_sentence	*sentence;
 }	t_cmd;
 
-/* typedef struct s_sentence
+typedef struct s_sentence
 {
-	char	**sentence;
-}	t_sentence; */
+	char	**args;
+	short	input;
+	short	output;
+}	t_sentence;
 
 typedef struct s_token
 {
@@ -171,4 +175,14 @@ int		redirects(t_token *token);
 int		parser_error(char *text);
 int		word(t_token *token);
 int		file(t_token *token);
+int		is_pipes(int type);
+int		is_redirect(int type);
+
+// SENTENCE	//
+
+t_sentence	*sentence_generator(t_token *token, t_cmd *cmd);
+
+//	EXPANDER	//
+
+char *remove_quotes_pair(char *token);
 #endif
