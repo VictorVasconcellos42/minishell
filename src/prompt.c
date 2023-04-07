@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/04 15:43:30 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/06 19:45:23 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	cmd;
 	int		build;
+	int		test = 1;
 	(void)argc;
 	(void)argv;
 	start_shell(&cmd, envp);
@@ -38,20 +39,40 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd.input = readline("Minishell: ");
 		check_input(cmd.input, &cmd);
+		if (!cmd.input[0])
+			continue ;
 		cmd.token = lexer(&cmd);
 		if (parser(cmd.token))
-		{	
-			cmd.cd = ft_split(cmd.input, ' ');
-			cmd.echo = ft_split(cmd.input, ' ');
-			build = is_builtin(cmd.input);
-			if (who_builtin(&cmd, build) == FALSE)
+		{
+			if (test == 0)
 			{
-				if (has_pipe(cmd.input, &cmd) == TRUE)
-					pipes(&cmd, 0, 0);
-				else
-					execution(&cmd);
+				cmd.sentence = sentence_generator(cmd.token, &cmd);
+				int j = 0;
+				int i = -1;
+				while (cmd.sentence[j].args)
+				{
+					i = -1;
+					while (cmd.sentence[j].args[++i])
+						printf("SENTENCE [%d] - ARGS [%d]: {%s}\n", j, i, cmd.sentence[j].args[i]);
+					if (cmd.sentence[j].args != NULL)
+						printf("==================\n");
+					j++;
+				}
 			}
-			free_matriz(cmd.cd);
+			else
+			{
+				cmd.cd = ft_split(cmd.input, ' ');
+				cmd.echo = ft_split(cmd.input, ' ');
+				build = is_builtin(cmd.input);
+				if (who_builtin(&cmd, build) == FALSE)
+				{
+					if (has_pipe(cmd.input, &cmd) == TRUE)
+						pipes(&cmd, 0, 0);
+					else
+						execution(&cmd);
+				}
+				free_matriz(cmd.cd);
+			}
 		}
 		free(cmd.input);
 	}

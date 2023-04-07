@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 07:24:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/06 13:35:52 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:31:59 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*search_var(char *id, char **envp)
 	return (NULL);
 }
 
-int	is_expandable(char *token)
+/* int	is_expandable(char *token)
 {
 	char *symbol_pointer;
 	char next_char;
@@ -153,7 +153,7 @@ char *expand_token(char *token, char **envp)
 	int		i;
 	char	quote;
 	char	*tmp;
-	char	*result;
+	//char	*result;
 
 	i = 0;
 	quote = 0;
@@ -196,7 +196,7 @@ void expand_tokens(char **tokens)
 		tokens[i] = swap;
 		i++;
 	}
-}
+} */
 
 /*
 int main(int argc, char **argv, char **envp)
