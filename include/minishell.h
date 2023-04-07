@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/06 15:30:38 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:27:15 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int		check_command(t_cmd *cmd);
 void	execution(t_cmd *exec);
 int		check_case(char *str);
 void	executor(t_cmd *cmd);
+void	execute_sentence(t_sentence sentence, t_cmd *cmd);
 
 // SIGNAL //
 
@@ -185,4 +186,16 @@ t_sentence	*sentence_generator(t_token *token, t_cmd *cmd);
 //	EXPANDER	//
 
 char *remove_quotes_pair(char *token);
+
+//	REDIRECT	//
+
+void	control_redirect(t_sentence *table);
+
+//	BOOLEAN	//
+
+int	is_output(char *type);
+int	is_input(char *type);
+int	is_append(char *type);
+int	is_heredoc(char *type);
+
 #endif
