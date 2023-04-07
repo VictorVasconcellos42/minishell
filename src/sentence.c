@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:26:52 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/06 20:07:29 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:24:55 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_sentence	*sentence_generator(t_token *token, t_cmd *cmd)
 	}
 	if (temp)
 	{
+		sentence[count].input = STDIN_FILENO;
+		sentence[count].output = STDOUT_FILENO;
 		sentence[count++].args = ft_split(temp, ' ');
 		free(temp);
 	}
