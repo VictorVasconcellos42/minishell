@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/07 17:14:19 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:08:34 by marolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	cmd;
 	int		build;
-	int		test = 1;
+	int		test = 0;
 	(void)argc;
 	(void)argv;
 	start_shell(&cmd, envp);
@@ -42,6 +42,12 @@ int	main(int argc, char **argv, char **envp)
 		if (!cmd.input[0])
 			continue ;
 		cmd.token = lexer(&cmd);
+		if(cmd.token->value[0] == '$')
+			dolleta(&cmd);
+		/* {
+			if(dolleta(&cmd))
+				printf("%s\n", dolleta(&cmd));
+		} */
 		if (parser(cmd.token))
 		{
 			if (test == 1)

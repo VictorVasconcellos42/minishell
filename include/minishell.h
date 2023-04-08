@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/07 15:27:15 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:06:25 by marolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ int		**init_fd(t_cmd *cmd);
 //	EXPANDER	//
 
 char	*search_var(char *id, char **envp);
+void    dolleta(t_cmd *cmd);
 
 //	TOKEN	//
 
