@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 08:48:20 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/08 01:41:23 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/08 16:15:07 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,19 @@ void	heredoc_action(t_sentence *table, int pos, int i)
 
 	fake_file = create_file(table[pos].args[i], HERE_DOC);
 	text = readline("> ");
+	if (!text)
+		text = ft_strdup(table[pos].args[i]);
 	len = ft_strlen(table[pos].args[i]);
 	while (ft_strncmp(table[pos].args[i], text, len))
 	{
 		ft_putendl_fd(text, fake_file);
 		free(text);
 		text = readline("> ");
+		if (!text)
+		{
+			free(text);
+			text = ft_strdup(table[pos].args[i]);
+		}
 	}
 	free(text);
 	input_action(table, pos, i);
