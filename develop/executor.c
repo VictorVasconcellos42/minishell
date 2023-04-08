@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/08 01:29:53 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/08 10:14:51 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	print_matriz(char **input)
 		printf("ARG: [%s]", input[i++]);
 }
 
-void	remove_output(t_sentence sentence)
+void	remove_redirect(t_sentence sentence)
 
 {
 	int		i;
@@ -108,7 +108,7 @@ void	execute_sentence(t_sentence sentence, t_cmd *cmd)
 			dup2(sentence.input, STDIN_FILENO);
 		if (sentence.output != STDOUT_FILENO)
 			dup2(sentence.output, STDOUT_FILENO);
-		remove_output(sentence);
+		remove_redirect(sentence);
 		the_executor(sentence, cmd);
 	}
 	dup2(backup, STDOUT_FILENO);

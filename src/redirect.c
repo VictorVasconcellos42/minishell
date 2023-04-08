@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 08:48:20 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/08 01:27:28 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/08 01:41:23 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	heredoc_action(t_sentence *table, int pos, int i)
 		free(text);
 		text = readline("> ");
 	}
+	free(text);
 	input_action(table, pos, i);
 }
 
