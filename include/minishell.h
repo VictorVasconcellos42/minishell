@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/07 23:36:32 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:38:49 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ typedef enum e_tokens
 	R_INPUT,
 	APP_INPUT,
 	HERE_DOC,
-	R_OUTPUT
+	R_OUTPUT,
+	Q_SIMPLE,
+	Q_DOUBLE
 }	t_tokens;
 
 // ENV //
@@ -149,6 +151,7 @@ void	middle_pipe(t_cmd *cmd, int i, int **fd);
 void	error_command(char *command);
 int		matriz_size(char **str);
 int		ft_isspace(char *str);
+void	check_input(char *input, t_cmd *cmd);
 
 //	START	//
 
@@ -198,4 +201,8 @@ int	is_input(char *type);
 int	is_append(char *type);
 int	is_heredoc(char *type);
 
+
+//	QUOTE	//	
+
+void	quote_handling(t_token *tokens);
 #endif

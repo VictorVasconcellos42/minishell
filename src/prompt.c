@@ -6,13 +6,13 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/07 23:53:07 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:38:40 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	check_input(char *input, t_cmd *cmd)
+void	check_input(char *input, t_cmd *cmd)
 
 {
 	if (!(input))
@@ -43,6 +43,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!cmd.input[0])
 			continue ;
 		cmd.token = lexer(&cmd);
+		quote_handling(cmd.token);
 		if (parser(cmd.token))
 		{
 			if (test == 1)
