@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/07 22:24:45 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/08 01:29:53 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ void	the_executor(t_sentence sentence, t_cmd *cmd)
 	exit(127);
 }
 
-void	redirect(t_cmd *cmd)
+int	is_str_redirect(char *type)
 
 {
-	(void)cmd;
-	return ;
+	if (is_output(type) || is_input(type) || is_append(type) || is_heredoc(type))
+		return (TRUE);
+	return (FALSE);
 }
 
 void	pipes_and_red(t_cmd *cmd)
@@ -76,8 +77,12 @@ void	remove_output(t_sentence sentence)
 	i = 0;
 	while (sentence.args[i])
 	{
-		while (sentence.args[i] && is_output(sentence.args[i]))
+		while (sentence.args[i] && is_str_redirect(sentence.args[i]))
+		{
+			if (is_heredoc(sentence.args[i]))
+				unlink(sentence.args[i + 1]);	
 			i += 2;
+		}
 		if (sentence.args[i] == NULL)
 			break ;
 		temp = ft_strdup(sentence.args[i]);
@@ -102,10 +107,8 @@ void	execute_sentence(t_sentence sentence, t_cmd *cmd)
 		if (sentence.input != STDIN_FILENO)
 			dup2(sentence.input, STDIN_FILENO);
 		if (sentence.output != STDOUT_FILENO)
-		{
 			dup2(sentence.output, STDOUT_FILENO);
-			remove_output(sentence);
-		}
+		remove_output(sentence);
 		the_executor(sentence, cmd);
 	}
 	dup2(backup, STDOUT_FILENO);
