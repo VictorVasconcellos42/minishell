@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 08:28:45 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/05 07:40:53 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/08 17:13:24 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	parser_error(char *text)
 
 {
 	printf("minishell: syntax error near unexpected token '%s'\n", text);
-	//g_code = 258
+	g_code = 258;
 	return (FALSE);
 }
 
