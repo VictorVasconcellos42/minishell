@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/07 17:14:19 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/07 23:53:07 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	cmd;
 	int		build;
 	int		test = 1;
+	int		i;
 	(void)argc;
 	(void)argv;
 	start_shell(&cmd, envp);
@@ -47,11 +48,13 @@ int	main(int argc, char **argv, char **envp)
 			if (test == 1)
 			{
 				cmd.sentence = sentence_generator(cmd.token, &cmd);
-				control_redirect(cmd.sentence);
-				int i = 0;
-				while (cmd.sentence[i].args)
+				if (!control_redirect(cmd.sentence))
+					continue ;
+				else
 				{
-					execute_sentence(cmd.sentence[i++], &cmd);
+					i = 0;
+					while (cmd.sentence[i].args)
+						execute_sentence(cmd.sentence[i++], &cmd);	
 				}
 /* 				int j = 0;
 				int i = -1;
@@ -85,3 +88,7 @@ int	main(int argc, char **argv, char **envp)
 	builtin_exit(&cmd);
 	return (0);
 }
+
+
+
+
