@@ -6,11 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 16:18:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 16:11:33 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:15:45 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	export_concat(t_cmd *cmd, char *var, char *value)
 {

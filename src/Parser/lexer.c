@@ -6,25 +6,25 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 11:18:55 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/20 15:16:27 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:36:07 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-int	type_var(char *str)
+static int	type_var(char *str)
 
 {
 	if (ft_strnstr(str, ">>", -1))
 		return (APP_INPUT);
 	else if (ft_strnstr(str, "<<", -1))
 		return (HERE_DOC);
-	else if (!ft_strncmp(">", str, -1))
+	else if (!ft_strncmp(str, ">", -1))
 		return (R_OUTPUT);
-	else if (!ft_strncmp("<", str, -1))
-		return (R_INPUT);
-	else if (!ft_strncmp("|", str, -1))
+	else if (!ft_strncmp(str, "|", 1) && (*str + 1 != '|'))
 		return (PIPE);
+	else if (!ft_strncmp(str, "<", -1))
+		return (R_INPUT);
 	else
 		return (WORD);
 }

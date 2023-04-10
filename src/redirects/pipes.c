@@ -6,13 +6,67 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:26:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 16:05:43 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:42:32 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-int	multiple_pipes(t_cmd *cmd, int i, int *pid, int **fd)
+
+
+static void	first_pipe(t_cmd *cmd, int *fd)
+
+{
+	close(fd[READ_END]);
+	dup2(fd[WRITE_END], STDOUT_FILENO);
+	close(fd[WRITE_END]);
+	cmd->exec = ft_split(cmd->pipex[0], ' ');
+	if (check_command(cmd) == FALSE)
+	{
+		error_command(cmd->exec[0]);
+		free_matriz(cmd->exec);
+		exit(127);
+	}
+	free_matriz(cmd->exec);
+	exit(EXIT_SUCCESS);
+}
+
+static void	middle_pipe(t_cmd *cmd, int i, int **fd)
+
+{
+	close(fd[i][READ_END]);
+	dup2(fd[i - 1][READ_END], STDIN_FILENO);
+	close(fd[i - 1][READ_END]);
+	dup2(fd[i][WRITE_END], STDOUT_FILENO);
+	close(fd[i][WRITE_END]);
+	cmd->exec = ft_split(cmd->pipex[i], ' ');
+	if (check_command(cmd) == FALSE)
+	{
+		error_command(cmd->exec[0]);
+		free_matriz(cmd->exec);
+		exit(127);
+	}
+	free_matriz(cmd->exec);
+	exit(EXIT_SUCCESS);
+}
+
+static void	last_pipe(t_cmd *cmd, int i, int *fd)
+
+{
+	dup2(fd[READ_END], STDIN_FILENO);
+	close(fd[READ_END]);
+	cmd->exec = ft_split(cmd->pipex[i], ' ');
+	if (check_command(cmd) == FALSE)
+	{
+		error_command(cmd->exec[0]);
+		free_matriz(cmd->exec);
+		exit(127);
+	}
+	free_matriz(cmd->exec);
+	exit(EXIT_SUCCESS);
+}
+
+static int	multiple_pipes(t_cmd *cmd, int i, int *pid, int **fd)
 
 {
 	while (i < cmd->c_pipes - 1)
@@ -50,56 +104,4 @@ void	pipes(t_cmd *cmd, int i, int j)
 	free(pid);
 	free_fd(fd, cmd->c_pipes);
 	cmd->c_pipes = 0;
-}
-
-void	first_pipe(t_cmd *cmd, int *fd)
-
-{
-	close(fd[READ_END]);
-	dup2(fd[WRITE_END], STDOUT_FILENO);
-	close(fd[WRITE_END]);
-	cmd->exec = ft_split(cmd->pipex[0], ' ');
-	if (check_command(cmd) == FALSE)
-	{
-		error_command(cmd->exec[0]);
-		free_matriz(cmd->exec);
-		exit(127);
-	}
-	free_matriz(cmd->exec);
-	exit(EXIT_SUCCESS);
-}
-
-void	middle_pipe(t_cmd *cmd, int i, int **fd)
-
-{
-	close(fd[i][READ_END]);
-	dup2(fd[i - 1][READ_END], STDIN_FILENO);
-	close(fd[i - 1][READ_END]);
-	dup2(fd[i][WRITE_END], STDOUT_FILENO);
-	close(fd[i][WRITE_END]);
-	cmd->exec = ft_split(cmd->pipex[i], ' ');
-	if (check_command(cmd) == FALSE)
-	{
-		error_command(cmd->exec[0]);
-		free_matriz(cmd->exec);
-		exit(127);
-	}
-	free_matriz(cmd->exec);
-	exit(EXIT_SUCCESS);
-}
-
-void	last_pipe(t_cmd *cmd, int i, int *fd)
-
-{
-	dup2(fd[READ_END], STDIN_FILENO);
-	close(fd[READ_END]);
-	cmd->exec = ft_split(cmd->pipex[i], ' ');
-	if (check_command(cmd) == FALSE)
-	{
-		error_command(cmd->exec[0]);
-		free_matriz(cmd->exec);
-		exit(127);
-	}
-	free_matriz(cmd->exec);
-	exit(EXIT_SUCCESS);
 }

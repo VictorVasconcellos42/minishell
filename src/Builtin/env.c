@@ -6,11 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:30:08 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 05:08:50 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:15:52 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 char	**get_path(t_cmd *cmd)
 

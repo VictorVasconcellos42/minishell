@@ -6,11 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:40:22 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/09 18:38:20 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:38:27 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	handle_ctrl_d(void)
 

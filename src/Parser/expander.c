@@ -6,11 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 07:24:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/06 15:31:59 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:18:10 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 char	*search_var(char *id, char **envp)
 {

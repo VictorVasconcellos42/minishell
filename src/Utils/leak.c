@@ -6,11 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 09:25:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 16:10:39 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:38:24 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	free_fd(int **input, int size)
 

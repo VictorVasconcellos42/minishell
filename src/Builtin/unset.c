@@ -6,11 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:21:11 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 14:58:43 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:38:38 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	ft_name(char *str)
 
