@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/08 17:13:14 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:41:43 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,6 @@ void	free_fd(int **input, int size);
 int		has_pipe(char *string, t_cmd *cmd);
 void	pipes(t_cmd *cmd, int i, int j);
 void	free_matriz(char **input);
-void	last_pipe(t_cmd *cmd, int i, int *fd);
-void	first_pipe(t_cmd *cmd, int *fd);
-void	middle_pipe(t_cmd *cmd, int i, int **fd);
 
 // UTILS //
 
@@ -175,7 +172,6 @@ char	**create_sentence(t_cmd *cmd);
 
 int		parser(t_token *token);
 int		check(t_token *token);
-void	easy_command(t_token *token);
 void	pipeline(t_token *token);
 int		redirects(t_token *token);
 int		parser_error(char *text);
@@ -195,6 +191,7 @@ char *remove_quotes_pair(char *token);
 //	REDIRECT	//
 
 int	control_redirect(t_sentence *table);
+int	create_file(char *name, int type);
 
 //	BOOLEAN	//
 
@@ -202,7 +199,7 @@ int	is_output(char *type);
 int	is_input(char *type);
 int	is_append(char *type);
 int	is_heredoc(char *type);
-
+int	is_str_redirect(char *type);
 
 //	QUOTE	//	
 
