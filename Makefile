@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/04/10 08:45:51 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/04/10 09:35:01 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ BUILTIN	= $(addprefix Builtin/, cd.c echo.c env.c export.c pwd.c unset.c builtin
 
 EXECUTOR	= $(addprefix Executor/, executor.c)
 
-REDIRECTS	=	${addprefix Redirects/, redirect.c pipes.c}
+REDIRECTS	=	$(addprefix Redirects/, redirect.c pipes.c)
 
 DEVELOP	=	$(addprefix develop/, exec.c quote.c)
 
