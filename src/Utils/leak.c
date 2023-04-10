@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 09:25:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:38:24 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:15:53 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	control_free(t_cmd *cmd)
 		free(cmd->input);
 	if (matriz_have_malloc(cmd->env) == TRUE)
 		free_matriz(cmd->env);
-	if (matriz_have_malloc(cmd->exec) == TRUE)
-		free_matriz(cmd->exec);
 	if (matriz_have_malloc(cmd->path) == TRUE)
 		free_matriz(cmd->path);
 }

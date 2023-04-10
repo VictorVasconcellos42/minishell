@@ -6,13 +6,13 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:21:11 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:38:38 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:17:51 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_name(char *str)
+static int	ft_name(char *str)
 
 {
 	int	i;
@@ -23,7 +23,7 @@ int	ft_name(char *str)
 	return (i);
 }
 
-int	ft_isspace(char *str)
+static int	ft_isspace(char *str)
 
 {
 	int	i;
@@ -43,6 +43,8 @@ void	unset(t_cmd *cmd, char *str)
 	int		len_s;
 	char	**new_envp;
 
+	if (is_valid_var(str))
+		return ;
 	i = ft_isspace(str);
 	new_envp = malloc((matriz_size(cmd->env)) * sizeof(*new_envp));
 	count = 0;
@@ -62,29 +64,13 @@ void	unset(t_cmd *cmd, char *str)
 	cmd->env = new_envp;
 }
 
-/* int	main(int argc, char **argv, char **envp)
+void	builtin_unset(t_sentence sentence, t_cmd *cmd)
 
 {
-	char **envt;
-	char **env;
+	int i;
 
-	env = _env(envp);
-	int len = matriz_size(env);
-	int	i = 0;
-	for (int j = 0; j < len; j++)
-	{
-		printf("%s\n", env[j]);
-	}
-	printf("---------------------------\n");
-	envt = unset(argv[++i], env);
-	while (argv[++i])
-	{
-		for (int j = 0; j < matriz_size(envt); j++)
-			printf("%s\n", envt[j]);
-		printf("-----------TESTE [%i]--------------\n", i);
-		envt = unset(argv[i], envt);
-	}
-	for (int j = 0; j < matriz_size(envt); j++)
-			printf("%s\n", envt[j]);
-	free_matriz(envt);
-} */
+	i = 1;
+
+	while (sentence.args[i])
+		unset(cmd, sentence.args[i++]);
+}

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:18:13 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:17:24 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,19 @@ int	main(int argc, char **argv, char **envp)
 			if (test == 1)
 			{
 				cmd.sentence = sentence_generator(cmd.token, &cmd);
-				if (!control_redirect(cmd.sentence))
-					continue ;
-				else
+				build = is_builtin(cmd.sentence->args[0]);
+				if (who_builtin(&cmd, build, cmd.sentence[0]) == FALSE)
 				{
-					i = 0;
-					while (cmd.sentence[i].args)
-						execute_sentence(cmd.sentence[i++], &cmd);	
-				}
+					if (!control_redirect(cmd.sentence))
+						continue ;
+					else
+					{
+						
+						i = 0;
+						while (cmd.sentence[i].args)
+							execute_sentence(cmd.sentence[i++], &cmd);	
+					}
+				}	
 /* 				int j = 0;
 				int i = -1;
 				while (cmd.sentence[j].args)
@@ -71,10 +76,8 @@ int	main(int argc, char **argv, char **envp)
 					j++;
 				} */
 			}
-			else
+/* 			else
 			{
-				cmd.cd = ft_split(cmd.input, ' ');
-				cmd.echo = ft_split(cmd.input, ' ');
 				build = is_builtin(cmd.input);
 				if (who_builtin(&cmd, build) == FALSE)
 				{
@@ -84,7 +87,7 @@ int	main(int argc, char **argv, char **envp)
 						execution(&cmd);
 				}
 				free_matriz(cmd.cd);
-			}
+			} */
 		}
 		free(cmd.input);
 	}

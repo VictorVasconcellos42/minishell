@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:30:08 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:15:52 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:22:10 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,25 @@ char	**get_path(t_cmd *cmd)
 	return (path);
 }
 
-int	matriz_size(char **str)
+void	builtin_env(t_cmd *cmd)
 
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (matriz_size(cmd->sentence->args) > 1)
+	{
+		g_code = 127;
+		errno = 2;
+		ft_printf("env: ");
+		perror(cmd->sentence->args[1]);
+	}
+	else
+	{
+		g_code = 0;
+		while (cmd->env[i])
+			printf("%s\n", cmd->env[i++]);
+	}
 }
 
 void	create_env(t_cmd *cmd, char **envp)

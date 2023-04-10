@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/04/10 09:35:01 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/04/10 15:25:57 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ PARSER	= $(addprefix Parser/, prompt.c tokenizer.c expander.c lexer.c parser.c p
 
 UTILS	= $(addprefix Utils/, init.c leak.c redirect_boolean.c token_boolean.c signal.c utils.c)
 
-BUILTIN	= $(addprefix Builtin/, cd.c echo.c env.c export.c pwd.c unset.c builtin.c)
+BUILTIN	= $(addprefix Builtin/, cd.c echo.c env.c export.c pwd.c unset.c exit.c builtin.c)
 
 EXECUTOR	= $(addprefix Executor/, executor.c)
 
