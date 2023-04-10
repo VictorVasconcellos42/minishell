@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/04/08 12:38:16 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/04/10 08:45:51 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,21 @@
 
 NAME	=	minishell
 
-SRC		=	src/env.c src/builtin.c src/exec.c src/signal.c src/leak.c src/pipes.c src/init.c \
-			src/utils.c src/cd.c src/pwd.c src/export.c src/expander.c src/tokenizer.c src/unset.c \
-			src/lexer.c src/sentence.c src/echo.c src/parser.c src/redirect.c src/prompt.c develop/executor.c \
-			develop/quote.c
+PARSER	= $(addprefix Parser/, prompt.c tokenizer.c expander.c lexer.c parser.c parser_utils.c sentence.c)
 
-OBJ		=	${SRC:.c=.o}
+UTILS	= $(addprefix Utils/, init.c leak.c redirect_boolean.c token_boolean.c signal.c utils.c)
+
+BUILTIN	= $(addprefix Builtin/, cd.c echo.c env.c export.c pwd.c unset.c builtin.c)
+
+EXECUTOR	= $(addprefix Executor/, executor.c)
+
+REDIRECTS	=	${addprefix Redirects/, redirect.c pipes.c}
+
+DEVELOP	=	$(addprefix develop/, exec.c quote.c)
+
+SRC		=	$(addprefix src/, ${PARSER} ${UTILS} ${BUILTIN} ${EXECUTOR} ${REDIRECTS})
+
+OBJ		=	${SRC:.c=.o} ${DEVELOP:.c=.o}
 
 CC		=	cc
 
