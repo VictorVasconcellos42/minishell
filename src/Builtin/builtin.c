@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/04/10 08:38:57 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:21:40 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,24 @@
 int	is_builtin(char *input)
 
 {
-	if (!ft_strncmp(input, "env", 3))
+	if (!ft_strncmp(input, "env", -1))
 		return (ENV);
-	else if (!ft_strncmp(input, "exit", 4))
+	else if (!ft_strncmp(input, "exit", -1))
 		return (EXIT);
-	else if (!ft_strncmp(input, "cd", 2))
+	else if (!ft_strncmp(input, "cd", -1))
 		return (CD);
 	else if (!ft_strncmp(input, "pwd", -1))
 		return (PWD);
-	else if (!ft_strncmp(input, "echo", 4))
+	else if (!ft_strncmp(input, "echo", -1))
 		return (ECHO);
-	else if (!ft_strncmp(input, "export", 6))
+	else if (!ft_strncmp(input, "export", -1))
 		return (EXPORT);
-	else if (!ft_strncmp(input, "unset", 5))
+	else if (!ft_strncmp(input, "unset", -1))
 		return (UNSET);
 	return (FALSE);
 }
 
-void	builtin_env(t_cmd *cmd)
-
-{
-	int	i;
-
-	i = 0;
-	while (cmd->env[i])
-		printf("%s\n", cmd->env[i++]);
-}
-
-void	builtin_exit(t_cmd *cmd)
-
-{
-	control_free(cmd);
-	printf("exit\n");
-	if (!(cmd->status == 0))
-		exit(cmd->status);
-	exit(EXIT_SUCCESS);
-}
-
-int	who_builtin(t_cmd *cmd, int builtin)
+int	who_builtin(t_cmd *cmd, int builtin, t_sentence sentence)
 {
 	if (builtin == 0)
 		return (FALSE);
@@ -61,14 +41,14 @@ int	who_builtin(t_cmd *cmd, int builtin)
 	else if (builtin == EXIT)
 		builtin_exit(cmd);
 	else if (builtin == CD)
-		cd(cmd->cd, cmd);
+		cd(sentence, cmd);
 	else if (builtin == PWD)
-		pwd(cmd);
+		pwd();
 	else if (builtin == ECHO)
-		my_echo(cmd);
+		my_echo(sentence);
 	else if (builtin == EXPORT)
-		export(cmd, cmd->input + 6);
+		builtin_export(sentence, cmd, 1);
 	else if (builtin == UNSET)
-		unset(cmd, cmd->input + 5);
+		builtin_unset(sentence, cmd);
 	return (TRUE);
 }

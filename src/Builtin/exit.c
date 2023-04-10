@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 13:51:35 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 11:10:17 by vde-vasc         ###   ########.fr       */
+/*   Created: 2023/04/10 15:20:19 by vde-vasc          #+#    #+#             */
+/*   Updated: 2023/04/10 15:20:43 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	pwd(void)
+void	builtin_exit(t_cmd *cmd)
 
 {
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	ft_printf("%s\n", pwd);
-//	g_code = 0;
+	printf("exit\n");
+	if (matriz_size(cmd->sentence->args) > 2)
+	{
+		if (!ft_str_isdigit(cmd->sentence->args[1]))
+		{
+			ft_printf("bash: exit: %s: numeric "
+				"argument required\n", cmd->sentence->args[1]);
+			exit(255);
+		}
+		ft_printf("bash: exit: too many arguments\n");
+		g_code = 1;
+		return ;
+	}
+	if (!(cmd->status == 0) && cmd->status < 255)
+		exit(cmd->status);
+	exit(EXIT_SUCCESS);
 }
