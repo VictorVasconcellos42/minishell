@@ -6,11 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:07:05 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 15:34:19 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:38:43 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	var_name(char *str)
 

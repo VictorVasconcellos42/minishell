@@ -6,11 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:47:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 16:02:58 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:38:21 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	start_shell(t_cmd *cmd, char **envp)
 

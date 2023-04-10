@@ -6,11 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/08 10:14:51 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:21:05 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 
 void	the_executor(t_sentence sentence, t_cmd *cmd)
@@ -39,21 +39,6 @@ void	the_executor(t_sentence sentence, t_cmd *cmd)
 	}
 	printf("bash: %s: command not found\n", sentence.args[0]);
 	exit(127);
-}
-
-int	is_str_redirect(char *type)
-
-{
-	if (is_output(type) || is_input(type) || is_append(type) || is_heredoc(type))
-		return (TRUE);
-	return (FALSE);
-}
-
-void	pipes_and_red(t_cmd *cmd)
-
-{
-	(void)cmd;
-	return ;
 }
 
 void	print_matriz(char **input)

@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   token_boolean.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 11:14:45 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/03/17 16:04:28 by vde-vasc         ###   ########.fr       */
+/*   Created: 2023/04/10 07:43:12 by vde-vasc          #+#    #+#             */
+/*   Updated: 2023/04/10 08:06:23 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-void	error_command(char *command)
-
-{
-	ft_putstr_fd("bash: ", 2);
-	ft_putstr_fd(command, 2);
-	ft_putstr_fd(": command not found\n", 2);
-}
+#include "../../include/minishell.h"
 
 int	has_pipe(char *string, t_cmd *cmd)
 
@@ -33,6 +25,33 @@ int	has_pipe(char *string, t_cmd *cmd)
 			cmd->c_pipes++;
 	}
 	if (cmd->c_pipes != 0)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	is_pipes(int type)
+
+{
+	if (type == PIPE)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	is_redirect(int type)
+
+{
+	if (type == HERE_DOC \
+	|| type == APP_INPUT \
+	|| type == R_INPUT \
+	|| type == R_OUTPUT)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	is_str_redirect(char *type)
+
+{
+	if (is_output(type) || is_input(type) || is_append(type) || is_heredoc(type))
 		return (TRUE);
 	return (FALSE);
 }

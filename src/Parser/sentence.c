@@ -6,13 +6,13 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:26:52 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/07 17:24:55 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:18:23 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-int	sentence_len(t_token *token)
+static int	sentence_len(t_token *token)
 
 {
 	int	i;
