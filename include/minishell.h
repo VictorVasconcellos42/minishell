@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:41:43 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:13:10 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ typedef struct s_cmd
 	int			sys_env;
 	int			env_size;
 
-	char		**cd;
-	char		**echo;
 	char		**exec;
 	char		**pipex;
 	char		*export;
@@ -113,12 +111,14 @@ char	**get_path(t_cmd *cmd);
 int		is_builtin(char *input);
 void	builtin_env(t_cmd *cmd);
 void	builtin_exit(t_cmd *cmd);
-int		who_builtin(t_cmd *cmd, int builtin);
-int		cd(char **cmd_table, t_cmd *cmd);
-void	pwd(t_cmd *cmd);
+int		who_builtin(t_cmd *cmd, int builtin, t_sentence sentence);
+int		cd(t_sentence sentence, t_cmd *cmd);
+void	pwd(void);
 void	export(t_cmd *cmd, char *new_var);
 void	unset(t_cmd *cmd, char *str);
-void	my_echo(t_cmd *cmd);
+void	my_echo(t_sentence sentence);
+void	builtin_export(t_sentence table, t_cmd *cmd, int j);
+void	builtin_unset(t_sentence sentence, t_cmd *cmd);
 
 // EXEC //
 
@@ -149,8 +149,9 @@ void	free_matriz(char **input);
 
 void	error_command(char *command);
 int		matriz_size(char **str);
-int		ft_isspace(char *str);
 void	check_input(char *input, t_cmd *cmd);
+void	error_var(char *var);
+int		is_valid_var(char *var);
 
 //	START	//
 
@@ -200,6 +201,7 @@ int	is_input(char *type);
 int	is_append(char *type);
 int	is_heredoc(char *type);
 int	is_str_redirect(char *type);
+int	ft_str_isdigit(char *str);
 
 //	QUOTE	//	
 
