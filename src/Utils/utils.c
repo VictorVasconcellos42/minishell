@@ -6,11 +6,22 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:14:45 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 15:22:20 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:35:09 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	how_many_sentences(t_sentence *sentence)
+
+{
+	int	i;
+
+	i = 0;
+	while (sentence[i].args)
+		i++;
+	return (i);
+}
 
 int	matriz_size(char **str)
 
@@ -42,7 +53,7 @@ void	error_command(char *command)
 int	ft_str_isdigit(char *str)
 
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
