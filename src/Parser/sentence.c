@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:26:52 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 23:02:54 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:12:51 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_sentence	*sentence_generator(t_token *token, int i, int count)
 	{
 		if (!is_pipes(token[i].type))
 		{
-			temp = ft_strjoin(temp, " ");
+			temp = ft_strjoin_gnl(temp, " ");
 			temp = ft_strjoin_gnl(temp, token[i].value);
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:48:44 by marolive          #+#    #+#             */
-/*   Updated: 2023/04/11 06:36:29 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 07:39:52 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	my_echo(t_sentence sentence, int flag, int i, int j)
 			if (sentence.args[i] == NULL)
 				return (next_line(flag, i));
 		}
-		insert_line(sentence.args[i], i++);
+		insert_line(sentence.args[i], i);
+		i++;
 	}
 	return (next_line(flag, i));
 }

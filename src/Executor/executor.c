@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 22:31:17 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:10:32 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,27 @@ void	the_executor(t_sentence sentence, t_cmd *cmd)
 	int		i;
 
 	table_path = get_path(cmd);
-	full_path = NULL;
 	i = -1;
+	full_path = ft_strdup("");
 	if (sentence.args[0][0] == '/' || sentence.args[0][0] == '.')
+	{
+		free(full_path);	
 		full_path = ft_strdup(sentence.args[0]);
+	}
 	while (table_path[++i])
 	{
 		if (access(full_path, F_OK | X_OK) == 0)
 		{
 			free(sentence.args[0]);
 			sentence.args[0] = ft_strdup(full_path);
+			free(full_path);
 			execve(sentence.args[0], sentence.args, cmd->env);
 		}
 		free(full_path);
 		full_path = ft_strjoin(table_path[i], "/");
 		full_path = ft_strjoin_gnl(full_path, sentence.args[0]);
 	}
+	free(full_path);
 	printf("bash: %s: command not found\n", sentence.args[0]);
 	exit(127);
 }

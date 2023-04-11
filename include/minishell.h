@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 06:25:11 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:18:49 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void		pipex(t_sentence *sentence, int i, int j, t_cmd *cmd);
 
 void		error_command(char *command);
 int			matriz_size(char **str);
-void		check_input(char *input, t_cmd *cmd);
+void		check_input(t_cmd *cmd);
 void		error_var(char *var);
 int			is_valid_var(char *var);
 
