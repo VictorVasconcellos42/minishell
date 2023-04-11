@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 08:18:49 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 18:53:45 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,9 @@ typedef struct s_sentence	t_sentence;
 typedef struct s_cmd
 {
 	char		*input;
-
 	char		**env;
-	int			sys_env;
-	int			env_size;
-
-	char		**exec;
-	char		**pipex;
-	char		*export;
-
 	char		**path;
-
-	int			status;
+	int			env_size;
 	int			c_pipes;
 	t_token		*token;
 	t_sentence	*sentence;
@@ -110,7 +101,7 @@ char		**get_path(t_cmd *cmd);
 
 int			is_builtin(char *input);
 void		builtin_env(t_cmd *cmd);
-void		builtin_exit(t_cmd *cmd);
+void		builtin_exit(t_sentence sentence);
 int			who_builtin(t_cmd *cmd, int builtin, t_sentence sentence);
 int			cd(t_sentence sentence, t_cmd *cmd);
 void		pwd(void);
@@ -139,6 +130,9 @@ void		handle_ctrl_d(void);
 
 void		control_free(t_cmd *cmd);
 void		free_fd(int **input, int size);
+void		free_sentence(t_sentence *sentence);
+void		free_token(t_token *token);
+void		clear_child(t_cmd *cmd, char *input);
 
 // PIPEX //
 
