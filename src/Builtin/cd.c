@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 16:18:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 12:19:30 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:48:32 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	cd(t_sentence cd, t_cmd *cmd)
 	}
 	else
 	{
-		export_concat(cmd, "OLDPWD", getcwd(NULL, 0));	
+		export_concat(cmd, "OLDPWD", getcwd(NULL, 0));
 		if (chdir(cd.args[1]))
 		{
 			perror(cd.args[1]);
-			//g_code = 1;
+			g_code = 1;
 		}
 	}
 	export_concat(cmd, "PWD", getcwd(NULL, 0));

@@ -6,12 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:21:05 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:31:17 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
 
 void	the_executor(t_sentence sentence, t_cmd *cmd)
 
@@ -41,16 +40,6 @@ void	the_executor(t_sentence sentence, t_cmd *cmd)
 	exit(127);
 }
 
-void	print_matriz(char **input)
-
-{
-	int i;
-
-	i = 0;
-	while (input[i])
-		printf("ARG: [%s]", input[i++]);
-}
-
 void	remove_redirect(t_sentence sentence)
 
 {
@@ -65,7 +54,7 @@ void	remove_redirect(t_sentence sentence)
 		while (sentence.args[i] && is_str_redirect(sentence.args[i]))
 		{
 			if (is_heredoc(sentence.args[i]))
-				unlink(sentence.args[i + 1]);	
+				unlink(sentence.args[i + 1]);
 			i += 2;
 		}
 		if (sentence.args[i] == NULL)
