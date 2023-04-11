@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/04/11 06:25:26 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 18:52:52 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	who_builtin(t_cmd *cmd, int builtin, t_sentence sentence)
 	else if (builtin == ENV)
 		builtin_env(cmd);
 	else if (builtin == EXIT)
-		builtin_exit(cmd);
+		builtin_exit(sentence);
 	else if (builtin == CD)
 		cd(sentence, cmd);
 	else if (builtin == PWD)
