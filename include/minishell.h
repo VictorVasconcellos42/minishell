@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 22:57:34 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 06:25:11 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int			cd(t_sentence sentence, t_cmd *cmd);
 void		pwd(void);
 void		export(t_cmd *cmd, char *new_var);
 void		unset(t_cmd *cmd, char *str);
-void		my_echo(t_sentence sentence);
+int			my_echo(t_sentence sentence, int flag, int i, int j);
 void		builtin_export(t_sentence table, t_cmd *cmd, int j);
 void		builtin_unset(t_sentence sentence, t_cmd *cmd);
 
