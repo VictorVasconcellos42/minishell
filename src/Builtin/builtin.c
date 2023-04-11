@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:28:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/04/10 15:21:40 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 06:25:26 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	who_builtin(t_cmd *cmd, int builtin, t_sentence sentence)
 	else if (builtin == PWD)
 		pwd();
 	else if (builtin == ECHO)
-		my_echo(sentence);
+		my_echo(sentence, 1, 1, 0);
 	else if (builtin == EXPORT)
 		builtin_export(sentence, cmd, 1);
 	else if (builtin == UNSET)

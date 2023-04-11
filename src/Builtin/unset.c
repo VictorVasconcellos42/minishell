@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:21:11 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 14:17:51 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 06:19:01 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,9 @@ void	unset(t_cmd *cmd, char *str)
 void	builtin_unset(t_sentence sentence, t_cmd *cmd)
 
 {
-	int i;
+	int	i;
 
 	i = 1;
-
 	while (sentence.args[i])
 		unset(cmd, sentence.args[i++]);
 }

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:07:05 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 14:12:38 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 06:19:48 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_valid_var(char *var)
 
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_isdigit(var[i]) || !ft_isalnum(var[i]))
@@ -61,7 +61,7 @@ void	export(t_cmd *cmd, char *new_var)
 	char	**n_envp;
 	short	n_present;
 
-	if(!is_valid_var(new_var))
+	if (!is_valid_var(new_var))
 		return ;
 	n_envp = NULL;
 	count = 0;
