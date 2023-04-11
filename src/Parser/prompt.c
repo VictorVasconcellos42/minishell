@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 08:18:23 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:56:49 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_code = 0;
 
-static void	free_token(t_token *token)
+void	free_token(t_token *token)
 
 {
 	int i;
@@ -25,7 +25,7 @@ static void	free_token(t_token *token)
 	free(token);
 }
 
-static void	free_sentence(t_sentence *sentence)
+void	free_sentence(t_sentence *sentence)
 
 {
 	int i;
