@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:26:52 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:18:23 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 23:02:54 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,23 @@ static int	sentence_len(t_token *token)
 	return (count);
 }
 
-t_sentence	*sentence_generator(t_token *token, t_cmd *cmd)
+static void	insert_value(t_sentence *sentence, int pos, char *temp)
+
+{
+	sentence[pos].input = STDIN_FILENO;
+	sentence[pos].output = STDOUT_FILENO;
+	sentence[pos].args = ft_split(temp, ' ');
+}
+
+t_sentence	*sentence_generator(t_token *token, int i, int count)
 
 {
 	t_sentence	*sentence;
 	char		*temp;
-	int			i;
-	int			count;
-	
-	(void)cmd;
+
 	temp = ft_strdup("");
 	sentence = malloc(sizeof(t_sentence) * (sentence_len(token) + 1));
-	i = 0;
-	count = 0;
-	while (token[i].value)
+	while (token[++i].value)
 	{
 		if (!is_pipes(token[i].type))
 		{
@@ -51,21 +54,13 @@ t_sentence	*sentence_generator(t_token *token, t_cmd *cmd)
 		}
 		else
 		{
-			sentence[count].input = STDIN_FILENO;
-			sentence[count].output = STDOUT_FILENO;
-			sentence[count++].args = ft_split(temp, ' ');
+			insert_value(sentence, count, temp);
+			count++;
 			free(temp);
 			temp = ft_strdup("");
 		}
-		i++;
 	}
 	if (temp)
-	{
-		sentence[count].input = STDIN_FILENO;
-		sentence[count].output = STDOUT_FILENO;
-		sentence[count++].args = ft_split(temp, ' ');
-		free(temp);
-	}
-	sentence[count].args = NULL;
-	return (sentence);
+		insert_value(sentence, count++, temp);
+	return (free(temp), sentence[count].args = NULL, sentence);
 }
