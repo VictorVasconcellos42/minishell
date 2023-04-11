@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 13:51:35 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 06:19:16 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:31:17 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ void	pwd(void)
 	g_code = 0;
 	pwd = getcwd(NULL, 0);
 	ft_printf("%s\n", pwd);
+	free(pwd);
 }

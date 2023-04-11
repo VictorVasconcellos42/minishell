@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:47:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 22:50:08 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:27:03 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ void	start_shell(t_cmd *cmd, char **envp)
 void	init_minishell(t_cmd *cmd)
 
 {
-	cmd->exec = NULL;
-	cmd->env = NULL;
 	cmd->path = NULL;
-	cmd->pipex = NULL;
 	cmd->token = NULL;
 	cmd->c_pipes = 0;
 	cmd->sys_env = 0;

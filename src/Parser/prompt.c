@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 23:05:30 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:18:23 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,40 @@
 
 int	g_code = 0;
 
-void	check_input(char *input, t_cmd *cmd)
+static void	free_token(t_token *token)
 
 {
-	if (!(input))
+	int i;
+
+	i = 0;
+	while (token[i].value)
+		free(token[i++].value);
+	free(token);
+}
+
+static void	free_sentence(t_sentence *sentence)
+
+{
+	int i;
+
+	i = 0;
+	while (sentence[i].args)
+		free_matriz(sentence[i++].args);
+	free(sentence);
+}
+
+void	check_input(t_cmd *cmd)
+
+{
+	if (!(cmd->input))
 	{
 		control_free(cmd);
 		handle_ctrl_d();
 	}
-	else if (input[0] != '\0')
-		add_history(input);
+	else if (!cmd->input[0])
+		free(cmd->input);
+	else if (cmd->input[0] != '\0')
+		add_history(cmd->input);
 	return ;
 }
 
@@ -36,12 +60,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	start_shell(&cmd, envp);
-	handle_signal();
 	while (1)
 	{
+		handle_signal();
 		cmd.input = readline("Minishell: ");
-		check_input(cmd.input, &cmd);
-		if (!cmd.input[0])
+		check_input(&cmd);
+		if (!cmd.input || !(cmd.input[0]))	
 			continue ;
 		cmd.token = lexer(&cmd);
 		quote_handling(cmd.token);
@@ -61,6 +85,8 @@ int	main(int argc, char **argv, char **envp)
 						execute_sentence(cmd.sentence[0], &cmd);
 				}
 			}
+			free_sentence(cmd.sentence);
+			free_token(cmd.token);
 		}
 	}
 	return (0);
