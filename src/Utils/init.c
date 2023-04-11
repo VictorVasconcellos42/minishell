@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:47:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:38:21 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:50:08 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,18 @@ void	init_minishell(t_cmd *cmd)
 	cmd->sys_env = 0;
 }
 
-int	**init_fd(t_cmd *cmd)
+int	**init_fd(t_sentence *sentence)
 
 {
 	int	i;
 	int	**fd;
 
 	i = 0;
-	cmd->pipex = ft_split(cmd->input, '|');
-	fd = malloc(sizeof(int *) * cmd->c_pipes);
-	while (i < cmd->c_pipes)
-		fd[i++] = malloc(sizeof(int) * 2);
+	fd = malloc(sizeof(int *) * (how_many_sentences(sentence) - 1));
+	while (i < how_many_sentences(sentence) - 1)
+	{
+		fd[i] = malloc(sizeof(int) * 2);
+		remove_redirect(sentence[i++]);
+	}
 	return (fd);
 }

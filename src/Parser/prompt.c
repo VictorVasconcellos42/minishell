@@ -6,13 +6,13 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 15:17:24 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 23:05:30 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int g_code = 0;
+int	g_code = 0;
 
 void	check_input(char *input, t_cmd *cmd)
 
@@ -32,8 +32,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	cmd;
 	int		build;
-	int		test = 1;
-	int		i;
+
 	(void)argc;
 	(void)argv;
 	start_shell(&cmd, envp);
@@ -48,53 +47,21 @@ int	main(int argc, char **argv, char **envp)
 		quote_handling(cmd.token);
 		if (parser(cmd.token))
 		{
-			if (test == 1)
+			cmd.sentence = sentence_generator(cmd.token, -1, 0);
+			build = is_builtin(cmd.sentence->args[0]);
+			if (who_builtin(&cmd, build, cmd.sentence[0]) == FALSE)
 			{
-				cmd.sentence = sentence_generator(cmd.token, &cmd);
-				build = is_builtin(cmd.sentence->args[0]);
-				if (who_builtin(&cmd, build, cmd.sentence[0]) == FALSE)
+				if (!control_redirect(cmd.sentence, -1, -1))
+					continue ;
+				else
 				{
-					if (!control_redirect(cmd.sentence))
-						continue ;
+					if (how_many_sentences(cmd.sentence) > 1)
+						pipex(cmd.sentence, 0, 0, &cmd);
 					else
-					{
-						
-						i = 0;
-						while (cmd.sentence[i].args)
-							execute_sentence(cmd.sentence[i++], &cmd);	
-					}
-				}	
-/* 				int j = 0;
-				int i = -1;
-				while (cmd.sentence[j].args)
-				{
-					i = -1;
-					while (cmd.sentence[j].args[++i])
-						printf("SENTENCE [%d] - ARGS [%d]: {%s}\n", j, i, cmd.sentence[j].args[i]);
-					if (cmd.sentence[j].args != NULL)
-						printf("==================\n");
-					j++;
-				} */
-			}
-/* 			else
-			{
-				build = is_builtin(cmd.input);
-				if (who_builtin(&cmd, build) == FALSE)
-				{
-					if (has_pipe(cmd.input, &cmd) == TRUE)
-						pipes(&cmd, 0, 0);
-					else
-						execution(&cmd);
+						execute_sentence(cmd.sentence[0], &cmd);
 				}
-				free_matriz(cmd.cd);
-			} */
+			}
 		}
-		free(cmd.input);
 	}
-	builtin_exit(&cmd);
 	return (0);
 }
-
-
-
-

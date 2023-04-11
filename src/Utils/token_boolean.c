@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:43:12 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:06:23 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:48:58 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	is_redirect(int type)
 int	is_str_redirect(char *type)
 
 {
-	if (is_output(type) || is_input(type) || is_append(type) || is_heredoc(type))
+	if (is_output(type) || \
+	is_input(type) || \
+	is_append(type) || \
+	is_heredoc(type))
 		return (TRUE);
 	return (FALSE);
 }

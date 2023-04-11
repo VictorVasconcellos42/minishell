@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:38:58 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:01:34 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 23:06:16 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	redirects(t_token *token)
 int	parser_error(char *text)
 
 {
-	printf("minishell: syntax error near unexpected token '%s'\n", text);
-	//g_code = 258;
+	printf("minishell: syntax error near "
+		"unexpected token '%s'\n", text);
+	g_code = 258;
 	return (FALSE);
 }
