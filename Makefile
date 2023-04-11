@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/04/10 15:25:57 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/04/11 19:25:38 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ EXECUTOR	= $(addprefix Executor/, executor.c)
 
 REDIRECTS	=	$(addprefix Redirects/, redirect.c pipes.c)
 
-DEVELOP	=	$(addprefix develop/, exec.c quote.c)
+DEVELOP	=	$(addprefix develop/, quote.c)
 
 SRC		=	$(addprefix src/, ${PARSER} ${UTILS} ${BUILTIN} ${EXECUTOR} ${REDIRECTS})
 
