@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 07:24:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:18:10 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 06:39:37 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 char	*search_var(char *id, char **envp)
 {
-	int i;
-	char *expanded;
-	char *search_id;
+	int		i;
+	int		len;
+	char	*expanded;
+	char	*search_id;
 
 	i = 0;
+	len = ft_strlen(id);
 	if (*id == '?')
 		return (ft_itoa(0));
 	search_id = ft_strjoin(id, "=");
 	while (envp[i])
 	{
-		if (!ft_strncmp(search_id, envp[i], ft_strlen(id)))
+		if (!ft_strncmp(search_id, envp[i], len))
 		{
-			expanded = ft_substr(envp[i], ft_strlen(id) + 1, ft_strlen(envp[i]));
+			expanded = ft_substr(envp[i], len + 1, ft_strlen(envp[i]));
 			if (!expanded)
 				return (NULL);
 			free(search_id);
