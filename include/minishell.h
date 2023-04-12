@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/12 07:17:50 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:01:01 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,13 @@ void		free_fd(int **input, int size);
 void		free_sentence(t_sentence *sentence);
 void		free_token(t_token *token);
 void		clear_child(t_cmd *cmd);
+void		free_code(char *input, char **aux);
 
 // PIPEX //
 
 int			has_pipe(char *string, t_cmd *cmd);
 void		free_matriz(char **input);
-void		pipex(t_sentence *sentence, int i, int j, t_cmd *cmd);
+void		pipex(t_sentence *sentence, int i, t_cmd *cmd);
 
 // UTILS //
 
@@ -149,6 +150,7 @@ int			matriz_size(char **str);
 void		check_input(t_cmd *cmd);
 void		error_var(char *var);
 int			is_valid_var(char *var);
+void		status_check(int *pid);
 
 //	START	//
 
