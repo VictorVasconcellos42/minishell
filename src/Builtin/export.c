@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:07:05 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 06:19:48 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 20:36:08 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,11 @@ void	export(t_cmd *cmd, char *new_var)
 	cmd->env = n_envp;
 }
 
-void	builtin_export(t_sentence table, t_cmd *cmd, int j)
+int	builtin_export(t_sentence table, t_cmd *cmd, int j)
 
 {
+	g_code = 0;
 	while (table.args[j])
 		export(cmd, table.args[j++]);
+	return (g_code);
 }
