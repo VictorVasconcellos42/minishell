@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 18:05:11 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 23:04:41 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*relative_or_absolute(char *command)
 {
 	if (command[0] == '/' || command[0] == '.')
 		return (ft_strdup(command));
-	return (ft_strdup(""));
+	return (ft_strdup(" "));
 }
 
 void	the_executor(t_sentence sentence, t_cmd *cmd)
@@ -36,6 +36,7 @@ void	the_executor(t_sentence sentence, t_cmd *cmd)
 		{
 			free(sentence.args[0]);
 			sentence.args[0] = full_path;
+			remove_redirect(sentence);
 			execve(sentence.args[0], sentence.args, cmd->env);
 		}
 		free(full_path);
@@ -44,46 +45,43 @@ void	the_executor(t_sentence sentence, t_cmd *cmd)
 	}
 	printf("bash: %s: command not found\n", sentence.args[0]);
 	clear_child(cmd, full_path);
-	free_matriz(table_path);
 	exit(127);
 }
 
-void	remove_redirect(t_sentence sentence)
+void	the_builtin_executor(t_sentence sentence, t_cmd *cmd)
 
 {
-	int		i;
-	int		origin;
-	char	*temp;
+	int	build;
 
-	origin = 0;
-	i = 0;
-	while (sentence.args[i])
-	{
-		while (sentence.args[i] && is_str_redirect(sentence.args[i]))
-		{
-			if (is_heredoc(sentence.args[i]))
-				unlink(sentence.args[i + 1]);
-			i += 2;
-		}
-		if (sentence.args[i] == NULL)
-			break ;
-		temp = ft_strdup(sentence.args[i]);
-		free(sentence.args[i]);
-		sentence.args[origin++] = ft_strdup(temp);
-		free(temp);
-		i++;
-	}
-	sentence.args[origin] = NULL;
+	build = is_builtin(sentence.args[0]);
+	remove_redirect(sentence);
+	if (build == ENV)
+		g_code = builtin_env(cmd);
+	else if (build == EXPORT)
+		g_code = builtin_export(sentence, cmd, 0);
+	else if (build == EXIT)
+		builtin_exit(sentence);
+	exit(g_code);
 }
 
-void	execute_sentence(t_sentence sentence, t_cmd *cmd)
+static void	status_check(int *status)
 
 {
-	int	pid;
+	if (WIFEXITED(status) == 0)
+		g_code = 127;
+	else if (WIFEXITED(status))
+		g_code = WEXITSTATUS(status);
+}
+
+void	execute_sentence(t_sentence sentence, t_cmd *cmd, int pid)
+
+{
 	int	backup;
+	int	status[1];
 
 	backup = dup(STDOUT_FILENO);
 	pid = fork();
+	status[0] = 0;
 	if (pid == 0)
 	{
 		if (sentence.input != STDIN_FILENO)
@@ -100,5 +98,6 @@ void	execute_sentence(t_sentence sentence, t_cmd *cmd)
 		the_executor(sentence, cmd);
 	}
 	dup2(backup, STDOUT_FILENO);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, status, 0);
+	status_check(status);
 }

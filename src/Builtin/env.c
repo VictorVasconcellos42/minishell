@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:30:08 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 08:30:49 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 20:34:37 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**get_path(t_cmd *cmd)
 	return (path);
 }
 
-void	builtin_env(t_cmd *cmd)
+int	builtin_env(t_cmd *cmd)
 
 {
 	int	i;
@@ -57,6 +57,7 @@ void	builtin_env(t_cmd *cmd)
 		while (cmd->env[i])
 			printf("%s\n", cmd->env[i++]);
 	}
+	return (g_code);
 }
 
 void	create_env(t_cmd *cmd, char **envp)

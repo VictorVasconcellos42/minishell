@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 18:53:45 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 22:29:19 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_cmd
 	char		**path;
 	int			env_size;
 	int			c_pipes;
+	int			backup;
 	t_token		*token;
 	t_sentence	*sentence;
 }	t_cmd;
@@ -100,7 +101,7 @@ char		**get_path(t_cmd *cmd);
 // BUILTIN //
 
 int			is_builtin(char *input);
-void		builtin_env(t_cmd *cmd);
+int			builtin_env(t_cmd *cmd);
 void		builtin_exit(t_sentence sentence);
 int			who_builtin(t_cmd *cmd, int builtin, t_sentence sentence);
 int			cd(t_sentence sentence, t_cmd *cmd);
@@ -108,8 +109,8 @@ void		pwd(void);
 void		export(t_cmd *cmd, char *new_var);
 void		unset(t_cmd *cmd, char *str);
 int			my_echo(t_sentence sentence, int flag, int i, int j);
-void		builtin_export(t_sentence table, t_cmd *cmd, int j);
-void		builtin_unset(t_sentence sentence, t_cmd *cmd);
+int			builtin_export(t_sentence table, t_cmd *cmd, int j);
+int			builtin_unset(t_sentence sentence, t_cmd *cmd);
 
 // EXEC //
 
@@ -117,8 +118,9 @@ int			check_command(t_cmd *cmd);
 void		execution(t_cmd *exec);
 int			check_case(char *str);
 void		executor(t_cmd *cmd);
-void		execute_sentence(t_sentence sentence, t_cmd *cmd);
+void		execute_sentence(t_sentence sentence, t_cmd *cmd, int pid);
 void		the_executor(t_sentence sentence, t_cmd *cmd);
+void		the_builtin_executor(t_sentence sentence, t_cmd *cmd);
 
 // SIGNAL //
 
