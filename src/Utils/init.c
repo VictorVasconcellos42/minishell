@@ -6,21 +6,17 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:47:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 18:51:02 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/12 17:48:30 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	clear_child(t_cmd *cmd, char *input)
+void	free_code(char *input, char **aux)
 
 {
-	if (input)
-		free(input);
-	free_sentence(cmd->sentence);
-	free_token(cmd->token);
-	free_matriz(cmd->env);
-	free_matriz(cmd->path);
+	free(input);
+	free_matriz(aux);
 }
 
 void	start_shell(t_cmd *cmd, char **envp)

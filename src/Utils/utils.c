@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:14:45 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 22:35:09 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/12 13:50:54 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	ft_str_isdigit(char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
+		{
+			puts("to aqui");
 			return (FALSE);
+		}
 		i++;
 	}
 	return (TRUE);
