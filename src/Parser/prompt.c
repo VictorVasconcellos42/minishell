@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 22:59:07 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:01:35 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,79 +14,76 @@
 
 int	g_code = 0;
 
-void	free_token(t_token *token)
+static void	clear_leak(t_cmd *cmd)
 
 {
-	int i;
-
-	i = 0;
-	while (token[i].value)
-		free(token[i++].value);
-	free(token);
+	free_sentence(cmd->sentence);
+	free_token(cmd->token);
+	free(cmd->input);
 }
 
-void	free_sentence(t_sentence *sentence)
+static void	check_fd(t_sentence sentence)
 
 {
-	int i;
-
-	i = 0;
-	while (sentence[i].args)
-		free_matriz(sentence[i++].args);
-	free(sentence);
-}
-
-void	check_input(t_cmd *cmd)
-
-{
-	if (!(cmd->input))
+	if (sentence.output != STDOUT_FILENO)
 	{
-		control_free(cmd);
-		handle_ctrl_d();
+		dup2(sentence.output, STDOUT_FILENO);
+		close(sentence.output);	
 	}
-	else if (!cmd->input[0])
-		free(cmd->input);
-	else if (cmd->input[0] != '\0')
-		add_history(cmd->input);
-	return ;
+	if (sentence.input != STDIN_FILENO)
+	{
+		dup2(sentence.input, STDIN_FILENO);
+		close(sentence.input);	
+	}
+}
+
+static void	which_routine(t_cmd *cmd)
+
+{
+	int	build;
+	int	backup;
+
+	backup = dup(STDOUT_FILENO);
+	build = is_builtin(cmd->sentence->args[0]);
+	if (how_many_sentences(cmd->sentence) > 1)
+		pipex(cmd->sentence, 0, cmd);
+	else if (build != 0)
+	{
+		remove_redirect(cmd->sentence[0]);
+		check_fd(cmd->sentence[0]);
+		who_builtin(cmd, build, cmd->sentence[0]);
+		dup2(backup, STDOUT_FILENO);
+	}
+	else
+		execute_sentence(cmd->sentence[0], cmd, 0);
 }
 
 int	main(int argc, char **argv, char **envp)
 
 {
 	t_cmd	cmd;
-	int		build;
 
-	(void)argc;
-	(void)argv;
-	start_shell(&cmd, envp);
-	while (1)
+	if (argc == 1 && argv[0])
 	{
-		handle_signal();
-		cmd.input = readline("Minishell: ");
-		check_input(&cmd);
-		if (!cmd.input || !(cmd.input[0]))	
-			continue ;
-		cmd.token = lexer(&cmd);
-		quote_handling(cmd.token);
-		if (parser(cmd.token))
+		start_shell(&cmd, envp);
+		while (1)
 		{
-			cmd.sentence = sentence_generator(cmd.token, -1, 0);
-			build = is_builtin(cmd.sentence->args[0]);
-			if (who_builtin(&cmd, build, cmd.sentence[0]) == FALSE)
+			handle_signal();
+			cmd.input = readline("Minishell: ");
+			check_input(&cmd);
+			if (!cmd.input || !(cmd.input[0]))	
+				continue ;
+			cmd.token = lexer(&cmd);
+			quote_handling(cmd.token);
+			if (parser(cmd.token))
 			{
+				cmd.sentence = sentence_generator(cmd.token, -1, 0);
 				if (!control_redirect(cmd.sentence, -1, -1))
 					continue ;
 				else
-				{
-					if (how_many_sentences(cmd.sentence) > 1)
-						pipex(cmd.sentence, 0, 0, &cmd);
-					else
-						execute_sentence(cmd.sentence[0], &cmd, 0);
-				}
+					which_routine(&cmd);
 			}
-			free_sentence(cmd.sentence);
-			free_token(cmd.token);
+			clear_leak(&cmd);
 		}
 	}
 	return (0);
