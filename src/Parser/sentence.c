@@ -6,11 +6,39 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:26:52 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 08:12:51 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 19:44:55 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	remove_redirect(t_sentence sentence)
+
+{
+	int		i;
+	int		origin;
+	char	*temp;
+
+	origin = 0;
+	i = 0;
+	while (sentence.args[i])
+	{
+		while (sentence.args[i] && is_str_redirect(sentence.args[i]))
+		{
+			if (is_heredoc(sentence.args[i]))
+				unlink(sentence.args[i + 1]);
+			i += 2;
+		}
+		if (sentence.args[i] == NULL)
+			break ;
+		temp = ft_strdup(sentence.args[i]);
+		free(sentence.args[i]);
+		sentence.args[origin++] = ft_strdup(temp);
+		free(temp);
+		i++;
+	}
+	sentence.args[origin] = NULL;
+}
 
 static int	sentence_len(t_token *token)
 
