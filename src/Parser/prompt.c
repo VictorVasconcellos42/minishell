@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 17:56:49 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/11 22:59:07 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int argc, char **argv, char **envp)
 					if (how_many_sentences(cmd.sentence) > 1)
 						pipex(cmd.sentence, 0, 0, &cmd);
 					else
-						execute_sentence(cmd.sentence[0], &cmd);
+						execute_sentence(cmd.sentence[0], &cmd, 0);
 				}
 			}
 			free_sentence(cmd.sentence);
