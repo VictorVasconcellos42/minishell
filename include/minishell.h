@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/12 21:09:47 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:26:44 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,5 +207,5 @@ int			ft_str_isdigit(char *str);
 
 //	QUOTE	//	
 
-void		quote_handling(t_token *tokens);
+int			quote_handling(t_token *tokens);
 #endif

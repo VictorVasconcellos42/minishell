@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/12 21:12:53 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:35:53 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ int	g_code = 0;
 static void	clear_leak(t_cmd *cmd)
 
 {
-	free_sentence(cmd->sentence);
-	free_token(cmd->token);
+	if (cmd->sentence != NULL)
+		free_sentence(cmd->sentence);
+	else if (cmd->token != NULL)
+		free_token(cmd->token);
 	free(cmd->input);
 }
 
@@ -74,7 +76,11 @@ int	main(int argc, char **argv, char **envp)
 			if (!cmd.input || !(cmd.input[0]) || only_space(cmd.input))	
 				continue ;
 			cmd.token = lexer(&cmd);
-			quote_handling(cmd.token);
+			if (!quote_handling(cmd.token))
+			{
+				clear_leak(&cmd);
+				continue ;
+			} 	
 			if (parser(cmd.token))
 			{
 				cmd.sentence = sentence_generator(cmd.token, -1, 0);
@@ -84,6 +90,7 @@ int	main(int argc, char **argv, char **envp)
 					which_routine(&cmd);
 			}
 			clear_leak(&cmd);
+			start_shell(&cmd, NULL);
 		}
 	}
 	return (0);
