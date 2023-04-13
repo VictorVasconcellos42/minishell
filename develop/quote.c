@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 11:10:41 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/12 16:06:06 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:26:24 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	simple_quote(t_token *token, int pos, int start)
 	token[pos].value = temp;
 }
 
-void	quote_handling(t_token *tokens)
+int	quote_handling(t_token *tokens)
 
 {
 	int i;
@@ -94,9 +94,12 @@ void	quote_handling(t_token *tokens)
 			}
 			j++;
 		}
+		if (only_space(tokens[i].value))
+			return (FALSE);
 		flag = 1;
 		i++;
 	}
+	return (TRUE);
 } 
 
 // verificao de variavel
