@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:21:11 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 20:37:37 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:12:01 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	unset(t_cmd *cmd, char *str)
 	int		len_s;
 	char	**new_envp;
 
-	if (is_valid_var(str))
+	if (!is_valid_var(str))
 		return ;
 	i = ft_isspace(str);
 	new_envp = malloc((matriz_size(cmd->env)) * sizeof(*new_envp));
