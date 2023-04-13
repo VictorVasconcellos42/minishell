@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/13 09:26:44 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:22:35 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int			only_space(char *input);
 void		start_shell(t_cmd *cmd, char **envp);
 void		init_minishell(t_cmd *cmd);
 int			**init_fd(t_sentence *sentence);
+int			step_shell(t_cmd *cmd);
 
 //	EXPANDER	//
 

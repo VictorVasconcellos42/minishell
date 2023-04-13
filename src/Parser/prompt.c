@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/13 09:35:53 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:25:59 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static void	check_fd(t_sentence sentence)
 	if (sentence.output != STDOUT_FILENO)
 	{
 		dup2(sentence.output, STDOUT_FILENO);
-		close(sentence.output);	
+		close(sentence.output);
 	}
 	if (sentence.input != STDIN_FILENO)
 	{
 		dup2(sentence.input, STDIN_FILENO);
-		close(sentence.input);	
+		close(sentence.input);
 	}
 }
 
@@ -73,22 +73,16 @@ int	main(int argc, char **argv, char **envp)
 			handle_signal();
 			cmd.input = readline("Minishell: ");
 			check_input(&cmd);
-			if (!cmd.input || !(cmd.input[0]) || only_space(cmd.input))	
+			if (!cmd.input || !(cmd.input[0]) || only_space(cmd.input))
 				continue ;
 			cmd.token = lexer(&cmd);
 			if (!quote_handling(cmd.token))
 			{
 				clear_leak(&cmd);
 				continue ;
-			} 	
-			if (parser(cmd.token))
-			{
-				cmd.sentence = sentence_generator(cmd.token, -1, 0);
-				if (!control_redirect(cmd.sentence, -1, -1))
-					continue ;
-				else
-					which_routine(&cmd);
 			}
+			if (!step_shell(&cmd))
+				perror("redirect");
 			clear_leak(&cmd);
 			start_shell(&cmd, NULL);
 		}
