@@ -6,13 +6,13 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/04 00:30:49 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:26:40 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 
 {
 	t_cmd	cmd;
@@ -42,3 +42,4 @@ int	main(int argc, char **argv, char **envp)
 	builtin_exit(&cmd);
 	return (0);
 }
+ */
