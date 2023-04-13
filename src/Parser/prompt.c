@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/12 18:01:35 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:12:53 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char **argv, char **envp)
 			handle_signal();
 			cmd.input = readline("Minishell: ");
 			check_input(&cmd);
-			if (!cmd.input || !(cmd.input[0]))	
+			if (!cmd.input || !(cmd.input[0]) || only_space(cmd.input))	
 				continue ;
 			cmd.token = lexer(&cmd);
 			quote_handling(cmd.token);

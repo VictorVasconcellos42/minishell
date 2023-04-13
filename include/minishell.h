@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/12 18:01:01 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:09:47 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ void		check_input(t_cmd *cmd);
 void		error_var(char *var);
 int			is_valid_var(char *var);
 void		status_check(int *pid);
+int			only_space(char *input);
 
 //	START	//
 
