@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/04/12 11:46:02 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/04/13 16:31:19 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME	=	minishell
 
-PARSER	= $(addprefix Parser/, prompt.c tokenizer.c expander.c lexer.c parser.c parser_utils.c sentence.c)
+PARSER	= $(addprefix Parser/, prompt.c tokenizer.c expander.c lexer.c parser.c system.c parser_utils.c sentence.c)
 
 UTILS	= $(addprefix Utils/, init.c leak.c redirect_boolean.c token_boolean.c signal.c utils_system.c utils.c)
 
