@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
+#    By: marolive <marolive@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/04/10 15:25:57 by vde-vasc         ###   ########.fr        #
+#    Updated: 2023/04/14 05:13:49 by marolive         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME	=	minishell
 
-PARSER	= $(addprefix Parser/, prompt.c tokenizer.c expander.c lexer.c parser.c parser_utils.c sentence.c)
+PARSER	= $(addprefix Parser/, prompt.c tokenizer.c expander.c lexer.c parser.c parser_utils.c sentence.c expansion.c expancion_2.c)
 
 UTILS	= $(addprefix Utils/, init.c leak.c redirect_boolean.c token_boolean.c signal.c utils.c)
 

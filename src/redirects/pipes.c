@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:26:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 08:42:32 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:03:15 by marolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-
 
 static void	first_pipe(t_cmd *cmd, int *fd)
 

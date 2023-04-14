@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:06:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 15:17:24 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/14 06:53:06 by marolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		cmd.token = lexer(&cmd);
 		quote_handling(cmd.token);
+		if (cmd.token->value[0] == '$')
+			dollar(&cmd);
 		if (parser(cmd.token))
 		{
 			if (test == 1)
