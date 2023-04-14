@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/12 17:49:08 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/14 07:36:09 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,10 @@ void	execute_sentence(t_sentence sentence, t_cmd *cmd, int pid)
 		remove_redirect(sentence);
 		if (is_builtin(sentence.args[0]) != 0)
 			the_builtin_executor(sentence, cmd);
+		close(backup);
 		the_executor(sentence, cmd);
 	}
 	dup2(backup, STDOUT_FILENO);
+	close(backup);
 	status_check(&pid);
 }
