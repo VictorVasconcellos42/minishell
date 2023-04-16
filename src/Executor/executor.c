@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/14 07:36:09 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:45:25 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,11 @@ void	the_builtin_executor(t_sentence sentence, t_cmd *cmd)
 	exit(g_code);
 }
 
-void	execute_sentence(t_sentence sentence, t_cmd *cmd, int pid)
+void	execute_sentence(t_sentence sentence, t_cmd *cmd)
 
 {
 	int	backup;
+	int	pid;
 
 	backup = dup(STDOUT_FILENO);
 	pid = fork();
@@ -119,7 +120,6 @@ void	execute_sentence(t_sentence sentence, t_cmd *cmd, int pid)
 			dup2(sentence.output, STDOUT_FILENO);
 			close(sentence.output);
 		}
-		remove_redirect(sentence);
 		if (is_builtin(sentence.args[0]) != 0)
 			the_builtin_executor(sentence, cmd);
 		close(backup);

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:20:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/12 17:16:39 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:34:06 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,11 @@ void	status_check(int *pid)
 
 	status = 0;
 	i = 0;
-	while (pid[i])
-		waitpid(pid[i++], &status, 0);
+	while (*pid)
+	{
+		waitpid(*pid, &status, 0);
+		pid++;
+	}
 	if (WIFEXITED(status))
 		g_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:26:52 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/11 19:44:55 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:20:50 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_sentence	*sentence_generator(t_token *token, int i, int count)
 	char		*temp;
 
 	temp = ft_strdup("");
-	sentence = malloc(sizeof(t_sentence) * (sentence_len(token) + 1));
+	sentence = ft_calloc(sizeof(t_sentence), (sentence_len(token) + 1));
 	while (token[++i].value)
 	{
 		if (!is_pipes(token[i].type))
@@ -90,5 +90,5 @@ t_sentence	*sentence_generator(t_token *token, int i, int count)
 	}
 	if (temp)
 		insert_value(sentence, count++, temp);
-	return (free(temp), sentence[count].args = NULL, sentence);
+	return (free(temp), sentence);
 }

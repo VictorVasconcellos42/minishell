@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:26:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/12 17:18:33 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:36:23 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	pipex(t_sentence *sentence, int i, t_cmd *cmd)
 	int	*pid;
 
 	fd = init_fd(sentence);
-	pid = (int *)malloc(sizeof(int) * how_many_sentences(sentence));
+	pid = ft_calloc(sizeof(int), how_many_sentences(sentence) + 1);
 	pipe(fd[i]);
 	pid[i] = fork();
 	if (pid[i] == 0)

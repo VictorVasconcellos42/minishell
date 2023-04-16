@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 11:18:55 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/13 16:37:17 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:17:33 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_token	*lexer(t_cmd *cmd)
 	count = 0;
 	tmp = tokenize(cmd->input);
 	len = matriz_size(tmp);
-	token = malloc(sizeof(t_token) * (len + 1));
+	token = ft_calloc(sizeof(t_token), (len + 1));
 	while (count < len)
 	{
 		token[count].value = ft_strdup(tmp[count]);

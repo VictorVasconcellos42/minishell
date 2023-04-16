@@ -6,11 +6,42 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:15:27 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/13 13:24:53 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:38:46 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	restart_shell(t_cmd *cmd)
+
+{
+	clear_leak(cmd);
+	start_shell(cmd, NULL);
+}
+
+void	clear_leak(t_cmd *cmd)
+
+{
+	if (cmd->sentence != NULL)
+		free_sentence(cmd->sentence);
+	free_token(cmd->token);
+	free(cmd->input);
+}
+
+static void	check_fd(t_sentence sentence)
+
+{
+	if (sentence.output != STDOUT_FILENO)
+	{
+		dup2(sentence.output, STDOUT_FILENO);
+		close(sentence.output);
+	}
+	if (sentence.input != STDIN_FILENO)
+	{
+		dup2(sentence.input, STDIN_FILENO);
+		close(sentence.input);
+	}
+}
 
 static void	which_routine(t_cmd *cmd)
 
@@ -30,7 +61,8 @@ static void	which_routine(t_cmd *cmd)
 		dup2(backup, STDOUT_FILENO);
 	}
 	else
-		execute_sentence(cmd->sentence[0], cmd, 0);
+		execute_sentence(cmd->sentence[0], cmd);
+	close(backup);
 }
 
 int	step_shell(t_cmd *cmd)
@@ -42,7 +74,7 @@ int	step_shell(t_cmd *cmd)
 		if (!control_redirect(cmd->sentence, -1, -1))
 			return (FALSE);
 		else
-			which_routine(&cmd);
+			which_routine(cmd);
 	}
 	return (TRUE);
 }

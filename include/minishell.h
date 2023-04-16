@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/13 16:33:53 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/14 07:48:19 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int			check_command(t_cmd *cmd);
 void		execution(t_cmd *exec);
 int			check_case(char *str);
 void		executor(t_cmd *cmd);
-void		execute_sentence(t_sentence sentence, t_cmd *cmd, int pid);
+void		execute_sentence(t_sentence sentence, t_cmd *cmd);
 void		the_executor(t_sentence sentence, t_cmd *cmd);
 void		the_builtin_executor(t_sentence sentence, t_cmd *cmd);
 
