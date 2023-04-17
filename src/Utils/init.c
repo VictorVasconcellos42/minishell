@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:47:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/14 07:39:31 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:57:24 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	init_minishell(t_cmd *cmd)
 	cmd->path = NULL;
 	cmd->token = NULL;
 	cmd->sentence = NULL;
-	cmd->c_pipes = 0;
+	cmd->size_cmd = 0;
+	cmd->oldpwd = NULL;
 }
 
 int	**init_fd(t_sentence *sentence)

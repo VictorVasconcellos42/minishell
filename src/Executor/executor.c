@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/16 14:45:25 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:23:29 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 static void	relative_executor(t_sentence table, t_cmd *cmd)
 
 {
+	char	*temp;
+
+	temp = getcwd(NULL, 0);
 	if (access(table.args[0], F_OK | X_OK) == 0)
 	{
 		remove_redirect(table);
 		execve(table.args[0], table.args, cmd->env);
 	}
-	perror(table.args[0] + ft_strlen(getcwd(NULL, 0)) + 1);
+	perror(table.args[0] + ft_strlen(temp) + 1);
 	clear_child(cmd);
+	free(temp);
+	free(cmd->oldpwd);
 	if (errno == 13)
 		exit(126);
 	exit(127);
@@ -36,8 +41,11 @@ static char	*check_path(char *command, t_sentence sentence, t_cmd *cmd)
 		return (ft_strdup(command));
 	else if (command[0] == '.')
 	{
-		relative = ft_strjoin_gnl(getcwd(NULL, 0), command + 1);
+		search_parth(sentence, cmd);
+		relative = ft_strjoin_gnl(getcwd(NULL, 0), command + cmd->size_cmd);
+		cmd->oldpwd = search_var("PWD", cmd->env);
 		free(sentence.args[0]);
+		chdir(cmd->oldpwd);
 		sentence.args[0] = relative;
 		relative_executor(sentence, cmd);
 		return (NULL);

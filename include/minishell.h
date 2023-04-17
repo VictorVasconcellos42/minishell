@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/14 07:48:19 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:19:38 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ typedef struct s_cmd
 	char		*input;
 	char		**env;
 	char		**path;
+	char		*oldpwd;
 	int			env_size;
-	int			c_pipes;
+	int			size_cmd;
 	int			backup;
 	t_token		*token;
 	t_sentence	*sentence;
@@ -121,6 +122,7 @@ void		executor(t_cmd *cmd);
 void		execute_sentence(t_sentence sentence, t_cmd *cmd);
 void		the_executor(t_sentence sentence, t_cmd *cmd);
 void		the_builtin_executor(t_sentence sentence, t_cmd *cmd);
+void		search_parth(t_sentence sentence, t_cmd *cmd);
 
 // SIGNAL //
 
@@ -154,7 +156,6 @@ void		status_check(int *pid);
 int			only_space(char *input);
 void		restart_shell(t_cmd *cmd);
 void		clear_leak(t_cmd *cmd);
-
 
 //	START	//
 
