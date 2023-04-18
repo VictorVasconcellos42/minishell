@@ -6,34 +6,27 @@
 /*   By: marolive <marolive@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:59:31 by marolive          #+#    #+#             */
-/*   Updated: 2023/04/14 08:41:40 by marolive         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:24:10 by marolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/* char *dollar_dollar(t_cmd *cmd)
+char *dollar_dollar(t_cmd *cmd)
 {
-    int j;
     char *pid;
-    char *tmp;
-    int size;
+    //char *tmp;
 
-    j = 0;
+    //j = 0;
+    //tmp = ft_strdup("");
     pid = ft_itoa(getpid());
-    //size = ft_strlen(pid);
-    //tmp = malloc(sizeof(char) * size);
-    //printf("TMP: %s\n", tmp);
-     if(cmd->token->value[j] == '$')
+    /* if (cmd->token->value[j] == '$')
     {
-        j += 2;
-        if(cmd->token->value[j + 1] != '$')
-            break ;
-        //printf("\n*TMP 1: %s*\n",tmp);
-    } 
-    tmp = ft_strjoin(tmp, pid);
-    return(tmp);
-} */
+        tmp = ft_strjoin(tmp, pid);
+        
+    }  */
+    return(pid);
+}
 
 void dollar(t_cmd *cmd)
 {
@@ -44,25 +37,13 @@ void dollar(t_cmd *cmd)
     
     int i;
     int j;
-
+    
     i = 0;
     j = 0;
     val = ft_split(cmd->token->value, '$');
     pid = ft_itoa(getpid());
-    if (cmd->token->value[j + 1] == '$')
-    {
-        tmp = pid;
-        j += 2;
-        if (!cmd->token->value[j])
-            return ;
-    }
-    else
-    {
-        env = search_var(val[i], cmd->env);
-        tmp = env;
-        j += ft_strlen(val[i]) + 1;
-        i++;
-    }
+    tmp = ft_strdup("");
+    printf("HERE!\n");
     while(cmd->token->value[j])
     {
         if (cmd->token->value[j + 1] == '$')
@@ -70,7 +51,10 @@ void dollar(t_cmd *cmd)
             tmp = ft_strjoin_gnl(tmp, pid);
             j += 2;
             if (!cmd->token->value[j])
+            {
+                cmd->token->value = ft_strdup(tmp);
                 return ;
+            }
         }
         else
         {
@@ -85,8 +69,9 @@ void dollar(t_cmd *cmd)
             }
         }
     }
+    //printf("$: %s\n", tmp);
     cmd->token->value = ft_strdup(tmp);
-    free(tmp);
+    //free(tmp);
 }
 
 /* void    dolleta(t_cmd *cmd)
