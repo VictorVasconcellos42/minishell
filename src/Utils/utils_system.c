@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:20:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/16 14:34:06 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/18 13:35:14 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	check_input(t_cmd *cmd)
 		handle_ctrl_d();
 	}
 	else if (!cmd->input[0])
+	{
 		free(cmd->input);
+		cmd->input = NULL;	
+	}
 	else if (cmd->input[0] != '\0')
 		add_history(cmd->input);
 	return ;
