@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:48:44 by marolive          #+#    #+#             */
-/*   Updated: 2023/04/12 17:09:26 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/18 12:28:14 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	next_line(int flag, int pos)
 	if (flag == 1 && pos == 2)
 		printf("\n");
 	else if (flag == 1)
-		printf(" ");
+		printf("\n");
 	return (0);
 }
 

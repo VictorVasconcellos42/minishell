@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 11:10:41 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/13 13:32:29 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/18 12:37:06 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	quote_handling(t_token *tokens)
 		}
 		if (only_space(tokens[i].value))
 			return (FALSE);
-		flag = 1;
+		flag = 0;
 		i++;
 	}
 	return (TRUE);
