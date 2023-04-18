@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:48:44 by marolive          #+#    #+#             */
-/*   Updated: 2023/04/18 12:28:14 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/18 13:14:44 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	printf_dollar(void)
 
 {
-	printf("STATUS CODE NOW: %d\n", g_code);
+	printf("%d\n", g_code);
 	g_code = 0;
 	return (1);
 }
