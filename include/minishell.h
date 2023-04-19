@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/17 17:19:38 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:47:35 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,9 @@ int			is_append(char *type);
 int			is_heredoc(char *type);
 int			is_str_redirect(char *type);
 int			ft_str_isdigit(char *str);
+void		handling(t_token token, char **envp);
 
 //	QUOTE	//	
 
-int			quote_handling(t_token *tokens);
+int			quote_handling(t_token *tokens, t_cmd *cmd);
 #endif

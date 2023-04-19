@@ -6,19 +6,19 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:48:44 by marolive          #+#    #+#             */
-/*   Updated: 2023/04/18 13:14:44 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:23:17 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	printf_dollar(void)
+/* static int	printf_dollar(void)
 
 {
 	printf("%d\n", g_code);
 	g_code = 0;
 	return (1);
-}
+} */
 
 static int	next_line(int flag, int pos)
 
@@ -42,8 +42,6 @@ int	my_echo(t_sentence sentence, int flag, int i, int j)
 {
 	if (!sentence.args[++i])
 		return (printf("\n"));
-	if (sentence.args[i][0] == '$' && sentence.args[i][1] == '?')
-		return (printf_dollar());
 	if (!strncmp(sentence.args[i], "-n", 2))
 		flag = 0;
 	while (sentence.args[i])
