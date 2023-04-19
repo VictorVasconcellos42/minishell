@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:20:19 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/12 17:13:43 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:22:08 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	builtin_exit(t_sentence sentence, t_cmd *cmd)
 			exit(code - 256);
 		exit(code);
 	}
-	else if (size > 2)
+	else if (size >= 2)
 	{
 		if (!ft_str_isdigit(sentence.args[1]))
 			not_numeric(sentence, cmd);
