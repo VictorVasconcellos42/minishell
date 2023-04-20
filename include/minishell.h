@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/19 14:47:35 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:41:54 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int			check_command(t_cmd *cmd);
 void		execution(t_cmd *exec);
 int			check_case(char *str);
 void		executor(t_cmd *cmd);
-void		execute_sentence(t_sentence sentence, t_cmd *cmd);
+void		execute_sentence(t_sentence sentence, t_cmd *cmd, int backup);
 void		the_executor(t_sentence sentence, t_cmd *cmd);
 void		the_builtin_executor(t_sentence sentence, t_cmd *cmd);
 void		search_parth(t_sentence sentence, t_cmd *cmd);
@@ -190,6 +190,10 @@ int			is_redirect(int type);
 // SENTENCE	//
 
 int			how_many_sentences(t_sentence *sentence);
+void		child_signal(void);
+void		sig_heredoc(int sig);
+void		heredoc_signal(void);
+void		fork_doc(t_sentence *table, int command, int i);
 
 //	EXPANDER	//
 
@@ -200,6 +204,7 @@ char		*remove_quotes_pair(char *token);
 int			control_redirect(t_sentence *table, int command, int i);
 int			create_file(char *name, int type);
 void		remove_redirect(t_sentence sentence);
+void		heredoc_action(t_sentence *table, int pos, int i);
 
 //	BOOLEAN	//
 
@@ -209,7 +214,7 @@ int			is_append(char *type);
 int			is_heredoc(char *type);
 int			is_str_redirect(char *type);
 int			ft_str_isdigit(char *str);
-void		handling(t_token token, char **envp);
+t_token		handling(t_token token, char **envp);
 
 //	QUOTE	//	
 

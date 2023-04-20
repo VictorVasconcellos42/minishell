@@ -6,19 +6,11 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:48:44 by marolive          #+#    #+#             */
-/*   Updated: 2023/04/19 14:23:17 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 08:15:08 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-/* static int	printf_dollar(void)
-
-{
-	printf("%d\n", g_code);
-	g_code = 0;
-	return (1);
-} */
 
 static int	next_line(int flag, int pos)
 

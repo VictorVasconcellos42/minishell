@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 11:10:41 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/19 14:52:12 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 06:39:23 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	quote_handling(t_token *tokens, t_cmd *cmd)
 	while (tokens[++i].value)
 	{
 		j = -1;
-	flag = 0;
+		flag = 0;
 		while (tokens[i].value[++j])
 		{
 			if (which_quote(tokens[i].value[j]) == Q_SIMPLE && !flag)
@@ -94,11 +94,11 @@ int	quote_handling(t_token *tokens, t_cmd *cmd)
 			else if (which_quote(tokens[i].value[j]) == Q_DOUBLE && !flag)
 			{
 				flag = double_quote(tokens, i, j + 1);
-				handling(tokens[i], cmd->env);
+				tokens[i] = handling(tokens[i], cmd->env);
 			}
 		}
 		if (flag == 0)
-			handling(tokens[i], cmd->env);
+			tokens[i] = handling(tokens[i], cmd->env);
 		if (only_space(tokens[i].value))
 			return (FALSE);
 	}

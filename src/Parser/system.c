@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:15:27 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/19 00:02:29 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:39:50 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	which_routine(t_cmd *cmd)
 		dup2(backup, STDOUT_FILENO);
 	}
 	else
-		execute_sentence(cmd->sentence[0], cmd);
+		execute_sentence(cmd->sentence[0], cmd, 0);
 	close(backup);
 }
 

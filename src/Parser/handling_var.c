@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 09:33:27 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/19 14:47:05 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 08:15:54 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static char	*str_joinchar(char *string, char set)
 	int		i;
 
 	i = -1;
-	if (!string)
-		string = ft_strdup("");
 	len = ft_strlen(string) + 1;
 	new = ft_calloc(sizeof(char), len + 1);
 	while (string[++i])
@@ -31,21 +29,23 @@ static char	*str_joinchar(char *string, char set)
 	return (new);
 }
 
-static char	*insert_var(char *str, char **envp, int *pos)
+static char	*insert_var(char *str, char **envp, int *pos, int len)
 
 {
 	int		start;
 	char	*tmp;
-	int		len;
 	char	*path;
+	char	*st;
 
 	start = *pos + 1;
-	len = 0;
+	st = ft_itoa(g_code);
 	if (str[start] == '?')
 	{
 		*pos = start;
-		return (ft_itoa(g_code));
+		g_code = 0;
+		return (st);
 	}
+	free(st);
 	while (ft_isalnum(str[++*pos]))
 		len++;
 	path = ft_substr(str, start, len);
@@ -57,22 +57,22 @@ static char	*insert_var(char *str, char **envp, int *pos)
 	return (tmp);
 }
 
-void	handling(t_token token, char **envp)
+t_token	handling(t_token token, char **envp)
 
 {
 	static int	j;
 	char		*tmp;
 	char		*exp;
 
-	tmp = NULL;
-	j = -1;
 	tmp = ft_strdup("");
+	j = -1;
 	while (token.value[++j])
 	{
 		if (token.value[j] == '$')
 		{
-			exp = insert_var(token.value, envp, &j);
+			exp = insert_var(token.value, envp, &j, 0);
 			tmp = ft_strjoin_gnl(tmp, exp);
+			free(exp);
 		}
 		else
 			tmp = str_joinchar(tmp, token.value[j]);
@@ -80,33 +80,5 @@ void	handling(t_token token, char **envp)
 	free(token.value);
 	token.value = ft_strdup(tmp);
 	free(tmp);
+	return (token);
 }
-
-/* int	main(int argc, char **argv, char **envp)
-
-{
-	t_token *token;
-	char	**tmp;
-	char	*test;
-	int		count;
-	int		len;
-	
-	test = ft_strdup(argv[1]);
-	tmp = tokenize(test);
-	count = 0;
-	len = matriz_size(tmp);
-	token = ft_calloc(sizeof(t_token), (len + 1));
-	while (count < len)
-	{
-		token[count].value = ft_strdup(tmp[count]);
-		token[count].type = 0;
-		count++;
-	}
-	token[count].value = NULL;
-	token[count].type = 0;
-
-	handling(token, envp);
-	for (int i = 0; i < 2; i++)
-		printf("TOKEN {%s}\n", token[i].value);
-}
- */

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:26:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/16 14:36:23 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 08:28:15 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	first_pipe(t_sentence *table, int *fd, t_cmd *cmd)
 
 {
 	close(fd[READ_END]);
+	child_signal();
 	if (table[0].output == STDOUT_FILENO)
 		dup2(fd[WRITE_END], STDOUT_FILENO);
 	if (table[0].output != STDOUT_FILENO)
@@ -76,7 +77,10 @@ static int	multiple_pipes(t_cmd *cmd, int i, int *pid, int **fd)
 		pipe(fd[++i]);
 		pid[i] = fork();
 		if (pid[i] == 0)
+		{
+			child_signal();
 			middle_pipe(cmd, i, fd, cmd->sentence);
+		}
 		close(fd[i - 1][0]);
 		close(fd[i][1]);
 	}

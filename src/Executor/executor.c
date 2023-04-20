@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/17 17:23:29 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:38:44 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,16 @@ void	the_builtin_executor(t_sentence sentence, t_cmd *cmd)
 	exit(g_code);
 }
 
-void	execute_sentence(t_sentence sentence, t_cmd *cmd)
+void	execute_sentence(t_sentence sentence, t_cmd *cmd, int backup)
 
 {
-	int	backup;
 	int	pid;
 
 	backup = dup(STDOUT_FILENO);
 	pid = fork();
 	if (pid == 0)
 	{
+		child_signal();
 		if (sentence.input != STDIN_FILENO)
 		{
 			dup2(sentence.input, STDIN_FILENO);

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 08:48:20 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/10 22:59:26 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:41:42 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	input_action(t_sentence *table, int pos, int i)
 	return (TRUE);
 }
 
-static void	heredoc_action(t_sentence *table, int pos, int i)
+void	heredoc_action(t_sentence *table, int pos, int i)
 
 {
 	char	*text;
@@ -71,7 +71,7 @@ static void	heredoc_action(t_sentence *table, int pos, int i)
 	if (!text)
 		text = ft_strdup(table[pos].args[i]);
 	len = ft_strlen(table[pos].args[i]);
-	while (ft_strncmp(table[pos].args[i], text, len))
+	while (ft_strncmp(table[pos].args[i], text, len + 1))
 	{
 		ft_putendl_fd(text, fake_file);
 		free(text);
@@ -100,7 +100,7 @@ int	control_redirect(t_sentence *table, int command, int i)
 					return (FALSE);
 			}
 			else if (is_heredoc(table[command].args[i]))
-				heredoc_action(table, command, i + 1);
+				fork_doc(table, command, i);
 			else if (is_input(table[command].args[i]))
 			{	
 				if (input_action(table, command, i + 1) == -1)

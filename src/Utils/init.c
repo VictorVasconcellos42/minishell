@@ -6,11 +6,17 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:47:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/17 15:57:24 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:40:04 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	heredoc_signal(void)
+
+{
+	signal(SIGQUIT, &sig_heredoc);
+}
 
 void	free_code(char *input, char **aux)
 
@@ -31,11 +37,11 @@ void	start_shell(t_cmd *cmd, char **envp)
 void	init_minishell(t_cmd *cmd)
 
 {
-	cmd->path = NULL;
-	cmd->token = NULL;
-	cmd->sentence = NULL;
+	cmd->path = 0;
+	cmd->token = 0;
+	cmd->sentence = 0;
 	cmd->size_cmd = 0;
-	cmd->oldpwd = NULL;
+	cmd->oldpwd = 0;
 }
 
 int	**init_fd(t_sentence *sentence)

@@ -6,11 +6,18 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:17:06 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/17 17:24:33 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:40:39 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	fork_doc(t_sentence *table, int command, int i)
+
+{
+	heredoc_signal();
+	heredoc_action(table, command, i + 1);
+}
 
 void	search_parth(t_sentence sentence, t_cmd *cmd)
 
