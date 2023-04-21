@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:26:52 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/14 12:20:50 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:43:35 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	insert_value(t_sentence *sentence, int pos, char *temp)
 {
 	sentence[pos].input = STDIN_FILENO;
 	sentence[pos].output = STDOUT_FILENO;
-	sentence[pos].args = ft_split(temp, ' ');
+	sentence[pos].args = ft_split(temp, '\a');
 }
 
 t_sentence	*sentence_generator(t_token *token, int i, int count)
@@ -77,7 +77,7 @@ t_sentence	*sentence_generator(t_token *token, int i, int count)
 	{
 		if (!is_pipes(token[i].type))
 		{
-			temp = ft_strjoin_gnl(temp, " ");
+			temp = ft_strjoin_gnl(temp, "\a");
 			temp = ft_strjoin_gnl(temp, token[i].value);
 		}
 		else

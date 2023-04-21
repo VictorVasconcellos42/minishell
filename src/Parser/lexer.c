@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 11:18:55 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/19 17:52:40 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:50:22 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int	type_var(char *str)
 
 {
-	if (ft_strnstr(str, ">>", -1))
+	if (is_append(str))
 		return (APP_INPUT);
-	else if (ft_strnstr(str, "<<", -1))
+	else if (is_heredoc(str))
 		return (HERE_DOC);
 	else if (!ft_strncmp(str, ">", -1))
 		return (R_OUTPUT);

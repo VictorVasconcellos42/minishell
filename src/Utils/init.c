@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:47:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/20 09:40:04 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:13:17 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ void	heredoc_signal(void)
 	signal(SIGQUIT, &sig_heredoc);
 }
 
-void	free_code(char *input, char **aux)
+void	free_code(char **aux)
 
 {
-	free(input);
 	free_matriz(aux);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:48:44 by marolive          #+#    #+#             */
-/*   Updated: 2023/04/20 08:15:08 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:35:14 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	insert_line(char **line, int pos)
 int	my_echo(t_sentence sentence, int flag, int i, int j)
 {
 	if (!sentence.args[++i])
-		return (printf("\n"));
+		return (g_code = 0, printf("\n"));
 	if (!strncmp(sentence.args[i], "-n", 2))
 		flag = 0;
 	while (sentence.args[i])
@@ -51,9 +51,9 @@ int	my_echo(t_sentence sentence, int flag, int i, int j)
 				}
 			}
 			if (sentence.args[++i] == NULL)
-				return (next_line(flag, i));
+				return (g_code = 0, next_line(flag, i));
 		}
 		insert_line(sentence.args, i++);
 	}
-	return (next_line(flag, i));
+	return (g_code = 0, next_line(flag, i));
 }

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:26:42 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/20 08:28:15 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:10:40 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	first_pipe(t_sentence *table, int *fd, t_cmd *cmd)
 	if (is_builtin(table[0].args[0]) != 0)
 		the_builtin_executor(table[0], cmd);
 	else
-		the_executor(table[0], cmd);
+		the_executor(table[0], cmd, -1);
 }
 
 static void	middle_pipe(t_cmd *cmd, int i, int **fd, t_sentence *table)
@@ -47,7 +47,7 @@ static void	middle_pipe(t_cmd *cmd, int i, int **fd, t_sentence *table)
 	if (is_builtin(table[i].args[0]) != 0)
 		the_builtin_executor(table[i], cmd);
 	else
-		the_executor(table[i], cmd);
+		the_executor(table[i], cmd, -1);
 }
 
 static void	last_pipe(t_cmd *cmd, int i, int *fd, t_sentence *table)
@@ -63,7 +63,7 @@ static void	last_pipe(t_cmd *cmd, int i, int *fd, t_sentence *table)
 	if (is_builtin(table[i].args[0]) != 0)
 		the_builtin_executor(table[i], cmd);
 	else
-		the_executor(table[i], cmd);
+		the_executor(table[i], cmd, -1);
 }
 
 static int	multiple_pipes(t_cmd *cmd, int i, int *pid, int **fd)

@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 09:33:27 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/20 08:15:54 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 19:47:00 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static char	*insert_var(char *str, char **envp, int *pos, int len)
 	if (str[start] == '?')
 	{
 		*pos = start;
-		g_code = 0;
 		return (st);
 	}
 	free(st);

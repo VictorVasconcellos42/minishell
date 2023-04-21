@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 04:14:17 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/20 09:41:54 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:14:04 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ char		**get_path(t_cmd *cmd);
 
 // BUILTIN //
 
+void		child_exec(t_sentence sentence, t_cmd *cmd, int backup);
 int			is_builtin(char *input);
 int			builtin_env(t_cmd *cmd);
 void		builtin_exit(t_sentence sentence, t_cmd *cmd);
@@ -120,7 +121,7 @@ void		execution(t_cmd *exec);
 int			check_case(char *str);
 void		executor(t_cmd *cmd);
 void		execute_sentence(t_sentence sentence, t_cmd *cmd, int backup);
-void		the_executor(t_sentence sentence, t_cmd *cmd);
+void		the_executor(t_sentence sentence, t_cmd *cmd, int i);
 void		the_builtin_executor(t_sentence sentence, t_cmd *cmd);
 void		search_parth(t_sentence sentence, t_cmd *cmd);
 
@@ -137,7 +138,7 @@ void		free_fd(int **input, int size);
 void		free_sentence(t_sentence *sentence);
 void		free_token(t_token *token);
 void		clear_child(t_cmd *cmd);
-void		free_code(char *input, char **aux);
+void		free_code(char **aux);
 
 // PIPEX //
 

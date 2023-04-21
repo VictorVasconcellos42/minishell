@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:42:25 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/20 09:38:44 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:19:49 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*check_path(char *command, t_sentence sentence, t_cmd *cmd)
 	char	*relative;
 
 	if (command[0] == '/')
-		return (ft_strdup(command));
+		return (command);
 	else if (command[0] == '.')
 	{
 		search_parth(sentence, cmd);
@@ -53,21 +53,18 @@ static char	*check_path(char *command, t_sentence sentence, t_cmd *cmd)
 	return (ft_strdup(" "));
 }
 
-void	the_executor(t_sentence sentence, t_cmd *cmd)
+void	the_executor(t_sentence sentence, t_cmd *cmd, int i)
 
 {
 	char	**table_path;
 	char	*full_path;
-	int		i;
 
-	i = -1;
 	full_path = check_path(sentence.args[0], sentence, cmd);
 	table_path = get_path(cmd);
 	while (table_path[++i])
 	{
 		if (access(full_path, F_OK | X_OK) == 0)
 		{
-			free(sentence.args[0]);
 			sentence.args[0] = full_path;
 			remove_redirect(sentence);
 			execve(sentence.args[0], sentence.args, cmd->env);
@@ -79,7 +76,7 @@ void	the_executor(t_sentence sentence, t_cmd *cmd)
 	}
 	printf("bash: %s: command not found\n", sentence.args[0]);
 	clear_child(cmd);
-	free_code(full_path, table_path);
+	free_code(table_path);
 	exit(127);
 }
 
@@ -116,23 +113,7 @@ void	execute_sentence(t_sentence sentence, t_cmd *cmd, int backup)
 	backup = dup(STDOUT_FILENO);
 	pid = fork();
 	if (pid == 0)
-	{
-		child_signal();
-		if (sentence.input != STDIN_FILENO)
-		{
-			dup2(sentence.input, STDIN_FILENO);
-			close(sentence.input);
-		}
-		if (sentence.output != STDOUT_FILENO)
-		{
-			dup2(sentence.output, STDOUT_FILENO);
-			close(sentence.output);
-		}
-		if (is_builtin(sentence.args[0]) != 0)
-			the_builtin_executor(sentence, cmd);
-		close(backup);
-		the_executor(sentence, cmd);
-	}
+		child_exec(sentence, cmd, backup);
 	dup2(backup, STDOUT_FILENO);
 	close(backup);
 	status_check(&pid);
