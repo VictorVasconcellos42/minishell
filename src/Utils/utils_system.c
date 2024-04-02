@@ -6,7 +6,7 @@
 /*   By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:20:16 by vde-vasc          #+#    #+#             */
-/*   Updated: 2023/04/19 14:24:09 by vde-vasc         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:00:44 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ void	status_check(int *pid)
 
 {
 	int	status;
-	int	i;
 
 	status = 0;
-	i = 0;
 	while (*pid)
 	{
 		waitpid(*pid, &status, 0);

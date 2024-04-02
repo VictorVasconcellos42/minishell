@@ -6,7 +6,7 @@
 #    By: vde-vasc <vde-vasc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 15:01:55 by vde-vasc          #+#    #+#              #
-#    Updated: 2023/04/19 10:59:00 by vde-vasc         ###   ########.fr        #
+#    Updated: 2024/04/01 19:02:35 by vde-vasc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ BUILTIN	= $(addprefix Builtin/, cd.c echo.c env.c export.c pwd.c unset.c exit.c 
 
 EXECUTOR	= $(addprefix Executor/, executor.c)
 
-REDIRECTS	=	$(addprefix Redirects/, redirect.c pipes.c)
+REDIRECTS	=	$(addprefix redirects/, redirect.c pipes.c)
 
 DEVELOP	=	$(addprefix develop/, quote.c relative.c)
 
@@ -55,14 +55,14 @@ $(LIBFT):
 	@cp $(addprefix ${LIBFT_DIR}, ${LIBFT}) .
 
 .c.o:
-	@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -c $< -o $@ #Mac 42
-#	@${CC} ${CFLAGS} -lreadline -c $< -o $@ #Linux
+#	@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -c $< -o $@ #Mac 42
+	@${CC} ${CFLAGS} -lreadline -c $< -o $@ #Linux
 #	@${CC} ${CFLAGS} -I/opt/homebrew/opt/readline/include -c $< -o $@ #Mac M1
 
 $(NAME): ${OBJ} ${LIBFT}
-	@${CC} ${CFLAGS} ${LIBFT} ${OBJ} -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include -lreadline -o ${NAME} #Mac 42
+#	@${CC} ${CFLAGS} ${LIBFT} ${OBJ} -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include -lreadline -o ${NAME} #Mac 42
 #	@${CC} ${CFLAGS} ${LIBFT} src/prompt.c -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline ${OBJ} -o ${NAME} #Mac M1
-#	@${CC} ${CFLAGS} ${OBJ} ${LIBFT} -lreadline -o ${NAME} #Linux
+	@${CC} ${CFLAGS} ${OBJ} ${LIBFT} -lreadline -o ${NAME} #Linux
 	@echo "${GREEN}Minishell created!${END} ✅"
 
 clean: 
